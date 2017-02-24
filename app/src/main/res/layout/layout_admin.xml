@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:background="#ffffff"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:orientation="horizontal"
+        android:background="#F5F5F5">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center_vertical"
+            android:text="商城平台退款审核"/>
+    </LinearLayout>
+    <View
+        style="@style/myLine"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center_vertical"
+            android:text="平台确认："/>
+        <TextView
+            android:id="@+id/tv_admin_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="已完成"
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+    <View
+        style="@style/myLine"/>
+    <LinearLayout
+        android:id="@+id/ll_admin_meg"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center_vertical"
+            android:text="平台备注："/>
+        <TextView
+            android:id="@+id/tv_admin_meg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="同意"
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+
+</LinearLayout>

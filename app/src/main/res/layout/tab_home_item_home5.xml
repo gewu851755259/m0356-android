@@ -1,0 +1,19 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg_w_color"
+    android:orientation="vertical" >
+
+
+    <cn.m0356.shop.custom.MyGridView
+        android:id="@+id/index_home_gridview_my"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@null"
+        android:horizontalSpacing="1dp"
+        android:listSelector="@null"
+        android:numColumns="4"
+        android:verticalSpacing="1dp" />
+
+</LinearLayout>

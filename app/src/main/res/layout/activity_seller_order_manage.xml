@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="@color/app_bg_color"
+              android:orientation="vertical">
+
+    <!-- 头部 -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/app_common_header"/>
+    </FrameLayout>
+
+    <!-- 搜索 -->
+<!--
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="@drawable/nc_bg_border_bottom"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <EditText
+            android:id="@+id/etOrderSearch"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@color/nc_bg"
+            android:hint="订单号、收货人姓名或手机号"
+            android:padding="3dp"
+            android:textColor="@color/nc_text"
+            android:textSize="14dp"/>
+
+        <ImageButton
+            style="@style/NCImageButton"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:onClick="btnOrderSearchClick"
+            android:src="@drawable/nc_icon_search"/>
+
+    </LinearLayout>
+-->
+
+    <!-- 订单状态切换按钮 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="@drawable/nc_bg_border_bottom"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnOrderAll"
+                style="@style/NCTabButton"
+                android:text="全部"
+                android:textSize="14dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnOrderNew"
+                style="@style/NCTabButton"
+                android:text="待付款"
+                android:textSize="14dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnOrderSend"
+                style="@style/NCTabButton"
+                android:text="待收货"
+                android:textSize="14dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnOrderUnSend"
+                style="@style/NCTabButton"
+                android:text="待发货"
+                android:textSize="14dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnOrderSuccess"
+                style="@style/NCTabButton"
+                android:text="交易成功"
+                android:textSize="14dp"/>
+        </LinearLayout>
+
+        <!--        <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/btnOrderNotakes"
+                        style="@style/NCTabButton"
+                        android:text="待自提"
+                        android:textSize="14dp" />
+                </LinearLayout>-->
+
+        <!--       <LinearLayout
+                   android:layout_width="0dp"
+                   android:layout_height="match_parent"
+                   android:layout_weight="1"
+                   android:gravity="center">
+
+                   <Button
+                       android:id="@+id/btnOrderNoeval"
+                       style="@style/NCTabButton"
+                       android:text="待评价"
+                       android:textSize="14dp" />
+               </LinearLayout>-->
+
+    </LinearLayout>
+
+    <!-- 列表空背景 -->
+    <LinearLayout
+        android:id="@+id/llListEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="没有查询到订单"/>
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <!-- 订单列表 -->
+    <cn.m0356.shop.custom.XListView
+        android:id="@+id/listViewID"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:dividerHeight="15dp"
+        android:fadingEdge="none"
+        android:scrollbars="none"/>
+
+</LinearLayout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:background="#ffffff"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="85dp">
+
+        <ImageView
+            android:id="@+id/iv_order_img"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginRight="10dp"
+            tools:src="@drawable/seller_bg"/>
+
+        <TextView
+            android:id="@+id/tv_order_goods_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/iv_order_img"
+            android:textColor="#000000"
+            tools:text="丹麦进口Jdeldsens 篮罐 曲奇 礼盒 908g 盒装"/>
+
+        <TextView
+            android:id="@+id/tv_order_goods_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:layout_toRightOf="@id/iv_order_img"
+            android:textColor="#ff0000"
+            tools:text="￥109.00"/>
+
+        <TextView
+            android:id="@+id/tv_order_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dp"
+            android:textColor="#000000"
+            tools:text="x2"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

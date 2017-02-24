@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/nc_bg">
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+        <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@color/nc_title_bg"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:src="@drawable/nc_icon_back" />
+
+                <TextView
+                    android:id="@+id/tvCommonTitle"
+                    style="@style/NCTitleText"
+                    android:text="编辑商品" />
+
+                <TextView
+                    android:id="@+id/tvCommonTitleBorder"
+                    style="@style/NCLine"
+                    android:layout_alignParentBottom="true" />
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/nc_white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/NCFormText"
+                        android:text="商品名称：" />
+
+                    <EditText
+                        android:id="@+id/et_seller_edit_name"
+                        style="@style/NCFormEdit"
+                        android:hint="请输入商品名称(必填)" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/NCFormText"
+                        android:text="商品卖点：" />
+
+                    <EditText
+                        android:id="@+id/et_seller_edit_jingle"
+                        style="@style/NCFormEdit"
+                        android:hint="" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/NCFormText"
+                        android:text="商品价格：" />
+
+                    <EditText
+                        android:id="@+id/et_seller_edit_price"
+                        style="@style/NCFormEdit"
+                        android:gravity="center_vertical"
+                        android:inputType="number"
+                        android:hint="" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/NCFormText"
+                        android:text="市场价：" />
+
+                    <EditText
+                        android:id="@+id/et_seller_edit_market_price"
+                        style="@style/NCFormEdit"
+                        android:inputType="number"
+                        android:hint="" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/NCFormText"
+                        android:text="成本价：" />
+
+                    <EditText
+                        android:id="@+id/et_seller_edit_cost_price"
+                        style="@style/NCFormEdit"
+                        android:inputType="number"
+                        android:hint="" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_spec_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/NCFormText"
+                        android:text="总库存：" />
+
+                    <EditText
+                        android:id="@+id/et_seller_edit_storage"
+                        style="@style/NCFormEdit"
+                        android:inputType="number"
+                        android:hint=""
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/NCFormText"
+                        android:text="库存预警值：" />
+
+                    <EditText
+                        android:id="@+id/et_seller_edit_alarm"
+                        style="@style/NCFormEdit"
+                        android:inputType="number"
+                        android:hint=""
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/NCFormText"
+                    android:text="运费：" />
+
+                <EditText
+                    android:id="@+id/et_seller_edit_freight"
+                    style="@style/NCFormEdit"
+                    android:inputType="number"
+                    android:hint="" />
+
+            </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/NCFormText"
+                        android:text="商品推荐：" />
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <RadioButton
+                            android:id="@+id/rb_seller_edit_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#ffffff"
+                            android:button="@null"
+                            android:layout_margin="5dp"
+                            android:background="@drawable/selector_spce"
+                            android:text="是"/>
+                        <RadioButton
+                            android:id="@+id/rb_seller_edit_0"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#ffffff"
+                            android:button="@null"
+                            android:layout_margin="5dp"
+                            android:background="@drawable/selector_spce"
+                            android:text="否"/>
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <TextView style="@style/NCLine" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnGoodsEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="商品配置" />
+
+            <Button
+                android:id="@+id/btnSave"
+                style="@style/NCCornerButton"
+                android:layout_width="match_parent"
+                android:layout_margin="20dp"
+                android:text="保存编辑" />
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

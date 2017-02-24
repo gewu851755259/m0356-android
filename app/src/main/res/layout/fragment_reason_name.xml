@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@drawable/dialog_corner"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content">
+
+    <RadioGroup
+        android:id="@+id/rg_reason"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rb_1"
+            android:textColor="#000000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/order_cancel_1"/>
+        <RadioButton
+            android:id="@+id/rb_2"
+            android:textColor="#000000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/order_cancel_2"/>
+        <RadioButton
+            android:id="@+id/rb_3"
+            android:textColor="#000000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/order_cancel_3"/>
+        <RadioButton
+            android:id="@+id/rb_other"
+            android:textColor="#000000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/order_cancel_4"/>
+
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/et_reason"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:visibility="gone"
+        android:hint="原因"/>
+    <Button
+        android:id="@+id/btn_ok"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/NCCornerButtonMain"
+        android:layout_margin="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="确定"/>
+
+</LinearLayout>

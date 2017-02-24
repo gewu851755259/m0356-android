@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="#ffffff"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@color/nc_title_bg"
+                    android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:src="@drawable/nc_icon_back" />
+
+        <TextView
+            android:id="@+id/tvCommonTitle"
+            style="@style/NCTitleText"
+            android:text="投诉" />
+
+        <TextView
+            android:id="@+id/tvCommonTitleBorder"
+            style="@style/NCLine"
+            android:layout_alignParentBottom="true" />
+
+    </RelativeLayout>
+
+
+    <cn.m0356.shop.custom.XListView
+        android:id="@+id/lv_complain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </cn.m0356.shop.custom.XListView>
+
+</LinearLayout>

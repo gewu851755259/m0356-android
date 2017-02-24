@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/nc_bg"
+              android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <RelativeLayout
+            android:id="@+id/rl_tab"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/nc_white"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:onClick="btnBackClick"
+                android:src="@drawable/nc_icon_back"/>
+
+            <LinearLayout
+                android:id="@+id/ll_new_tab"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnGoodsDetail"
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/nc_tab_button_bg"
+                    android:onClick="btnGoodsDetailClick"
+                    android:text="商品"
+                    android:textColor="@drawable/nc_tab_button_text_color"
+                    android:textSize="16dp"/>
+
+                <Button
+                    android:id="@+id/btnGoodsBody"
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/nc_tab_button_bg"
+                    android:onClick="btnGoodsBodyClick"
+                    android:text="详情"
+                    android:textColor="@drawable/nc_tab_button_text_color"
+                    android:textSize="16dp"/>
+
+                <Button
+                    android:id="@+id/btnGoodsEvaluate"
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/nc_tab_button_bg"
+                    android:onClick="btnGoodsEvaluateClick"
+                    android:text="评价"
+                    android:textColor="@drawable/nc_tab_button_text_color"
+                    android:textSize="16dp"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl_tab_detail"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/nc_white"
+            android:visibility="invisible">
+
+            <ImageButton
+                android:id="@+id/ib_detail_back"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:src="@drawable/nc_icon_back"/>
+
+            <TextView
+                android:id="@+id/tvCommonTitle"
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@drawable/nc_tab_button_text_color"
+                android:textSize="16dp"
+                android:gravity="center_vertical"
+                android:text="图文详情" />
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+
+    <TextView style="@style/NCLine"/>
+
+    <!--<LinearLayout
+        android:id="@+id/llMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"></LinearLayout>-->
+
+    <!-- 20160902 -->
+    <!--<android.support.v4.view.ViewPager
+        android:id="@+id/vpMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v4.view.ViewPager>-->
+
+    <!-- 20161103 -->
+    <cn.m0356.shop.custom.GoodsDetailViewPager
+        android:id="@+id/vpMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </cn.m0356.shop.custom.GoodsDetailViewPager>
+
+</LinearLayout>

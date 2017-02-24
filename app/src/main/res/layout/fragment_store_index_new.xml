@@ -1,0 +1,61 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/nc_bg">
+
+    <LinearLayout
+        android:fillViewport="true"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/main_home_adv_height">
+
+                <!-- 幻灯图片 -->
+                <cn.m0356.shop.custom.ViewFlipperScrollView
+                    android:id="@+id/viewFlipperScrollViewID"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ViewFlipper
+                            android:id="@+id/viewflipper"
+                            android:layout_width="fill_parent"
+                            android:layout_height="@dimen/main_home_adv_height" />
+
+                        <LinearLayout
+                            android:id="@+id/dian"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="horizontal" />
+                    </LinearLayout>
+                </cn.m0356.shop.custom.ViewFlipperScrollView>
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:id="@+id/homeViewID"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:orientation="vertical" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

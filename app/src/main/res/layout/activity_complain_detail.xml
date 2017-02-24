@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:background="#ffffff"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@color/nc_title_bg"
+                    android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:src="@drawable/nc_icon_back" />
+
+        <TextView
+            android:id="@+id/tvCommonTitle"
+            style="@style/NCTitleText"
+            android:text="详情" />
+
+        <TextView
+            android:id="@+id/tvCommonTitleBorder"
+            style="@style/NCLine"
+            android:layout_alignParentBottom="true" />
+
+    </RelativeLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="#F5F5F5"
+                android:textColor="#000000"
+                android:gravity="center_vertical"
+                android:paddingLeft="8dp"
+                android:text="投诉信息"/>
+
+            <View
+                style="@style/myLine"/>
+
+            <LinearLayout
+                android:id="@+id/ll_mes_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="投诉状态："/>
+                    <TextView
+                        android:id="@+id/tv_complain_detail_state"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="待申诉"/>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="投诉主题："/>
+                    <TextView
+                        android:id="@+id/tv_complain_detail_sub"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="未收到货"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="投诉证据："/>
+                    <TextView
+                        android:id="@+id/tv_complain_detail_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="暂无图片"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="投诉时间："/>
+                    <TextView
+                        android:id="@+id/tv_complain_detail_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="2017-01-12 09:04:04"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="投诉内容："/>
+                    <TextView
+                        android:id="@+id/tv_complain_detail_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        tools:text="xxxxxxxxx"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:background="#ffffff"
+              android:padding="6dp"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="投诉人："/>
+            <TextView
+                android:id="@+id/tv_complain_member_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="山西方舟数码"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="投诉商品："/>
+            <TextView
+                android:id="@+id/tv_complain_goods_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="恒大冰泉"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="投诉主题："/>
+            <TextView
+                android:id="@+id/tv_complain_subject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="未收到货"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="投诉时间："/>
+            <TextView
+                android:id="@+id/tv_complain_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="2017-01-11 11:45:19"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="投诉状态："/>
+            <TextView
+                android:id="@+id/tv_complain_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ff0000"
+                tools:text="待仲裁"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

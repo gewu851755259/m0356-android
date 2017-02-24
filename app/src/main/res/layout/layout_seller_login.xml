@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="#ffffff"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView style="@style/NCLine"
+        android:layout_marginTop="40dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/NCFormText"
+            android:text="账号：" />
+
+        <EditText
+            android:id="@+id/etUsername"
+            style="@style/NCFormEdit"
+            android:maxLength="20"
+            android:hint="请输入用户名" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/NCFormText"
+            android:text="密码：" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            style="@style/NCFormEditNoBorder"
+            android:hint="请输入密码"
+            android:maxLength="20"
+            android:password="true" />
+
+    </LinearLayout>
+
+    <TextView style="@style/NCLine" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        style="@style/NCCornerButton"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="40dp"
+        android:onClick="btnLoginClick"
+        android:text="登录" />
+
+</LinearLayout>
