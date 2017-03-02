@@ -103,6 +103,9 @@ import java.util.List;
  * @Time 2015-8-17
  */
 public class HomeFragment extends Fragment implements OnGestureListener, OnTouchListener {
+
+    // 测试HomeFragment修改在git分支中的保存情况
+
     private MyShopApplication myApplication;
 
     private Intent intent = null;
