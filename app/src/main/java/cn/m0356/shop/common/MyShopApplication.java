@@ -218,7 +218,7 @@ public class MyShopApplication extends Application {
         initImageLoader(this);
 
         MyExceptionHandler mUncaughtException = MyExceptionHandler.getInstance();
-        mUncaughtException.init();
+//        mUncaughtException.init();
 
         try {
             //连接Socket
@@ -252,7 +252,7 @@ public class MyShopApplication extends Application {
                 IMConnect = false;////设置链接失败
 //			  mNotification.tickerText = "您的IM帐号已离线";;
 //			  Intent intent = new Intent(getApplicationContext(),IMFriendsListActivity.class);  
-//              PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);  
+//              PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
 //              mNotification.setLatestEventInfo(getApplicationContext(), "", "",contentIntent);//ShopNC商城客户端 
 //              mNotificationManager.notify(-1, mNotification);// 通知一下才会生效哦  
 //              mNotificationManager.cancel(-1);

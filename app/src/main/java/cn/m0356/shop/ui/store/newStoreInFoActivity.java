@@ -68,55 +68,55 @@ public class newStoreInFoActivity extends FragmentActivity implements OnClickLis
         StoreIndexFragment.OnFragmentInteractionListener,
         StoreAllGoodsFragment.OnFragmentInteractionListener,
         StoreNewGoodsFragment.OnFragmentInteractionListener,
-        StoreActivitiesFragment.OnFragmentInteractionListener{
-  FragmentManager fragmentManager = getSupportFragmentManager();
-  private MyShopApplication myApplication;
+        StoreActivitiesFragment.OnFragmentInteractionListener {
+    FragmentManager fragmentManager = getSupportFragmentManager();
+    private MyShopApplication myApplication;
 
-  private ImageButton btnBack;//返回
-  private TextView etSearchText;//搜素
-  private ImageView imgClassify;//分类
-  private ImageView imgMenu;//悬浮菜单
+    private ImageButton btnBack;//返回
+    private TextView etSearchText;//搜素
+    private ImageView imgClassify;//分类
+    private ImageView imgMenu;//悬浮菜单
 
-  private ImageView storeInFoPic;//店铺背景图
-  private ImageView storePic;//店铺的图片
+    private ImageView storeInFoPic;//店铺背景图
+    private ImageView storePic;//店铺的图片
 
-  private TextView storeNameID;//店铺名称
-  private TextView textFanCount;//店铺的粉丝数目
+    private TextView storeNameID;//店铺名称
+    private TextView textFanCount;//店铺的粉丝数目
 
-  private Button favoritesAddID;  //收藏
-  private Button favoritesDeleteID;//已经收藏
+    private Button favoritesAddID;  //收藏
+    private Button favoritesDeleteID;//已经收藏
 
-  private RelativeLayout rStoreHome;//店铺首页
-  private RelativeLayout rStoreGoods;//全部商品
-  private RelativeLayout rStoreNew;//商品上新
-  private RelativeLayout rStoreActivity;//店铺活动
+    private RelativeLayout rStoreHome;//店铺首页
+    private RelativeLayout rStoreGoods;//全部商品
+    private RelativeLayout rStoreNew;//商品上新
+    private RelativeLayout rStoreActivity;//店铺活动
 
-  private StoreIndexNewFragment storeIndexFragment;  //店铺首页
-  private StoreAllGoodsFragment storeAllGoodsFragment; //店铺全部商品
-  private StoreNewGoodsFragment storeNewGoodsFragment; //店铺上新
-  private StoreActivitiesFragment storeActivityFragment; //店铺活动
+    private StoreIndexNewFragment storeIndexFragment;  //店铺首页
+    private StoreAllGoodsFragment storeAllGoodsFragment; //店铺全部商品
+    private StoreNewGoodsFragment storeNewGoodsFragment; //店铺上新
+    private StoreActivitiesFragment storeActivityFragment; //店铺活动
     private StoreIndexFragment storeIndexOldFragment; // 旧版店铺首页
 
-  private TextView textIntroduce;//店铺介绍
-  private TextView textGetQuan;//免费领券
-  private TextView textCall;//联系客服
+    private TextView textIntroduce;//店铺介绍
+    private TextView textGetQuan;//免费领券
+    private TextView textCall;//联系客服
 
-  private Intent intent = null;
-  private String store_id; //店铺的id
-  private String store_name;//记录店铺的名称
+    private Intent intent = null;
+    private String store_id; //店铺的id
+    private String store_name;//记录店铺的名称
 
-  private InputMethodManager imm;
-  private NCNewStoreVoucherPopupWindow pwVoucher;
+    private InputMethodManager imm;
+    private NCNewStoreVoucherPopupWindow pwVoucher;
 
-  private PopupWindow popupWindow ;
-  private View mPopupWindowView;
-  private LinearLayout llSearch;
+    private PopupWindow popupWindow;
+    private View mPopupWindowView;
+    private LinearLayout llSearch;
 
-  private int count = 0;
-  private TimerTask task;
-  private Timer delayTimer;
-  private long interval = 500;
-  private long firstTime = 0;
+    private int count = 0;
+    private TimerTask task;
+    private Timer delayTimer;
+    private long interval = 500;
+    private long firstTime = 0;
     // 点击事件结束后的事件处理
     private Handler handler = new Handler() {
         @Override
@@ -144,14 +144,13 @@ public class newStoreInFoActivity extends FragmentActivity implements OnClickLis
         setContentView(R.layout.store_info_view_new);
         MyExceptionHandler.getInstance().setContext(this);
         myApplication = (MyShopApplication) this.getApplicationContext();
-        imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         store_id = getIntent().getStringExtra("store_id");
 
         initView();
         //initData(store_id);
         initPopupWindow();
     }
-
 
 
     //延迟时间是连击的时间间隔有效范围
@@ -172,29 +171,29 @@ public class newStoreInFoActivity extends FragmentActivity implements OnClickLis
     }
 
 
-    private void initView(){
-        llSearch = (LinearLayout)this.findViewById(R.id.llSearch);
-        btnBack = (ImageButton)this.findViewById(R.id.btnBack);
-        etSearchText = (TextView)this.findViewById(R.id.etSearchText);
-        imgClassify = (ImageView)this.findViewById(R.id.imgClassify);
-        imgMenu = (ImageView)this.findViewById(R.id.imgMenu);
+    private void initView() {
+        llSearch = (LinearLayout) this.findViewById(R.id.llSearch);
+        btnBack = (ImageButton) this.findViewById(R.id.btnBack);
+        etSearchText = (TextView) this.findViewById(R.id.etSearchText);
+        imgClassify = (ImageView) this.findViewById(R.id.imgClassify);
+        imgMenu = (ImageView) this.findViewById(R.id.imgMenu);
 
-        storeInFoPic = (ImageView)this.findViewById(R.id.storeInFoPic);
-        storePic = (ImageView)this.findViewById(R.id.storePic);
-        storeNameID = (TextView)this.findViewById(R.id.storeNameID);
-        textFanCount = (TextView)this.findViewById(R.id.textFanCount);
+        storeInFoPic = (ImageView) this.findViewById(R.id.storeInFoPic);
+        storePic = (ImageView) this.findViewById(R.id.storePic);
+        storeNameID = (TextView) this.findViewById(R.id.storeNameID);
+        textFanCount = (TextView) this.findViewById(R.id.textFanCount);
 
-        favoritesAddID = (Button)this.findViewById(R.id.favoritesAddID);
-        favoritesDeleteID = (Button)this.findViewById(R.id.favoritesDeleteID);
+        favoritesAddID = (Button) this.findViewById(R.id.favoritesAddID);
+        favoritesDeleteID = (Button) this.findViewById(R.id.favoritesDeleteID);
 
-        textIntroduce = (TextView)this.findViewById(R.id.textIntroduce);
-        textGetQuan = (TextView)this.findViewById(R.id.textGetQuan);
-        textCall = (TextView)this.findViewById(R.id.textCall);
+        textIntroduce = (TextView) this.findViewById(R.id.textIntroduce);
+        textGetQuan = (TextView) this.findViewById(R.id.textGetQuan);
+        textCall = (TextView) this.findViewById(R.id.textCall);
 
-        rStoreHome = (RelativeLayout)this.findViewById(R.id.rStoreHome);
-        rStoreGoods = (RelativeLayout)this.findViewById(R.id.rStoreGoods);
-        rStoreNew = (RelativeLayout)this.findViewById(R.id.rStoreNew);
-        rStoreActivity = (RelativeLayout)this.findViewById(R.id.rStoreActivity);
+        rStoreHome = (RelativeLayout) this.findViewById(R.id.rStoreHome);
+        rStoreGoods = (RelativeLayout) this.findViewById(R.id.rStoreGoods);
+        rStoreNew = (RelativeLayout) this.findViewById(R.id.rStoreNew);
+        rStoreActivity = (RelativeLayout) this.findViewById(R.id.rStoreActivity);
 
         loadStoreIsModif();
 
@@ -220,7 +219,7 @@ public class newStoreInFoActivity extends FragmentActivity implements OnClickLis
     }
 
     private void initFragment(int p) {
-        this. p = p;
+        this.p = p;
         // storeIndexFragment = StoreIndexFragment.newInstance(store_id);
         storeIndexFragment = StoreIndexNewFragment.newInstance(store_id);
         storeIndexOldFragment = StoreIndexFragment.newInstance(store_id);
@@ -229,7 +228,7 @@ public class newStoreInFoActivity extends FragmentActivity implements OnClickLis
         storeActivityFragment = StoreActivitiesFragment.newInstance(store_id);
 
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        if(p == 1){
+        if (p == 1) {
             transaction.add(R.id.llContent, storeIndexFragment);
         } else {
             transaction.add(R.id.llContent, storeIndexOldFragment);
@@ -246,10 +245,10 @@ public class newStoreInFoActivity extends FragmentActivity implements OnClickLis
         RemoteDataHandler.asyncDataStringGet(Constants.URL_STORE_ISMODIF + store_id, new Callback() {
             @Override
             public void dataLoaded(ResponseData data) {
-                if(data.getCode() == HttpStatus.SC_OK){
-                    if(data.getJson().equals("y")){ // 已修改 显示新首页
+                if (data.getCode() == HttpStatus.SC_OK) {
+                    if (data.getJson().equals("y")) { // 已修改 显示新首页
                         initFragment(1);
-                    } else if(data.getJson().equals("n")){ // 未修改 显示旧首页
+                    } else if (data.getJson().equals("n")) { // 未修改 显示旧首页
                         initFragment(2);
                     }
                 } else {
@@ -261,125 +260,125 @@ public class newStoreInFoActivity extends FragmentActivity implements OnClickLis
 
     @Override
     public void onClick(View view) {
-      switch (view.getId()){
-          case R.id.btnBack:
-              this.finish();
-              break;
+        switch (view.getId()) {
+            case R.id.btnBack:
+                this.finish();
+                break;
 
-          case R.id.etSearchText:
-              intent = new Intent(newStoreInFoActivity.this, StoreSearchActivity.class);
-              intent.putExtra("store_id", store_id);
-              intent.putExtra("store_name", store_name);
-              startActivity(intent);
-              break;
+            case R.id.etSearchText:
+                intent = new Intent(newStoreInFoActivity.this, StoreSearchActivity.class);
+                intent.putExtra("store_id", store_id);
+                intent.putExtra("store_name", store_name);
+                startActivity(intent);
+                break;
 
-          case R.id.imgClassify:
-              intent = new Intent(newStoreInFoActivity.this, StoreSearchActivity.class);
-              intent.putExtra("store_id", store_id);
-              intent.putExtra("store_name", store_name);
-              startActivity(intent);
-              break;
+            case R.id.imgClassify:
+                intent = new Intent(newStoreInFoActivity.this, StoreSearchActivity.class);
+                intent.putExtra("store_id", store_id);
+                intent.putExtra("store_name", store_name);
+                startActivity(intent);
+                break;
 
-          case R.id.imgMenu://溢出菜单
-              showPopupWindow();
-              break;
+            case R.id.imgMenu://溢出菜单
+                showPopupWindow();
+                break;
 
-          case R.id.favoritesAddID:
-              long secondTime = System.currentTimeMillis();
-              if (secondTime - firstTime <= interval) {
-                  ++count;
-              } else {
-                  count = 1;
-              }
-              delay(0);
-              firstTime = secondTime;
+            case R.id.favoritesAddID:
+                long secondTime = System.currentTimeMillis();
+                if (secondTime - firstTime <= interval) {
+                    ++count;
+                } else {
+                    count = 1;
+                }
+                delay(0);
+                firstTime = secondTime;
 
-              break;
+                break;
 
-          case R.id.favoritesDeleteID:
-              long secondTime2 = System.currentTimeMillis();
-              if (secondTime2 - firstTime <= interval) {
-                  ++count;
-              } else {
-                  count = 1;
-              }
-              delay(1);
-              firstTime = secondTime2;
-              break;
+            case R.id.favoritesDeleteID:
+                long secondTime2 = System.currentTimeMillis();
+                if (secondTime2 - firstTime <= interval) {
+                    ++count;
+                } else {
+                    count = 1;
+                }
+                delay(1);
+                firstTime = secondTime2;
+                break;
 
-          case R.id.rStoreHome:
-              showStoreIndex();
-              break;
+            case R.id.rStoreHome:
+                showStoreIndex();
+                break;
 
-          case R.id.rStoreGoods:
-              showStoreAllGoods();
-              break;
+            case R.id.rStoreGoods:
+                showStoreAllGoods();
+                break;
 
-          case R.id.rStoreNew:
-              showStoreNewGoods();
-              break;
+            case R.id.rStoreNew:
+                showStoreNewGoods();
+                break;
 
-          case R.id.rStoreActivity:
-              showStoreActivity();
-              break;
+            case R.id.rStoreActivity:
+                showStoreActivity();
+                break;
 
-          case R.id.textIntroduce:
-              intent = new Intent(this, StoreIntroduceActivity.class);
-              intent.putExtra("store_id",store_id);
-              startActivity(intent);
-              break;
+            case R.id.textIntroduce:
+                intent = new Intent(this, StoreIntroduceActivity.class);
+                intent.putExtra("store_id", store_id);
+                startActivity(intent);
+                break;
 
-          case R.id.textGetQuan:
-              getStoreVoucher();
-              break;
+            case R.id.textGetQuan:
+                getStoreVoucher();
+                break;
 
-          case R.id.textCall:
-              if (ShopHelper.isLogin(this,myApplication.getLoginKey())){
-                  getMember();
-              }else {
-                  startActivity(new Intent(this, LoginActivity.class));
-              }
-           break;
+            case R.id.textCall:
+                if (ShopHelper.isLogin(this, myApplication.getLoginKey())) {
+                    getMember();
+                } else {
+                    startActivity(new Intent(this, LoginActivity.class));
+                }
+                break;
 
-          //菜单点击事件
-          case R.id.textview_home:
-             //ShopHelper.showMessage(this,"首页");
-              intent = new Intent(newStoreInFoActivity.this, MainFragmentManager.class);
-              myApplication.sendBroadcast(new Intent(Constants.SHOW_HOME_URL));
-              startActivity(intent);
-              popupWindow.dismiss();
-              break;
+            //菜单点击事件
+            case R.id.textview_home:
+                //ShopHelper.showMessage(this,"首页");
+                intent = new Intent(newStoreInFoActivity.this, MainFragmentManager.class);
+                myApplication.sendBroadcast(new Intent(Constants.SHOW_HOME_URL));
+                startActivity(intent);
+                popupWindow.dismiss();
+                break;
 
-          case R.id.textview_search:
-              //ShopHelper.showMessage(this,"搜索");
-              startActivity(new Intent(newStoreInFoActivity.this, SearchActivity.class));
-              popupWindow.dismiss();
-              break;
+            case R.id.textview_search:
+                //ShopHelper.showMessage(this,"搜索");
+                startActivity(new Intent(newStoreInFoActivity.this, SearchActivity.class));
+                popupWindow.dismiss();
+                break;
 
-          case R.id.textview_cart:
-              //ShopHelper.showMessage(this,"购物车");
-              intent = new Intent(newStoreInFoActivity.this, MainFragmentManager.class);
-              myApplication.sendBroadcast(new Intent(Constants.SHOW_CART_URL));
-              startActivity(intent);
-              popupWindow.dismiss();
-              break;
+            case R.id.textview_cart:
+                //ShopHelper.showMessage(this,"购物车");
+                intent = new Intent(newStoreInFoActivity.this, MainFragmentManager.class);
+                myApplication.sendBroadcast(new Intent(Constants.SHOW_CART_URL));
+                startActivity(intent);
+                popupWindow.dismiss();
+                break;
 
-          case R.id.textview_msg:
-              //ShopHelper.showMessage(this,"消息");
-              if (ShopHelper.isLogin(newStoreInFoActivity.this, myApplication.getLoginKey())) {
-                  startActivity(new Intent(newStoreInFoActivity.this, IMFriendsListActivity.class));
-              }else{
-                  startActivity(new Intent(newStoreInFoActivity.this,LoginActivity.class));
-              }
-              popupWindow.dismiss();
-              break;
-      }
+            case R.id.textview_msg:
+                //ShopHelper.showMessage(this,"消息");
+                if (ShopHelper.isLogin(newStoreInFoActivity.this, myApplication.getLoginKey())) {
+                    startActivity(new Intent(newStoreInFoActivity.this, IMFriendsListActivity.class));
+                } else {
+                    startActivity(new Intent(newStoreInFoActivity.this, LoginActivity.class));
+                }
+                popupWindow.dismiss();
+                break;
+        }
     }
 
     /**
      * 联系客服
      */
-    private void getMember(){
+    private void getMember() {
         OkHttpUtil.postAsyn(this, Constants.URL_STORE_INTRODUCE, new OkHttpUtil.ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
@@ -409,7 +408,7 @@ public class newStoreInFoActivity extends FragmentActivity implements OnClickLis
     /**
      * 初始化店铺的信息
      */
-    private void initData(String store_id){
+    private void initData(String store_id) {
         String url = Constants.URL_STORE_INFO + "&store_id=" + store_id + "&key=" + myApplication.getLoginKey();
         RemoteDataHandler.asyncDataStringGet(url, new Callback() {
             @Override
@@ -447,6 +446,7 @@ public class newStoreInFoActivity extends FragmentActivity implements OnClickLis
                         e.printStackTrace();
                     }
                 } else {
+                    if (json == null) return;
                     try {
                         JSONObject obj = new JSONObject(json);
                         String error = obj.getString("error");
@@ -464,36 +464,36 @@ public class newStoreInFoActivity extends FragmentActivity implements OnClickLis
     /**
      * 获取店铺的代金券(现在是可以获取免费代金券)
      */
-    private void getStoreVoucher(){
+    private void getStoreVoucher() {
         final ArrayList<StoreVoucher> storeVouchers = new ArrayList<StoreVoucher>();
         OkHttpUtil.postAsyn(this, Constants.URL_STORE_VOUCHER, new OkHttpUtil.ResultCallback<String>() {
-            @Override
-            public void onError(Request request, Exception e) {
-            }
-
-            @Override
-            public void onResponse(String response) {
-                ResponseData data = JsonFastUtil.fromJsonFast(response, ResponseData.class);
-                if (data.getCode() == HttpStatus.SC_OK) {
-                    String datas = data.getDatas();
-                    try {
-                        JSONObject obj = new JSONObject(datas);
-                        String voucher_list = obj.getString("voucher_list");
-                        JSONArray arr = new JSONArray(voucher_list);
-
-                        for (int i = 0; i < arr.length(); i++) {
-                            StoreVoucher storeVoucher = JsonFastUtil.fromJsonFast(arr.get(i).toString(), StoreVoucher.class);
-                            LogHelper.d("huting--voucher:", storeVoucher.toString());
-                            storeVouchers.add(storeVoucher);
-                        }
-
-                        initStoreVoucher(storeVouchers);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    @Override
+                    public void onError(Request request, Exception e) {
                     }
-                }
-            }
-        }, new OkHttpUtil.Param("store_id", store_id),
+
+                    @Override
+                    public void onResponse(String response) {
+                        ResponseData data = JsonFastUtil.fromJsonFast(response, ResponseData.class);
+                        if (data.getCode() == HttpStatus.SC_OK) {
+                            String datas = data.getDatas();
+                            try {
+                                JSONObject obj = new JSONObject(datas);
+                                String voucher_list = obj.getString("voucher_list");
+                                JSONArray arr = new JSONArray(voucher_list);
+
+                                for (int i = 0; i < arr.length(); i++) {
+                                    StoreVoucher storeVoucher = JsonFastUtil.fromJsonFast(arr.get(i).toString(), StoreVoucher.class);
+                                    LogHelper.d("huting--voucher:", storeVoucher.toString());
+                                    storeVouchers.add(storeVoucher);
+                                }
+
+                                initStoreVoucher(storeVouchers);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }, new OkHttpUtil.Param("store_id", store_id),
                 new OkHttpUtil.Param("gettype", "free"));
     }
 
@@ -505,8 +505,8 @@ public class newStoreInFoActivity extends FragmentActivity implements OnClickLis
     private void initStoreVoucher(ArrayList<StoreVoucher> storeVoucher) {
         pwVoucher = new NCNewStoreVoucherPopupWindow(this);
         if (storeVoucher.size() > 0) {
-          pwVoucher.setStoreName("");
-          pwVoucher.setVoucherList(storeVoucher);
+            pwVoucher.setStoreName("");
+            pwVoucher.setVoucherList(storeVoucher);
         }
         pwVoucher.showPopupWindow();
     }
@@ -595,7 +595,7 @@ public class newStoreInFoActivity extends FragmentActivity implements OnClickLis
     public void showStoreIndex() {
         setTabButtonState(rStoreHome);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        if(p == 1){
+        if (p == 1) {
             transaction.show(storeIndexFragment);
         } else {
             transaction.show(storeIndexOldFragment);
@@ -613,7 +613,7 @@ public class newStoreInFoActivity extends FragmentActivity implements OnClickLis
         setTabButtonState(rStoreGoods);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.show(storeAllGoodsFragment);
-        if(p == 1){
+        if (p == 1) {
             transaction.hide(storeIndexFragment);
         } else {
             transaction.hide(storeIndexOldFragment);
@@ -630,7 +630,7 @@ public class newStoreInFoActivity extends FragmentActivity implements OnClickLis
         setTabButtonState(rStoreNew);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.show(storeNewGoodsFragment);
-        if(p == 1){
+        if (p == 1) {
             transaction.hide(storeIndexFragment);
         } else {
             transaction.hide(storeIndexOldFragment);
@@ -647,7 +647,7 @@ public class newStoreInFoActivity extends FragmentActivity implements OnClickLis
         setTabButtonState(rStoreActivity);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.show(storeActivityFragment);
-        if(p == 1){
+        if (p == 1) {
             transaction.hide(storeIndexFragment);
         } else {
             transaction.hide(storeIndexOldFragment);
@@ -657,11 +657,13 @@ public class newStoreInFoActivity extends FragmentActivity implements OnClickLis
         transaction.commit();
     }
 
-    /**显示popupwindow*/
-    private void showPopupWindow(){
-        if(!popupWindow.isShowing()){
-            popupWindow.showAsDropDown(imgMenu, imgMenu.getLayoutParams().width/2, 0);
-        }else{
+    /**
+     * 显示popupwindow
+     */
+    private void showPopupWindow() {
+        if (!popupWindow.isShowing()) {
+            popupWindow.showAsDropDown(imgMenu, imgMenu.getLayoutParams().width / 2, 0);
+        } else {
             popupWindow.dismiss();
         }
     }
@@ -669,7 +671,7 @@ public class newStoreInFoActivity extends FragmentActivity implements OnClickLis
     /**
      * 初始化popupwindow
      */
-    private void initPopupWindow(){
+    private void initPopupWindow() {
         initPopupWindowView();
         popupWindow = new PopupWindow(mPopupWindowView, ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
         popupWindow.setFocusable(true);
@@ -688,7 +690,7 @@ public class newStoreInFoActivity extends FragmentActivity implements OnClickLis
     /**
      * 初始化popupwindowView
      */
-    private void initPopupWindowView(){
+    private void initPopupWindowView() {
         mPopupWindowView = LayoutInflater.from(this).inflate(R.layout.menu_store, null);
         TextView textview_home = (TextView) mPopupWindowView.findViewById(R.id.textview_home);
         textview_home.setOnClickListener(this);
@@ -704,7 +706,8 @@ public class newStoreInFoActivity extends FragmentActivity implements OnClickLis
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {}
+    public void onFragmentInteraction(Uri uri) {
+    }
 
 
     @Override

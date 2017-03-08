@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/nc_bg"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/nc_bg"
+              android:orientation="vertical">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <include layout="@layout/app_common_header" />
+        <include layout="@layout/app_common_header"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -25,7 +25,7 @@
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/nc_combin_btn_left_bg"
                 android:text="充值卡余额"
-                android:textColor="@drawable/nc_btn_text_color" />
+                android:textColor="@drawable/nc_btn_text_color"/>
 
             <Button
                 android:id="@+id/btnRechargeCardAdd"
@@ -35,7 +35,7 @@
                 android:layout_marginRight="10dp"
                 android:background="@drawable/nc_combin_btn_right_bg"
                 android:text="充值卡充值"
-                android:textColor="@drawable/nc_btn_text_color" />
+                android:textColor="@drawable/nc_btn_text_color"/>
         </LinearLayout>
     </FrameLayout>
 
@@ -53,7 +53,7 @@
             android:layout_marginTop="6dp"
             android:text="请输入已知平台充值卡号码"
             android:textColor="@color/nc_white"
-            android:textSize="12dp" />
+            android:textSize="12dp"/>
 
         <TextView
             android:id="@+id/tvPredeposit"
@@ -64,7 +64,7 @@
             android:layout_marginBottom="10dp"
             android:text="充值后可以在购物结算时选取使用充值卡余额进行支付"
             android:textColor="@color/nc_white"
-            android:textSize="11dp" />
+            android:textSize="11dp"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -81,14 +81,15 @@
             <TextView
                 style="@style/NCFormText"
                 android:layout_width="70dp"
-                android:text="充值卡号：" />
+                android:text="充值卡号："/>
 
             <EditText
                 android:id="@+id/etRcsn"
                 style="@style/NCFormEdit"
-                android:hint="请输入平台充值卡号"/>
+                android:hint="请输入平台充值卡号"
+                android:maxLength="50"/>
 
-            <TextView style="@style/NCLine" />
+            <TextView style="@style/NCLine"/>
         </LinearLayout>
 
         <LinearLayout
@@ -99,7 +100,7 @@
             <TextView
                 style="@style/NCFormText"
                 android:layout_width="70dp"
-                android:text="验  证  码：" />
+                android:text="验  证  码："/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -109,18 +110,18 @@
                     android:id="@+id/etCode"
                     style="@style/NCFormEdit"
                     android:layout_alignParentLeft="true"
-                    android:maxLength="4"
-                    android:hint="请输入验证码" />
+                    android:hint="请输入验证码"
+                    android:maxLength="4"/>
 
                 <ImageView
                     android:id="@+id/ivCode"
                     android:layout_width="120dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp" />
+                    android:layout_marginRight="10dp"/>
             </RelativeLayout>
 
-            <TextView style="@style/NCLine" />
+            <TextView style="@style/NCLine"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -132,5 +133,5 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
         android:onClick="btnSubmitClick"
-        android:text="确认提交" />
+        android:text="确认提交"/>
 </LinearLayout>

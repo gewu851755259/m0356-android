@@ -193,7 +193,7 @@ public final class Constants {
     /**
      * 首页请求地址
      */
-    public static final String URL_HOME = URL_CONTEXTPATH + "act=index&op=index";
+    public static final String URL_HOME = URL_CONTEXTPATH + "act=index&op=index&style=1";
 
     /**
      * 专题接口(get)

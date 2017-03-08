@@ -2,9 +2,14 @@
 
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="main_width">360dp</dimen>
+    <!-- 屏幕一半的宽度 -->
+    <dimen name="main_home_half_width">180dp</dimen>
+    <!-- 屏幕四分之一的宽度 -->
+    <dimen name="main_home_quarter_width">90dp</dimen>
     <dimen name="main_home_search_top">145dp</dimen>
     <dimen name="main_home_adv_width">360dp</dimen>
     <dimen name="main_home_adv_height">191dp</dimen>
+    <dimen name="main_home_adv_height2">158dp</dimen>
     <dimen name="main_home1_width">360dp</dimen>
     <dimen name="main_home1_height">146dp</dimen>
     <dimen name="main_home2_width">360dp</dimen>
@@ -14,5 +19,11 @@
     <dimen name="main_home3_width">180dp</dimen>
     <dimen name="main_home3_height">48dp</dimen>
     <dimen name="main_goods_size">180dp</dimen>
+    <dimen name="main_home6_width">360dp</dimen>
+    <dimen name="main_home6_height">37dp</dimen>
+    <dimen name="main_home8_height">101dp</dimen>
+    <dimen name="main_home9_height">101dp</dimen>
+    <dimen name="main_home11_width">118dp</dimen>
+    <dimen name="main_home11_height">115dp</dimen>
 
 </resources>

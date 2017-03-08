@@ -77,6 +77,7 @@
             <EditText
                 android:id="@+id/editJieDaoAddress"
                 style="@style/NCFormEdit"
+                android:maxLength="50"
                 android:hint="请输入详细地址" />
 
         </LinearLayout>

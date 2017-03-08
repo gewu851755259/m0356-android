@@ -60,6 +60,7 @@
             android:background="@color/nc_bg"
             android:hint="输入商品标题或订单号进行搜索"
             android:padding="3dp"
+            android:maxLength="50"
             android:textColor="@color/nc_text"
             android:textSize="14dp" />
 

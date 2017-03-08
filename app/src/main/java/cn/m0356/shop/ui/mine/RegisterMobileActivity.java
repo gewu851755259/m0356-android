@@ -19,6 +19,10 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
+import org.apache.http.HttpStatus;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import cn.m0356.shop.BaseActivity;
 import cn.m0356.shop.R;
 import cn.m0356.shop.common.AnimateFirstDisplayListener;
@@ -30,11 +34,6 @@ import cn.m0356.shop.common.SystemHelper;
 import cn.m0356.shop.custom.NCDialog;
 import cn.m0356.shop.http.RemoteDataHandler;
 import cn.m0356.shop.http.ResponseData;
-import cn.m0356.shop.ncinterface.INCOnDialogConfirm;
-
-import org.apache.http.HttpStatus;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class RegisterMobileActivity extends BaseActivity {
 
@@ -243,7 +242,7 @@ public class RegisterMobileActivity extends BaseActivity {
      * @param view
      */
     public void btnGetSmsCaptchaClick(View view) {
-        if(!btnGetSmsCaptcha.isActivated())
+        if (!btnGetSmsCaptcha.isActivated())
             return;
         phone = etPhone.getText().toString();
         String code = etCode.getText().toString();
@@ -301,6 +300,7 @@ public class RegisterMobileActivity extends BaseActivity {
 
     /**
      * 获取短信验证码
+     *
      * @param code
      */
     private void getSmsCaptcha(String code) {
@@ -395,8 +395,8 @@ public class RegisterMobileActivity extends BaseActivity {
 
         @Override
         public void afterTextChanged(Editable s) {
-            if(s.length() >3 && !TextUtils.isEmpty(etCode.getText().toString())
-                    && !TextUtils.isEmpty(etPhone.getText().toString())){
+            if (s.length() > 3 && !TextUtils.isEmpty(etCode.getText().toString())
+                    && !TextUtils.isEmpty(etPhone.getText().toString())) {
                 btnRegNext.setActivated(true);
             } else {
                 btnRegNext.setActivated(false);
