@@ -517,8 +517,8 @@ public class HomeFragment extends Fragment implements OnGestureListener, IHomeVi
      * 初始化加载数据
      */
     public void loadUIData() {
-        String testUrl = "http://192.168.1.137/mobile/index.php?act=index&style=1";
-        RemoteDataHandler.asyncDataStringGet(Constants.URL_HOME, new Callback() {
+        String testUrl = "http://192.168.5.56/mobile/index.php?act=index&style=1";
+        RemoteDataHandler.asyncDataStringGet(testUrl, new Callback() {
             @Override
             public void dataLoaded(ResponseData data) { // Constants.URL_HOME
                 LogHelper.d("HomeFragment", data.getCode() + "----" + data.getJson());
@@ -563,7 +563,7 @@ public class HomeFragment extends Fragment implements OnGestureListener, IHomeVi
                             } else if (!JsonObj.isNull("home6")) {
                                 homePresenter.showHome6(JsonObj);  // 显示一张图片的home6,模版F，复用原来home1代码
                             } else if (!JsonObj.isNull("home7")) {
-                                homePresenter.showHome7(JsonObj);  // 两行两列的那个模版,模版G，复用原来home3代码
+                                homePresenter.showHome7(JsonObj);  // 两行两列的那个模版,模版G
                             } else if (!JsonObj.isNull("home8")) {
                                 homePresenter.showHome8(JsonObj);  // 一排1：1：1：1模版，模版H
                             } else if (!JsonObj.isNull("home9")) {
@@ -571,11 +571,11 @@ public class HomeFragment extends Fragment implements OnGestureListener, IHomeVi
                             } else if (!JsonObj.isNull("home11")) {
                                 homePresenter.showHome11(JsonObj);  // 一排1：1：1模版，模版K
                             } else if (!JsonObj.isNull("home12")) {
-                                homePresenter.showHome12(JsonObj);  // 一排1：1模版，模版L，复用原来home3代码
+                                homePresenter.showHome12(JsonObj);  // 一排1：1模版，模版L
                             } else if (!JsonObj.isNull("home13")) {
                                 homePresenter.showHome13(JsonObj);  // 一排2：1：1：1模版，模版M
                             } else if (!JsonObj.isNull("home14")) {
-                                homePresenter.showHome14(JsonObj);  //  两行两列，模版N，复用原来home3代码
+                                homePresenter.showHome14(JsonObj);  //  两行两列，模版N，复用原来home7代码
                             } else if (!JsonObj.isNull("home15")) {
                                 homePresenter.showHome15(JsonObj);  //  一个大格，模版O，复用原来home1代码
                             } else if (!JsonObj.isNull("home16")) {

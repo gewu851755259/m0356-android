@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import cn.m0356.shop.bean.AdvertList;
+import cn.m0356.shop.bean.Home3Data;
 import cn.m0356.shop.bean.HomeGoodsList;
 import cn.m0356.shop.bean.NavigationList;
 
@@ -25,4 +26,7 @@ public interface IHomeModel {
 
     // 解析导航的数据
     ArrayList<NavigationList> analysisNavList(JSONObject jsonObj , String title) throws JSONException, IOException;
+
+    // 解析首页home13
+    ArrayList<Home3Data> analysisHome13(JSONObject jsonObj , String title) throws JSONException, IOException;
 }

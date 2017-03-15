@@ -1,6 +1,7 @@
 package cn.m0356.shop.presenter;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
@@ -45,6 +46,7 @@ import cn.m0356.shop.common.SystemHelper;
 import cn.m0356.shop.controller.HomeModel;
 import cn.m0356.shop.controller.IHomeModel;
 import cn.m0356.shop.custom.MyGridView;
+import cn.m0356.shop.custom.SpaceItemDecoration;
 import cn.m0356.shop.ui.home.HomeFragment;
 import cn.m0356.shop.viewinterface.IHomeView;
 
@@ -58,10 +60,12 @@ public class HomePresenter {
     protected ImageLoader imageLoader = ImageLoader.getInstance();
     private DisplayImageOptions options = SystemHelper.getDisplayImageOptions();
     private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
+    private float mainWidth = 0.0f;
 
     public HomePresenter(IHomeView iHomeView) {
         this.iHomeView = iHomeView;
         this.iHomeModel = new HomeModel();
+        mainWidth = iHomeView.getMainActivity().getResources().getDimension(R.dimen.main_width);
     }
 
     /**
@@ -99,7 +103,6 @@ public class HomePresenter {
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             imageView.setBackgroundResource(R.drawable.dic_av_item_pic_bg);
             imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-            LogHelper.d("HomeFragment", "adv image url" + bean.getImage());
             imageLoader.displayImage(bean.getImage(), imageView, options, animateFirstListener);
             view.addView(imageView);
             iHomeView.onImageViewClick(imageView, bean.getType(), bean.getData(), true);
@@ -166,12 +169,22 @@ public class HomePresenter {
      * @throws JSONException
      */
     public void showPreferentialGoods(JSONObject jsonObj) throws IOException, JSONException {
+        Typeface typeface1 = Typeface.createFromAsset(iHomeView.getMainActivity().getAssets(), "fonts/youyuan.ttf");
+        Typeface typeface2 = Typeface.createFromAsset(iHomeView.getMainActivity().getAssets(), "fonts/kaiti.TTF");
+        Typeface typeface3 = Typeface.createFromAsset(iHomeView.getMainActivity().getAssets(), "fonts/stxihei.ttf");
         ArrayList<HomeGoodsList> preGoodsLists = iHomeModel.analysisPreGoodsList(jsonObj, "preferential_goods");
         if (preGoodsLists != null && preGoodsLists.size() > 0) {
             View preGoodsView = iHomeView.getMainActivity().getLayoutInflater().inflate(R.layout.tab_home_item_pregoods, null);
+            TextView textViewTitle = (TextView) preGoodsView.findViewById(R.id.pregoods_title_textview);
+            textViewTitle.setTypeface(typeface1);
+            TextView textViewHint = (TextView) preGoodsView.findViewById(R.id.pregoods_hint_textview);
+            textViewHint.setTypeface(typeface2);
+            TextView textViewTime = (TextView) preGoodsView.findViewById(R.id.pregoods_time_textview);
+            textViewTime.setTypeface(typeface3);
             RecyclerView recyclerView = (RecyclerView) preGoodsView.findViewById(R.id.recyclerViewPreferentialGoods);
             recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL));
             recyclerView.setItemAnimator(new DefaultItemAnimator());//more的动画效果
+            recyclerView.addItemDecoration(new SpaceItemDecoration(10));
             HomePreGoodsRecyclerAdapter adapter = new HomePreGoodsRecyclerAdapter(iHomeView.getMainActivity(), preGoodsLists);
             recyclerView.setAdapter(adapter);
             iHomeView.getHomeView().addView(preGoodsView);
@@ -221,6 +234,11 @@ public class HomePresenter {
         View home1View = iHomeView.getMainActivity().getLayoutInflater().inflate(R.layout.tab_home_item_home1, null);
         TextView textView = (TextView) home1View.findViewById(R.id.TextViewHome1Title01);
         ImageView imageView = (ImageView) home1View.findViewById(R.id.ImageViewHome1Imagepic01);
+
+        LinearLayout.LayoutParams ll = (LinearLayout.LayoutParams) imageView.getLayoutParams();
+        ll.width = (int) mainWidth;
+        ll.height = (int) (mainWidth / 640 * 260);
+        imageView.setLayoutParams(ll);
 
         if (!bean.getTitle().equals("") && !bean.getTitle().equals("null") && bean.getTitle() != null) {
             textView.setVisibility(View.VISIBLE);
@@ -361,8 +379,10 @@ public class HomePresenter {
         View home1View = iHomeView.getMainActivity().getLayoutInflater().inflate(R.layout.tab_home_item_home1, null);
         TextView textView = (TextView) home1View.findViewById(R.id.TextViewHome1Title01);
         ImageView imageView = (ImageView) home1View.findViewById(R.id.ImageViewHome1Imagepic01);
+
         LinearLayout.LayoutParams ll = (LinearLayout.LayoutParams) imageView.getLayoutParams();
-        ll.height = (int) iHomeView.getMainActivity().getResources().getDimension(R.dimen.main_home6_height);
+        ll.width = (int) mainWidth;
+        ll.height = (int) (mainWidth / 640 * 66);
         imageView.setLayoutParams(ll);
 
         if (!bean.getTitle().equals("") && !bean.getTitle().equals("null") && bean.getTitle() != null) {
@@ -382,28 +402,39 @@ public class HomePresenter {
      */
     public void showHome7(JSONObject jsonObj) throws IOException, JSONException {
         JSONObject home7Json = jsonObj.getJSONObject("home7");
-        ArrayList<Home3Data> home3Datas = new ArrayList<Home3Data>();
         Home3Data bean1 = new Home3Data(home7Json.getString("square1_image"), home7Json.getString("square1_type"), home7Json.getString("square1_data"));
-        home3Datas.add(bean1);
         Home3Data bean2 = new Home3Data(home7Json.getString("square2_image"), home7Json.getString("square2_type"), home7Json.getString("square2_data"));
-        home3Datas.add(bean2);
-        Home3Data bean3 = new Home3Data(home7Json.getString("square3_image"),
-                home7Json.has("square3_type") ? home7Json.getString("square3_type") : "",
-                home7Json.has("square3_data") ? home7Json.getString("square3_data") : "");
-        home3Datas.add(bean3);
-        Home3Data bean4 = new Home3Data(home7Json.getString("square4_image"),
-                home7Json.has("square4_type") ? home7Json.getString("square4_type") : "",
-                home7Json.has("square4_data") ? home7Json.getString("square4_data") : "");
-        home3Datas.add(bean4);
+        Home3Data bean3 = new Home3Data(home7Json.getString("rectangle1_image"),
+                home7Json.has("rectangle1_type") ? home7Json.getString("rectangle1_type") : "",
+                home7Json.has("rectangle1_data") ? home7Json.getString("rectangle1_data") : "");
+        Home3Data bean4 = new Home3Data(home7Json.getString("rectangle2_image"),
+                home7Json.has("rectangle2_type") ? home7Json.getString("rectangle2_type") : "",
+                home7Json.has("rectangle2_data") ? home7Json.getString("rectangle2_data") : "");
 
-        View home7View = iHomeView.getMainActivity().getLayoutInflater().inflate(R.layout.tab_home_item_home3, null);
+        View home7View = iHomeView.getMainActivity().getLayoutInflater().inflate(R.layout.tab_home_item_home7, null);
         TextView textView = (TextView) home7View.findViewById(R.id.TextViewTitle);
-        MyGridView gridview = (MyGridView) home7View.findViewById(R.id.gridview);
-        gridview.setFocusable(false);
-        HomeActivityMyGridViewListAdapter adapter = new HomeActivityMyGridViewListAdapter(iHomeView.getMainActivity());
-        adapter.setHome3Datas(home3Datas);
-        gridview.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        ImageView imageview1 = (ImageView) home7View.findViewById(R.id.home7ImageView1);
+        ImageView imageview2 = (ImageView) home7View.findViewById(R.id.home7ImageView2);
+        ImageView imageview3 = (ImageView) home7View.findViewById(R.id.home7ImageView3);
+        ImageView imageview4 = (ImageView) home7View.findViewById(R.id.home7ImageView4);
+
+        LinearLayout.LayoutParams ll = (LinearLayout.LayoutParams) imageview1.getLayoutParams();
+        ll.width = (int) (mainWidth / 2);
+        ll.height = (int) (mainWidth / 2 / 320 * 180);
+        imageview1.setLayoutParams(ll);
+        imageview2.setLayoutParams(ll);
+        imageview3.setLayoutParams(ll);
+        imageview4.setLayoutParams(ll);
+
+        imageLoader.displayImage(bean1.getImage(), imageview1, options, animateFirstListener);
+        imageLoader.displayImage(bean2.getImage(), imageview2, options, animateFirstListener);
+        imageLoader.displayImage(bean3.getImage(), imageview3, options, animateFirstListener);
+        imageLoader.displayImage(bean4.getImage(), imageview4, options, animateFirstListener);
+
+        iHomeView.onImageViewClick(imageview1, bean1.getType(), bean1.getData(), false);
+        iHomeView.onImageViewClick(imageview2, bean2.getType(), bean2.getData(), false);
+        iHomeView.onImageViewClick(imageview3, bean3.getType(), bean3.getData(), false);
+        iHomeView.onImageViewClick(imageview4, bean4.getType(), bean4.getData(), false);
 
         if (bean1.getTitle() != null && !bean1.getTitle().equals("") && !bean1.getTitle().equals("null")) {
             textView.setVisibility(View.VISIBLE);
@@ -439,6 +470,14 @@ public class HomePresenter {
         ImageView imageview2 = (ImageView) home8View.findViewById(R.id.home8ImageView2);
         ImageView imageview3 = (ImageView) home8View.findViewById(R.id.home8ImageView3);
         ImageView imageview4 = (ImageView) home8View.findViewById(R.id.home8ImageView4);
+
+        LinearLayout.LayoutParams ll = (LinearLayout.LayoutParams) imageview1.getLayoutParams();
+        ll.width = (int) (mainWidth / 4);
+        ll.height = (int) (mainWidth / 4 / 160 * 180);
+        imageview1.setLayoutParams(ll);
+        imageview2.setLayoutParams(ll);
+        imageview3.setLayoutParams(ll);
+        imageview4.setLayoutParams(ll);
 
         imageLoader.displayImage(bean1.getImage(), imageview1, options, animateFirstListener);
         imageLoader.displayImage(bean2.getImage(), imageview2, options, animateFirstListener);
@@ -544,20 +583,25 @@ public class HomePresenter {
      */
     public void showHome12(JSONObject jsonObj) throws IOException, JSONException {
         JSONObject home12Json = jsonObj.getJSONObject("home12");
-        ArrayList<Home3Data> home3Datas = new ArrayList<Home3Data>();
         Home3Data bean1 = new Home3Data(home12Json.getString("square1_image"), home12Json.getString("square1_type"), home12Json.getString("square1_data"));
-        home3Datas.add(bean1);
         Home3Data bean2 = new Home3Data(home12Json.getString("square2_image"), home12Json.getString("square2_type"), home12Json.getString("square2_data"));
-        home3Datas.add(bean2);
 
-        View home12View = iHomeView.getMainActivity().getLayoutInflater().inflate(R.layout.tab_home_item_home3, null);
+        View home12View = iHomeView.getMainActivity().getLayoutInflater().inflate(R.layout.tab_home_item_home12, null);
         TextView textView = (TextView) home12View.findViewById(R.id.TextViewTitle);
-        MyGridView gridview = (MyGridView) home12View.findViewById(R.id.gridview);
-        gridview.setFocusable(false);
-        HomeActivityMyGridViewListAdapter adapter = new HomeActivityMyGridViewListAdapter(iHomeView.getMainActivity());
-        adapter.setHome3Datas(home3Datas);
-        gridview.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        ImageView imageview1 = (ImageView) home12View.findViewById(R.id.home12ImageView1);
+        ImageView imageview2 = (ImageView) home12View.findViewById(R.id.home12ImageView2);
+
+        LinearLayout.LayoutParams ll = (LinearLayout.LayoutParams) imageview1.getLayoutParams();
+        ll.width = (int) (mainWidth / 2);
+        ll.height = (int) (mainWidth / 2 / 320 * 248);
+        imageview1.setLayoutParams(ll);
+        imageview2.setLayoutParams(ll);
+
+        imageLoader.displayImage(bean1.getImage(), imageview1, options, animateFirstListener);
+        imageLoader.displayImage(bean2.getImage(), imageview2, options, animateFirstListener);
+
+        iHomeView.onImageViewClick(imageview1, bean1.getType(), bean1.getData(), false);
+        iHomeView.onImageViewClick(imageview2, bean2.getType(), bean2.getData(), false);
 
         if (bean1.getTitle() != null && !bean1.getTitle().equals("") && !bean1.getTitle().equals("null")) {
             textView.setVisibility(View.VISIBLE);
@@ -573,7 +617,33 @@ public class HomePresenter {
      * 显示Home13，两行，每行2：1：1：1，240*189和130*189，模版M
      */
     public void showHome13(JSONObject jsonObj) throws IOException, JSONException {
-        JSONObject home13Json = jsonObj.getJSONObject("home13");
+        ArrayList<Home3Data> home13Data = iHomeModel.analysisHome13(jsonObj, "home13");
+
+        View home13View = iHomeView.getMainActivity().getLayoutInflater().inflate(R.layout.tab_home_item_home13, null);
+        TextView textView = (TextView) home13View.findViewById(R.id.TextViewTitle);
+        ArrayList<ImageView> home13Imgs = new ArrayList<ImageView>();
+        home13Imgs.add((ImageView) home13View.findViewById(R.id.home13ImageView1));
+        home13Imgs.add((ImageView) home13View.findViewById(R.id.home13ImageView2));
+        home13Imgs.add((ImageView) home13View.findViewById(R.id.home13ImageView3));
+        home13Imgs.add((ImageView) home13View.findViewById(R.id.home13ImageView4));
+        home13Imgs.add((ImageView) home13View.findViewById(R.id.home13ImageView5));
+        home13Imgs.add((ImageView) home13View.findViewById(R.id.home13ImageView6));
+        home13Imgs.add((ImageView) home13View.findViewById(R.id.home13ImageView7));
+        home13Imgs.add((ImageView) home13View.findViewById(R.id.home13ImageView8));
+
+        for (int i = 0; i < home13Imgs.size(); i++) {
+            imageLoader.displayImage(home13Data.get(i).getImage(), home13Imgs.get(i), options, animateFirstListener);
+            iHomeView.onImageViewClick(home13Imgs.get(i), home13Data.get(i).getType(), home13Data.get(i).getData(), false);
+        }
+
+        if (home13Data.get(0).getTitle() != null && !home13Data.get(0).getTitle().equals("") && !home13Data.get(0).getTitle().equals("null")) {
+            textView.setVisibility(View.VISIBLE);
+            textView.setText(home13Data.get(0).getTitle());
+        } else {
+            textView.setVisibility(View.GONE);
+        }
+
+        iHomeView.getHomeView().addView(home13View);
     }
 
     /**
@@ -581,28 +651,39 @@ public class HomePresenter {
      */
     public void showHome14(JSONObject jsonObj) throws IOException, JSONException {
         JSONObject home14Json = jsonObj.getJSONObject("home14");
-        ArrayList<Home3Data> home3Datas = new ArrayList<Home3Data>();
         Home3Data bean1 = new Home3Data(home14Json.getString("square1_image"), home14Json.getString("square1_type"), home14Json.getString("square1_data"));
-        home3Datas.add(bean1);
         Home3Data bean2 = new Home3Data(home14Json.getString("square2_image"), home14Json.getString("square2_type"), home14Json.getString("square2_data"));
-        home3Datas.add(bean2);
         Home3Data bean3 = new Home3Data(home14Json.getString("square3_image"),
                 home14Json.has("square3_type") ? home14Json.getString("square3_type") : "",
                 home14Json.has("square3_data") ? home14Json.getString("square3_data") : "");
-        home3Datas.add(bean3);
         Home3Data bean4 = new Home3Data(home14Json.getString("square4_image"),
                 home14Json.has("square4_type") ? home14Json.getString("square4_type") : "",
                 home14Json.has("square4_data") ? home14Json.getString("square4_data") : "");
-        home3Datas.add(bean4);
 
-        View home14View = iHomeView.getMainActivity().getLayoutInflater().inflate(R.layout.tab_home_item_home3, null);
+        View home14View = iHomeView.getMainActivity().getLayoutInflater().inflate(R.layout.tab_home_item_home7, null);
         TextView textView = (TextView) home14View.findViewById(R.id.TextViewTitle);
-        MyGridView gridview = (MyGridView) home14View.findViewById(R.id.gridview);
-        gridview.setFocusable(false);
-        HomeActivityMyGridViewListAdapter adapter = new HomeActivityMyGridViewListAdapter(iHomeView.getMainActivity());
-        adapter.setHome3Datas(home3Datas);
-        gridview.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        ImageView imageview1 = (ImageView) home14View.findViewById(R.id.home7ImageView1);
+        ImageView imageview2 = (ImageView) home14View.findViewById(R.id.home7ImageView2);
+        ImageView imageview3 = (ImageView) home14View.findViewById(R.id.home7ImageView3);
+        ImageView imageview4 = (ImageView) home14View.findViewById(R.id.home7ImageView4);
+
+        LinearLayout.LayoutParams ll = (LinearLayout.LayoutParams) imageview1.getLayoutParams();
+        ll.width = (int) (mainWidth / 2);
+        ll.height = (int) (mainWidth / 2 / 320 * 200);
+        imageview1.setLayoutParams(ll);
+        imageview2.setLayoutParams(ll);
+        imageview3.setLayoutParams(ll);
+        imageview4.setLayoutParams(ll);
+
+        imageLoader.displayImage(bean1.getImage(), imageview1, options, animateFirstListener);
+        imageLoader.displayImage(bean2.getImage(), imageview2, options, animateFirstListener);
+        imageLoader.displayImage(bean3.getImage(), imageview3, options, animateFirstListener);
+        imageLoader.displayImage(bean4.getImage(), imageview4, options, animateFirstListener);
+
+        iHomeView.onImageViewClick(imageview1, bean1.getType(), bean1.getData(), false);
+        iHomeView.onImageViewClick(imageview2, bean2.getType(), bean2.getData(), false);
+        iHomeView.onImageViewClick(imageview3, bean3.getType(), bean3.getData(), false);
+        iHomeView.onImageViewClick(imageview4, bean4.getType(), bean4.getData(), false);
 
         if (bean1.getTitle() != null && !bean1.getTitle().equals("") && !bean1.getTitle().equals("null")) {
             textView.setVisibility(View.VISIBLE);
@@ -623,8 +704,10 @@ public class HomePresenter {
         View home15View = iHomeView.getMainActivity().getLayoutInflater().inflate(R.layout.tab_home_item_home1, null);
         TextView textView = (TextView) home15View.findViewById(R.id.TextViewHome1Title01);
         ImageView imageView = (ImageView) home15View.findViewById(R.id.ImageViewHome1Imagepic01);
+
         LinearLayout.LayoutParams ll = (LinearLayout.LayoutParams) imageView.getLayoutParams();
-        ll.height = (int) iHomeView.getMainActivity().getResources().getDimension(R.dimen.main_home6_height);
+        ll.width = (int) mainWidth;
+        ll.height = (int) (mainWidth / 640 * 150);
         imageView.setLayoutParams(ll);
 
         if (!bean.getTitle().equals("") && !bean.getTitle().equals("null") && bean.getTitle() != null) {
@@ -663,6 +746,14 @@ public class HomePresenter {
         ImageView imageview2 = (ImageView) home8View.findViewById(R.id.home8ImageView2);
         ImageView imageview3 = (ImageView) home8View.findViewById(R.id.home8ImageView3);
         ImageView imageview4 = (ImageView) home8View.findViewById(R.id.home8ImageView4);
+
+        LinearLayout.LayoutParams ll = (LinearLayout.LayoutParams) imageview1.getLayoutParams();
+        ll.width = (int) (mainWidth / 4);
+        ll.height = (int) (mainWidth / 4 / 160 * 256);
+        imageview1.setLayoutParams(ll);
+        imageview2.setLayoutParams(ll);
+        imageview3.setLayoutParams(ll);
+        imageview4.setLayoutParams(ll);
 
         imageLoader.displayImage(bean1.getImage(), imageview1, options, animateFirstListener);
         imageLoader.displayImage(bean2.getImage(), imageview2, options, animateFirstListener);

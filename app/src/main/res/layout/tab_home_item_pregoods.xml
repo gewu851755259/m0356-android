@@ -2,27 +2,62 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:background="@color/app_bg_color"
               android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/main_pregoods_title_height"
+        android:background="@color/app_white"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/pregoods_title_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="限时特惠"/>
+            android:layout_marginLeft="10dp"
+            android:text="今日特惠"
+            android:textColor="@color/nc_red_dark"
+            android:textSize="18dp"
+            android:typeface="monospace"/>
 
         <TextView
+            android:id="@+id/pregoods_hint_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="19:49:23"/>
+            android:layout_marginLeft="13dp"
+            android:text="每日9点上新"
+            android:textColor="@color/nc_black"
+            android:textSize="16dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right|center_vertical"
+            android:orientation="horizontal"
+            android:paddingRight="15dp">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/daojishi"/>
+
+            <TextView
+                android:id="@+id/pregoods_time_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="16 : 06 : 26"
+                android:textColor="@color/nc_black"
+                android:textSize="16dp"/>
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/app_white"
         android:orientation="vertical">
 
         <android.support.v7.widget.RecyclerView

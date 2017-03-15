@@ -31,19 +31,6 @@ public class WelcomeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_view);
 
-        DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        int width = metrics.widthPixels;
-        int height = metrics.heightPixels;
-        int densityDpi = metrics.densityDpi;
-        float scaledDensity = metrics.scaledDensity;
-        float xdpi = metrics.xdpi;
-        float density = metrics.density;
-        float widthdp = width / density;
-        float heightdp = height / density;
-        LogHelper.d("WelcomeActivity", "宽：" + width + "px    高：" + height + "px    densityDpi：" + densityDpi + "    scaledDensity" + scaledDensity + "    xdpi" + xdpi + "    density" + density + "    宽：" + widthdp + "dp    高：" + heightdp + "dp");
-        LogHelper.d("WelcomeActivity", "dimen main width = " + getResources().getDimension(R.dimen.main_width));
-
         MyExceptionHandler.getInstance().setContext(this);
 
         // 百度移动统计

@@ -2,6 +2,8 @@ package cn.m0356.shop.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,20 +63,22 @@ public class HomePreGoodsRecyclerAdapter extends RecyclerView.Adapter<HomePreGoo
 
     @Override
     public PreGoodsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Typeface typeface = Typeface.createFromAsset(context.getAssets() , "fonts/stxihei.ttf");
         final View view = mInflater.inflate(R.layout.tab_home_item_pregoods_recyclerview_item, parent, false);
         final ImageView imageViewImagePic01 = (ImageView) view.findViewById(R.id.ImageViewImagePic01);
-        final TextView textViewTitle = (TextView) view.findViewById(R.id.TextViewTitle);
-        final TextView textViewPrice = (TextView) view.findViewById(R.id.TextViewPrice);
+        final TextView textViewTitle = (TextView) view.findViewById(R.id.goodsPriceID);
+        final TextView textViewPrice = (TextView) view.findViewById(R.id.goodsOldPriceID);
+        textViewTitle.setTypeface(typeface);
+        textViewPrice.setTypeface(typeface);
+        textViewPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         return new PreGoodsViewHolder(view, imageViewImagePic01, textViewTitle, textViewPrice);
     }
 
     @Override
     public void onBindViewHolder(PreGoodsViewHolder holder, int position) {
         HomeGoodsList bean = preGoodsLists.get(position);
-
         holder.textViewTitle.setText(bean.getGoods_name());
         holder.textViewPrice.setText("￥" + bean.getGoods_promotion_price());
-
         imageLoader.displayImage(bean.getGoods_image(), holder.imageViewImagePic01, options, animateFirstListener);
         OnImageViewClick(holder.imageViewImagePic01, "goods", bean.getGoods_id());
     }

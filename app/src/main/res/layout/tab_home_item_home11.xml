@@ -45,7 +45,7 @@
                     android:scaleType="centerCrop"/>
 
                 <View
-                    android:layout_width="1dp"
+                    android:layout_width="2dp"
                     android:layout_height="fill_parent"
                     android:background="@drawable/widget_gap_line"/>
 
@@ -57,10 +57,9 @@
                     android:scaleType="centerCrop"/>
 
                 <View
-                    android:layout_width="1dp"
+                    android:layout_width="2dp"
                     android:layout_height="fill_parent"
                     android:background="@drawable/widget_gap_line"/>
-
 
                 <ImageView
                     android:id="@+id/home11ImageView3"

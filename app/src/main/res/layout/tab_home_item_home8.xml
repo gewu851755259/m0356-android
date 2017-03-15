@@ -40,9 +40,9 @@
                 <ImageView
                     android:id="@+id/home8ImageView1"
                     android:layout_width="@dimen/main_home_quarter_width"
-                    android:layout_height="@dimen/main_home8_height"
+                    android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="fitCenter"/>
 
                 <View
                     android:layout_width="1dp"
@@ -52,9 +52,9 @@
                 <ImageView
                     android:id="@+id/home8ImageView2"
                     android:layout_width="@dimen/main_home_quarter_width"
-                    android:layout_height="@dimen/main_home8_height"
+                    android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="fitCenter"/>
 
                 <View
                     android:layout_width="1dp"
@@ -65,21 +65,21 @@
                 <ImageView
                     android:id="@+id/home8ImageView3"
                     android:layout_width="@dimen/main_home_quarter_width"
-                    android:layout_height="@dimen/main_home8_height"
+                    android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="fitCenter"/>
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="fill_parent"
-                    android:background="@drawable/cart_listview_gap"/>
+                    android:background="@drawable/widget_gap_line"/>
 
                 <ImageView
                     android:id="@+id/home8ImageView4"
                     android:layout_width="@dimen/main_home_quarter_width"
-                    android:layout_height="@dimen/main_home8_height"
+                    android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="fitCenter"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

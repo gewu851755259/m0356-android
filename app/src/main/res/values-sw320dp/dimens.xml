@@ -19,11 +19,17 @@
     <dimen name="main_home3_width">160dp</dimen>
     <dimen name="main_home3_height">42dp</dimen>
     <dimen name="main_goods_size">160dp</dimen>
-    <dimen name="main_pregoods_size">160dp</dimen>
+    <dimen name="main_pregoods_size">80dp</dimen>
+    <dimen name="main_pregoods_title_height">25dp</dimen>
     <dimen name="main_home6_width">320dp</dimen>
     <dimen name="main_home6_height">33dp</dimen>
     <dimen name="main_home8_height">90dp</dimen>
+    <dimen name="main_home9_width">161dp</dimen>
     <dimen name="main_home9_height">90dp</dimen>
     <dimen name="main_home11_width">105dp</dimen>
     <dimen name="main_home11_height">103dp</dimen>
+    <dimen name="main_home13_width">120dp</dimen>
+    <dimen name="main_home13_width_2">65dp</dimen>
+    <dimen name="main_home13_height">95dp</dimen>
+
 </resources>
