@@ -8,6 +8,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -16,16 +17,17 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import java.util.ArrayList;
 
+import cn.m0356.shop.MainFragmentManager;
 import cn.m0356.shop.R;
-import cn.m0356.shop.bean.HomeGoodsList;
 import cn.m0356.shop.bean.NavigationList;
 import cn.m0356.shop.common.AnimateFirstDisplayListener;
 import cn.m0356.shop.common.Constants;
+import cn.m0356.shop.common.MyShopApplication;
+import cn.m0356.shop.common.ShopHelper;
 import cn.m0356.shop.common.SystemHelper;
-import cn.m0356.shop.ui.home.SubjectWebActivity;
-import cn.m0356.shop.ui.store.newStoreInFoActivity;
-import cn.m0356.shop.ui.type.GoodsDetailsActivity;
-import cn.m0356.shop.ui.type.GoodsListFragmentManager;
+import cn.m0356.shop.ui.home.SearchActivity;
+import cn.m0356.shop.ui.mine.RegisterMobileActivity;
+import cn.m0356.shop.ui.type.VoucherActivity;
 
 /**
  * 首页Navigation适配器
@@ -41,10 +43,12 @@ public class HomeNavMyGridViewListAdapter extends BaseAdapter {
     protected ImageLoader imageLoader = ImageLoader.getInstance();
     private DisplayImageOptions options = SystemHelper.getDisplayImageOptions();
     private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
+    private MyShopApplication myApplication;
 
     public HomeNavMyGridViewListAdapter(Context context) {
         this.context = context;
         this.inflater = LayoutInflater.from(context);
+        this.myApplication = (MyShopApplication) context.getApplicationContext();
     }
 
     @Override
@@ -76,54 +80,52 @@ public class HomeNavMyGridViewListAdapter extends BaseAdapter {
         if (null == convertView) {
             convertView = inflater.inflate(R.layout.tab_home_item_nav_gridview_item, null);
             holder = new ViewHolder();
-            holder.ImageViewImagePic01 = (ImageView) convertView.findViewById(R.id.ImageViewImagePic01);
+            holder.navBgLayout = (RelativeLayout) convertView.findViewById(R.id.home_navigation_layout);
+            holder.navBgImg = (ImageView) convertView.findViewById(R.id.home_navigation_img);
+            holder.navBgText = (TextView) convertView.findViewById(R.id.home_navigation_text);
+            holder.navTitle = (TextView) convertView.findViewById(R.id.home_navigation_title);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
         NavigationList bean = navDatas.get(position);
-
-        imageLoader.displayImage(bean.getImage(), holder.ImageViewImagePic01, options, animateFirstListener);
-        OnImageViewClick(holder.ImageViewImagePic01, bean.getType(), bean.getData());
+        holder.navTitle.setText(bean.getImage_title());
+        imageLoader.displayImage(bean.getImage(), holder.navBgImg, options, animateFirstListener);
+        OnImageViewClick(holder.navBgImg, bean.getImage_title(), bean.getData());
 
         return convertView;
     }
 
     class ViewHolder {
-        ImageView ImageViewImagePic01;
+        ImageView navBgImg;
+        RelativeLayout navBgLayout;
+        TextView navTitle, navBgText;
     }
 
     public void OnImageViewClick(View view, final String type, final String data) {
         view.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (type.equals("keyword")) {//搜索关键字
-                    Intent intent = new Intent(context, GoodsListFragmentManager.class);
-                    intent.putExtra("keyword", data);
-                    intent.putExtra("gc_name", data);
+                if (type.equals("分类")) {
+                    Intent intent = new Intent(context, MainFragmentManager.class);
+                    myApplication.sendBroadcast(new Intent(Constants.SHOW_Classify_URL));
                     context.startActivity(intent);
-                } else if (type.equals("special")) {//专题编号
-                    Intent intent = new Intent(context, SubjectWebActivity.class);
-                    intent.putExtra("data", Constants.URL_SPECIAL + "&special_id=" + data + "&type=html");
+                } else if (type.equals("领券")) {
+                    if (ShopHelper.isLogin(context, myApplication.getLoginKey())) {
+                        VoucherActivity.start(context);
+                    } else {
+                    }
+                } else if (type.equals("我的晋城购")) {
+                    Intent intent = new Intent(context, MainFragmentManager.class);
+                    myApplication.sendBroadcast(new Intent(Constants.SHOW_Mine_URL));
                     context.startActivity(intent);
-                } else if (type.equals("goods")) {//商品编号
-                    Intent intent = new Intent(context, GoodsDetailsActivity.class);
-                    intent.putExtra("goods_id", data);
-                    context.startActivity(intent);
-                } else if (type.equals("url")) {//地址
-                    Intent intent = new Intent(context, SubjectWebActivity.class);
-                    intent.putExtra("data", data);
-                    context.startActivity(intent);
-                } else if (type.equals("store")) { // 店铺
-                    //Toast.makeText(getActivity(), "store", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(context, newStoreInFoActivity.class);
-                    intent.putExtra("store_id", data);
-                    context.startActivity(intent);
-                } else if (type.equals("category")) { // 分类
-                    Intent intent = new Intent(context, GoodsListFragmentManager.class);
-                    intent.putExtra("gc_id", data);
-                    context.startActivity(intent);
+                } else if (type.equals("注册")) {
+                    if (ShopHelper.isLogin(context, myApplication.getLoginKey())) {
+                        context.startActivity(new Intent(context, RegisterMobileActivity.class));
+                    }
+                } else {
+                    context.startActivity(new Intent(context, SearchActivity.class));
                 }
             }
         });

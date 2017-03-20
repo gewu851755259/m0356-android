@@ -1,17 +1,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/app_bg_color"
-    android:orientation="vertical"
-    tools:context=".MainFragmentManager" >
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/app_bg_color"
+              android:orientation="vertical"
+              tools:context=".MainFragmentManager">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="#FFFFFF"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:paddingLeft="7dp"
+        android:paddingRight="7dp"
+        android:paddingTop="10dp">
 
         <TextView
             android:id="@+id/TextViewTitle"
@@ -20,26 +21,24 @@
             android:layout_margin="5dp"
             android:textColor="#6D6D6D"
             android:textSize="15dp"
-            android:visibility="gone" />
+            android:visibility="gone"/>
 
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dp"
-            android:visibility="gone"
-            android:background="@drawable/cart_listview_gap" />
+            android:background="@drawable/cart_listview_gap"
+            android:visibility="gone"/>
+
+        <cn.m0356.shop.custom.MyGridView
+            android:id="@+id/gridview_navigation"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:background="@null"
+            android:horizontalSpacing="5dp"
+            android:listSelector="@null"
+            android:numColumns="5"
+            android:verticalSpacing="10dp"/>
     </LinearLayout>
-    <!-- ====================== -->
-
-    <cn.m0356.shop.custom.MyGridView
-        android:id="@+id/gridview_navigation"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:background="@null"
-        android:horizontalSpacing="5dp"
-        android:listSelector="@null"
-        android:numColumns="5"
-        android:verticalSpacing="5dp" />
-
 </LinearLayout>

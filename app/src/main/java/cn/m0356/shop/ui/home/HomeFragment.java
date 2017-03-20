@@ -516,6 +516,7 @@ public class HomeFragment extends Fragment implements OnGestureListener, IHomeVi
     /**
      * 初始化加载数据
      */
+    @Override
     public void loadUIData() {
         String testUrl = "http://192.168.5.56/mobile/index.php?act=index&style=1";
         RemoteDataHandler.asyncDataStringGet(testUrl, new Callback() {

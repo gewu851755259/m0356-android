@@ -50,4 +50,6 @@ public interface IHomeView {
 
     // 得到包裹模版的父控件
     LinearLayout getHomeView();
+
+    void loadUIData();
 }

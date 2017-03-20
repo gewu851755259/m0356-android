@@ -2,8 +2,6 @@ package cn.m0356.shop.common;
 
 import android.os.Environment;
 
-import org.json.JSONObject;
-
 /**
  * 常量类
  *
@@ -163,7 +161,7 @@ public final class Constants {
      */
 	public static final String HOST = "www.m0356.com";
 //    public static final String HOST = "192.168.1.137"; // 测试
-//    public static final String HOST = "192.168.136.1"; // localhost
+//    public static final String HOST = "192.168.80.1"; // localhost
 
 
     //WAPURL

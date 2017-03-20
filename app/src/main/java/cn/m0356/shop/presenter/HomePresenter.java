@@ -3,6 +3,7 @@ package cn.m0356.shop.presenter;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.os.CountDownTimer;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -24,6 +25,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import cn.m0356.shop.R;
 import cn.m0356.shop.adapter.GridViewAdapter;
@@ -41,7 +43,7 @@ import cn.m0356.shop.bean.Home9Data;
 import cn.m0356.shop.bean.HomeGoodsList;
 import cn.m0356.shop.bean.NavigationList;
 import cn.m0356.shop.common.AnimateFirstDisplayListener;
-import cn.m0356.shop.common.LogHelper;
+import cn.m0356.shop.common.FontUtils;
 import cn.m0356.shop.common.SystemHelper;
 import cn.m0356.shop.controller.HomeModel;
 import cn.m0356.shop.controller.IHomeModel;
@@ -61,6 +63,7 @@ public class HomePresenter {
     private DisplayImageOptions options = SystemHelper.getDisplayImageOptions();
     private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
     private float mainWidth = 0.0f;
+    private CountDownTimer timer = null;
 
     public HomePresenter(IHomeView iHomeView) {
         this.iHomeView = iHomeView;
@@ -169,18 +172,24 @@ public class HomePresenter {
      * @throws JSONException
      */
     public void showPreferentialGoods(JSONObject jsonObj) throws IOException, JSONException {
-        Typeface typeface1 = Typeface.createFromAsset(iHomeView.getMainActivity().getAssets(), "fonts/youyuan.ttf");
-        Typeface typeface2 = Typeface.createFromAsset(iHomeView.getMainActivity().getAssets(), "fonts/kaiti.TTF");
-        Typeface typeface3 = Typeface.createFromAsset(iHomeView.getMainActivity().getAssets(), "fonts/stxihei.ttf");
         ArrayList<HomeGoodsList> preGoodsLists = iHomeModel.analysisPreGoodsList(jsonObj, "preferential_goods");
         if (preGoodsLists != null && preGoodsLists.size() > 0) {
             View preGoodsView = iHomeView.getMainActivity().getLayoutInflater().inflate(R.layout.tab_home_item_pregoods, null);
             TextView textViewTitle = (TextView) preGoodsView.findViewById(R.id.pregoods_title_textview);
-            textViewTitle.setTypeface(typeface1);
+            textViewTitle.setTypeface(FontUtils.getTypeface(iHomeView.getMainActivity(), "youyuan.ttf"));
             TextView textViewHint = (TextView) preGoodsView.findViewById(R.id.pregoods_hint_textview);
-            textViewHint.setTypeface(typeface2);
+            textViewHint.setTypeface(FontUtils.getTypeface(iHomeView.getMainActivity(), "kaiti.TTF"));
             TextView textViewTime = (TextView) preGoodsView.findViewById(R.id.pregoods_time_textview);
-            textViewTime.setTypeface(typeface3);
+            textViewTime.setTypeface(FontUtils.getTypeface(iHomeView.getMainActivity(), "stxihei.ttf"));
+            stopNormalCountDownTime();
+            Calendar calendar = Calendar.getInstance();
+            if (calendar.get(Calendar.HOUR_OF_DAY) < 24) {
+                calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH) + 1);
+            }
+            calendar.set(Calendar.HOUR_OF_DAY, 9);
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.SECOND, 0);
+            startNormalCountDownTime(textViewTime, calendar.getTimeInMillis() - System.currentTimeMillis());
             RecyclerView recyclerView = (RecyclerView) preGoodsView.findViewById(R.id.recyclerViewPreferentialGoods);
             recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL));
             recyclerView.setItemAnimator(new DefaultItemAnimator());//more的动画效果
@@ -773,6 +782,44 @@ public class HomePresenter {
         }
 
         iHomeView.getHomeView().addView(home8View);
+    }
+
+    /**
+     * 特惠商品倒计时
+     *
+     * @param timeTextView 显示倒计时的文本框
+     * @param time         倒计的总时间
+     */
+    private void startNormalCountDownTime(final TextView timeTextView, final long time) {
+        /**
+         * 最简单的倒计时类，实现了官方的CountDownTimer类（没有特殊要求的话可以使用）
+         * 即使退出activity，倒计时还能进行，因为是创建了后台的线程。
+         * 有onTick，onFinsh、cancel和start方法
+         */
+        timer = new CountDownTimer(time, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                int hour = (int) (millisUntilFinished / 1000 / 60 / 60);
+                int minute = (int) (millisUntilFinished / 1000 / 60 % 60);
+                int second = (int) (millisUntilFinished / 1000 % 60);
+                timeTextView.setText((hour < 10 ? "0" + hour : hour) + " : " + (minute < 10 ? "0" + minute : minute) + " : " + (second < 10 ? "0" + second : second));
+            }
+
+            @Override
+            public void onFinish() {
+                iHomeView.loadUIData();
+            }
+        };
+        timer.start();
+    }
+
+    /**
+     * 如果刷新了界面，先停掉原来的倒计时，然后再从新开始新的
+     */
+    private void stopNormalCountDownTime() {
+        if (timer != null) {
+            timer.cancel();
+        }
     }
 
 }

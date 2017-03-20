@@ -1,18 +1,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/nc_bg">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/nc_bg">
 
     <LinearLayout
         android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:gravity="center_vertical"
         android:layout_alignParentTop="true"
         android:background="#ED5968"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
-        <!--
-         -->
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="30dp"
@@ -28,7 +27,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:src="@drawable/nc_icon_search" />
+                android:src="@drawable/nc_icon_search"/>
 
             <TextView
                 android:id="@+id/tvSearch"
@@ -38,7 +37,7 @@
                 android:background="@android:color/white"
                 android:gravity="center_vertical"
                 android:singleLine="true"
-                android:textColorHint="@color/nc_text" />
+                android:textColorHint="@color/nc_text"/>
 
             <Button
                 android:id="@+id/btnCamera"
@@ -46,7 +45,7 @@
                 android:layout_height="26dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:background="@drawable/nc_icon_camera" />
+                android:background="@drawable/nc_icon_camera"/>
         </LinearLayout>
 
         <LinearLayout
@@ -59,14 +58,14 @@
             <ImageView
                 android:layout_width="18dp"
                 android:layout_height="18dp"
-                android:src="@drawable/nc_icon_im_white" />
+                android:src="@drawable/nc_icon_im_white"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="消息"
                 android:textColor="@color/app_white"
-                android:textSize="12dp" />
+                android:textSize="12dp"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -80,11 +79,12 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:descendantFocusability="blocksDescendants"
             android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="@dimen/main_home_adv_height">
+                android:layout_height="@dimen/main_home_adv_height2">
 
                 <!-- 幻灯图片 -->
                 <cn.m0356.shop.custom.ViewFlipperScrollView
@@ -102,7 +102,7 @@
                         <ViewFlipper
                             android:id="@+id/viewflipper"
                             android:layout_width="fill_parent"
-                            android:layout_height="@dimen/main_home_adv_height" />
+                            android:layout_height="@dimen/main_home_adv_height"/>
 
                         <LinearLayout
                             android:id="@+id/dian"
@@ -110,7 +110,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:orientation="horizontal" />
+                            android:orientation="horizontal"/>
                     </LinearLayout>
                 </cn.m0356.shop.custom.ViewFlipperScrollView>
 
@@ -131,7 +131,7 @@
                         <ViewFlipper
                             android:id="@+id/viewflipper2"
                             android:layout_width="fill_parent"
-                            android:layout_height="@dimen/main_home_adv_height2" />
+                            android:layout_height="@dimen/main_home_adv_height2"/>
 
                         <LinearLayout
                             android:id="@+id/dian2"
@@ -139,78 +139,78 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:orientation="horizontal" />
+                            android:orientation="horizontal"/>
                     </LinearLayout>
                 </cn.m0356.shop.custom.ViewFlipperScrollView>
 
 
                 <!-- 搜索框 -->
-<!--
-                <LinearLayout
-                    android:id="@+id/homeSearch"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@android:color/transparent"
-                    android:orientation="horizontal">
+                <!--
+                                <LinearLayout
+                                    android:id="@+id/homeSearch"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="48dp"
+                                    android:layout_marginTop="15dp"
+                                    android:background="@android:color/transparent"
+                                    android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="1"
-                        android:background="@color/nc_white_transport"
-                        android:orientation="horizontal">
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="30dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_weight="1"
+                                        android:background="@color/nc_white_transport"
+                                        android:orientation="horizontal">
 
-                        <ImageView
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginRight="5dp"
-                            android:src="@drawable/nc_icon_search" />
+                                        <ImageView
+                                            android:layout_width="18dp"
+                                            android:layout_height="18dp"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_marginLeft="5dp"
+                                            android:layout_marginRight="5dp"
+                                            android:src="@drawable/nc_icon_search" />
 
-                        <TextView
-                            android:id="@+id/tvSearchD"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical"
-                            android:singleLine="true"
-                            android:textColorHint="@color/nc_text" />
+                                        <TextView
+                                            android:id="@+id/tvSearchD"
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1"
+                                            android:gravity="center_vertical"
+                                            android:singleLine="true"
+                                            android:textColorHint="@color/nc_text" />
 
-                        <Button
-                            android:id="@+id/btnCameraD"
-                            android:layout_width="26dp"
-                            android:layout_height="26dp"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginRight="5dp"
-                            android:background="@drawable/nc_icon_camera" />
-                    </LinearLayout>
+                                        <Button
+                                            android:id="@+id/btnCameraD"
+                                            android:layout_width="26dp"
+                                            android:layout_height="26dp"
+                                            android:layout_marginLeft="5dp"
+                                            android:layout_marginRight="5dp"
+                                            android:background="@drawable/nc_icon_camera" />
+                                    </LinearLayout>
 
-                    <LinearLayout
-                        android:id="@+id/llImD"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                                    <LinearLayout
+                                        android:id="@+id/llImD"
+                                        android:layout_width="48dp"
+                                        android:layout_height="48dp"
+                                        android:gravity="center"
+                                        android:orientation="vertical">
 
-                        <ImageView
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"
-                            android:src="@drawable/nc_icon_im_white" />
+                                        <ImageView
+                                            android:layout_width="18dp"
+                                            android:layout_height="18dp"
+                                            android:src="@drawable/nc_icon_im_white" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="消息"
-                            android:textColor="@color/nc_white"
-                            android:textSize="12dp" />
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="消息"
+                                            android:textColor="@color/nc_white"
+                                            android:textSize="12dp" />
 
-                    </LinearLayout>
-                </LinearLayout>
--->
+                                    </LinearLayout>
+                                </LinearLayout>
+                -->
 
             </RelativeLayout>
 
@@ -234,13 +234,13 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:layout_gravity="center_horizontal"
-                        android:background="@drawable/icon1">
+                        android:background="@drawable/nc_home_icon_bg_1">
 
-                        <!--<ImageView
+                        <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_centerInParent="true"
-                            android:src="@drawable/nc_icon_fav_goods" />-->
+                            android:src="@drawable/nc_icon_fav_goods"/>
                     </RelativeLayout>
 
                     <TextView
@@ -248,7 +248,7 @@
                         android:layout_height="wrap_content"
                         android:text="分类"
                         android:textColor="@color/nc_text"
-                        android:textSize="12dp" />
+                        android:textSize="12dp"/>
 
                 </LinearLayout>
 
@@ -264,21 +264,22 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:layout_gravity="center_horizontal"
-                        android:background="@drawable/icon2">
+                        android:background="@drawable/nc_home_icon_bg_2">
 
                         <!--<ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_centerInParent="true"
-                            android:src="@drawable/nc_icon_order" />-->
-                        <!--<TextView
+                            android:src="@drawable/nc_icon_order"/>-->
+
+                        <TextView
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:layout_centerInParent="true"
                             android:gravity="center"
-                            android:textSize="18sp"
+                            android:text="券"
                             android:textColor="#ffffff"
-                            android:text="券"/>-->
+                            android:textSize="18sp"/>
                     </RelativeLayout>
 
                     <TextView
@@ -286,7 +287,7 @@
                         android:layout_height="wrap_content"
                         android:text="领券"
                         android:textColor="@color/nc_text"
-                        android:textSize="12dp" />
+                        android:textSize="12dp"/>
 
                 </LinearLayout>
 
@@ -302,13 +303,13 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:layout_gravity="center_horizontal"
-                        android:background="@drawable/icon3">
+                        android:background="@drawable/nc_home_icon_bg_3">
 
-                        <!--<ImageView
+                        <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_centerInParent="true"
-                            android:src="@drawable/nc_icon_my_asset" />-->
+                            android:src="@drawable/nc_icon_my_asset"/>
                     </RelativeLayout>
 
                     <TextView
@@ -316,7 +317,7 @@
                         android:layout_height="wrap_content"
                         android:text="我的晋城购"
                         android:textColor="@color/nc_text"
-                        android:textSize="12dp" />
+                        android:textSize="12dp"/>
 
                 </LinearLayout>
 
@@ -332,13 +333,13 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:layout_gravity="center_horizontal"
-                        android:background="@drawable/icon4">
+                        android:background="@drawable/nc_home_icon_bg_4">
 
-                        <!--<ImageView
+                        <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_centerInParent="true"
-                            android:src="@drawable/nc_icon_eval" />-->
+                            android:src="@drawable/nc_icon_eval"/>
                     </RelativeLayout>
 
                     <TextView
@@ -346,7 +347,7 @@
                         android:layout_height="wrap_content"
                         android:text="注册"
                         android:textColor="@color/nc_text"
-                        android:textSize="12dp" />
+                        android:textSize="12dp"/>
 
                 </LinearLayout>
 
@@ -354,10 +355,10 @@
 
             <!--&lt;!&ndash; 20160829 &ndash;&gt;-->
             <!--<LinearLayout-->
-                <!--android:id="@+id/ll_home5"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="vertical">-->
+            <!--android:id="@+id/ll_home5"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical">-->
 
             <!--</LinearLayout>-->
 
@@ -378,7 +379,7 @@
                 android:id="@+id/homeViewID"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:orientation="vertical" />
+                android:orientation="vertical"/>
         </LinearLayout>
     </cn.m0356.shop.pulltorefresh.library.PullToRefreshScrollView>
 
@@ -392,8 +393,8 @@
         android:layout_marginRight="6dp"
         android:background="@drawable/top_btn_bg"
         android:gravity="center"
-        android:textStyle="bold"
         android:textColor="@android:color/white"
-        android:visibility="gone" />
+        android:textStyle="bold"
+        android:visibility="gone"/>
 
 </RelativeLayout>

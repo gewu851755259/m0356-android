@@ -115,8 +115,6 @@ public class SearchActivity extends OrmLiteBaseActivity<DatabaseHelper> {
         });
         btnSearch = (Button) findViewById(R.id.btnSearch);
 
-
-
         //搜索关键词
         gvSearchKeyList = (MyGridView) findViewById(R.id.gvSearchKeyList);
         searchKeyListAdapter = new SearchGridViewAdapter(SearchActivity.this);
