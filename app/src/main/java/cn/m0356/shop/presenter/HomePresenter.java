@@ -1,7 +1,6 @@
 package cn.m0356.shop.presenter;
 
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.CountDownTimer;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -183,7 +182,7 @@ public class HomePresenter {
             textViewTime.setTypeface(FontUtils.getTypeface(iHomeView.getMainActivity(), "stxihei.ttf"));
             stopNormalCountDownTime();
             Calendar calendar = Calendar.getInstance();
-            if (calendar.get(Calendar.HOUR_OF_DAY) < 24) {
+            if (calendar.get(Calendar.HOUR_OF_DAY) >= 9) {
                 calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH) + 1);
             }
             calendar.set(Calendar.HOUR_OF_DAY, 9);

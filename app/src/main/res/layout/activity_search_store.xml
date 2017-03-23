@@ -39,9 +39,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:clickable="true"
                 android:gravity="center_vertical"
                 android:text=""
-                android:clickable="true"
                 android:textColor="#000000"
                 android:textColorHint="#000000"/>
             <!--
@@ -52,29 +52,32 @@
         </LinearLayout>
 
     </LinearLayout>
+
     <TextView
         style="@style/NCLine"/>
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:background="#ffffff"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#ffffff">
+
         <ListView
             android:id="@+id/lv_store"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/nc_bg"
             android:divider="@null"
-            android:dividerHeight="10dp"
-            android:background="@color/nc_bg">
+            android:dividerHeight="10dp">
         </ListView>
+
         <TextView
             android:id="@+id/tv_empty"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:visibility="gone"
             android:text="没有找到符合条件的店铺"
-            android:layout_height="wrap_content"/>
+            android:visibility="gone"/>
     </FrameLayout>
 
 </LinearLayout>

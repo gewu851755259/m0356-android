@@ -518,14 +518,13 @@ public class HomeFragment extends Fragment implements OnGestureListener, IHomeVi
      */
     @Override
     public void loadUIData() {
-        String testUrl = "http://192.168.5.56/mobile/index.php?act=index&style=1";
-        RemoteDataHandler.asyncDataStringGet(testUrl, new Callback() {
+        RemoteDataHandler.asyncDataStringGet(Constants.URL_HOME, new Callback() {
             @Override
-            public void dataLoaded(ResponseData data) { // Constants.URL_HOME
+            public void dataLoaded(ResponseData data) {
                 LogHelper.d("HomeFragment", data.getCode() + "----" + data.getJson());
                 mPullRefreshScrollView.onRefreshComplete();//加载完成下拉控件取消显示
                 if (data.getCode() == HttpStatus.SC_OK) {
-                    HomeView.removeAllViews(); //删除homeview所有View
+                    HomeView.removeAllViews(); // 删除homeview所有View
                     try {
                         String json = data.getJson();
                         JSONArray arr = new JSONArray(json);

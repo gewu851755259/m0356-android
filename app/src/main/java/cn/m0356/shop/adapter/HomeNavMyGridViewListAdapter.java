@@ -32,9 +32,7 @@ import cn.m0356.shop.ui.type.VoucherActivity;
 /**
  * 首页Navigation适配器
  *
- * @author KingKong-HE
- * @Time 2015年1月4日
- * @Email KingKong@QQ.COM
+ * @author yml
  */
 public class HomeNavMyGridViewListAdapter extends BaseAdapter {
     private Context context;
@@ -112,10 +110,8 @@ public class HomeNavMyGridViewListAdapter extends BaseAdapter {
                     myApplication.sendBroadcast(new Intent(Constants.SHOW_Classify_URL));
                     context.startActivity(intent);
                 } else if (type.equals("领券")) {
-                    if (ShopHelper.isLogin(context, myApplication.getLoginKey())) {
+                    if (ShopHelper.isLogin(context, myApplication.getLoginKey()))
                         VoucherActivity.start(context);
-                    } else {
-                    }
                 } else if (type.equals("我的晋城购")) {
                     Intent intent = new Intent(context, MainFragmentManager.class);
                     myApplication.sendBroadcast(new Intent(Constants.SHOW_Mine_URL));

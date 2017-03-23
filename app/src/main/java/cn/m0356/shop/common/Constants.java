@@ -154,14 +154,15 @@ public final class Constants {
     /**
      * 与服务器端连接的协议名
      */
-    public static final String PROTOCOL = "https://";
+//    public static final String PROTOCOL = "https://";
+    public static final String PROTOCOL = "http://";
 
     /**
      * 服务器域名
      */
-	public static final String HOST = "www.m0356.com";
-//    public static final String HOST = "192.168.1.137"; // 测试
-//    public static final String HOST = "192.168.80.1"; // localhost
+//	public static final String HOST = "www.m0356.com";
+//    public static final String HOST = "192.168.5.56"; // 测试
+    public static final String HOST = "192.168.80.1:80/m0356.com.test"; // localhost
 
 
     //WAPURL
@@ -181,7 +182,7 @@ public final class Constants {
     /**
      * 应用上下文名
      */
-    public static final String APP = "/mobile";///mobile
+    public static final String APP = "/mobile";// /mobile
 
     /**
      * 应用上下文完整路径
@@ -192,6 +193,7 @@ public final class Constants {
      * 首页请求地址
      */
     public static final String URL_HOME = URL_CONTEXTPATH + "act=index&op=index&style=1";
+    // String testUrl = "http://192.168.5.56/mobile/index.php?act=index&style=1";
 
     /**
      * 专题接口(get)

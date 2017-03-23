@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:background="#FFFFFF"
-                android:layout_margin="15dp"
                 xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="15dp"
+                android:background="#FFFFFF">
 
     <FrameLayout
         android:id="@+id/fl"
         android:layout_width="120dp"
         android:layout_height="80dp">
+
         <ImageView
             android:id="@+id/iv_voucher_img"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/triangle_red"/>
+            android:layout_height="match_parent"/>
 
         <TextView
+            android:id="@+id/tv_voucher_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#ffffff"
             android:layout_gravity="center_horizontal|bottom"
             android:layout_marginBottom="10dp"
-            android:textSize="18sp"
-            android:text="红 包"/>
+            android:textColor="#ffffff"
+            android:textSize="18sp"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -34,48 +34,48 @@
                 android:id="@+id/tv_voucher_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#ffffff"
-                android:textStyle="bold"
                 android:layout_centerInParent="true"
                 android:paddingBottom="18dp"
+                android:textColor="#ffffff"
                 android:textSize="22sp"
+                android:textStyle="bold"
                 tools:text="20"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="￥"
-                android:textSize="10sp"
-                android:layout_toLeftOf="@id/tv_voucher_amount"
                 android:layout_alignTop="@id/tv_voucher_amount"
-                android:textColor="#ffffff"/>
+                android:layout_toLeftOf="@id/tv_voucher_amount"
+                android:text="￥"
+                android:textColor="#ffffff"
+                android:textSize="10sp"/>
 
         </RelativeLayout>
     </FrameLayout>
 
     <RelativeLayout
-        android:layout_toRightOf="@id/fl"
-        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/fl">
 
         <TextView
             android:id="@+id/tv_voucher_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
             android:textColor="#F18248"
+            android:textSize="15sp"
             tools:text="测试"/>
 
         <TextView
             android:id="@+id/tv_voucher_leve"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="V1"
-            android:background="@drawable/shape_red"
             android:layout_marginLeft="8dp"
-            android:textColor="#ffffff"
             android:layout_toRightOf="@id/tv_voucher_title"
+            android:background="@drawable/shape_red"
+            android:text="V1"
+            android:textColor="#ffffff"
             android:textSize="10sp"/>
 
         <TextView
@@ -84,47 +84,48 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_voucher_title"
             android:layout_marginTop="3dp"
+            android:textColor="#555551"
             android:textSize="11sp"
-            tools:text="购物满5.01元可用"
-            android:textColor="#555551"/>
+            tools:text="购物满5.01元可用"/>
 
         <TextView
-            android:layout_below="@id/tv_voucher_limit"
             android:id="@+id/tv_voucher_used"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
+            android:layout_below="@id/tv_voucher_limit"
             android:layout_marginTop="3dp"
-            tools:text="1人已领取"
-            android:textColor="#555551"/>
+            android:textColor="#555551"
+            android:textSize="10sp"
+            tools:text="1人已领取"/>
 
-        <View android:layout_width="match_parent"
+        <View
+            android:layout_width="match_parent"
             android:layout_height="0.5dp"
-              android:layout_alignParentBottom="true"
-              android:layout_marginBottom="18dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="18dp"
             android:background="#aaaaaa"/>
 
         <Button
             android:id="@+id/btn_voucher"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_margin="8dp"
             android:background="@drawable/shape_red_btn"
-            android:textColor="#ffffff"
-            android:text="立即领取"/>
+            android:text="立即领取"
+            android:textColor="#ffffff"/>
 
     </RelativeLayout>
 
     <TextView
         android:id="@+id/tv_voucher_time"
-        android:layout_alignParentBottom="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="10sp"
+        android:layout_alignParentBottom="true"
         android:layout_marginBottom="15dp"
         android:layout_toRightOf="@id/fl"
+        android:textSize="10sp"
         tools:text="有效期"/>
 
 </RelativeLayout>

@@ -125,4 +125,26 @@
     <string name="order_cancel_3">买家主动要求</string>
     <string name="order_cancel_4">其他原因</string>
 
+
+    <!--消息中心-->
+    <string name="notice_order_transaction">订单交易通知</string>
+    <string name="notice_balance_and_voucher">余额卡券提醒</string>
+    <string name="notice_after_sale_service">售后服务消息</string>
+    <string name="notice_friends_message">好友消息</string>
+    <string name="notice_store_message">店铺消息</string>
+
+    <string name="notice_set_payment_success">付款成功提示</string>
+    <string name="notice_set_goods_out">商品出库提示</string>
+    <string name="notice_set_redeem_code_expire">兑换码即将到期提醒</string>
+    <string name="notice_set_final_payment">预定订单尾款支付提醒</string>
+    <string name="notice_set_balance_change">余额变动提醒</string>
+    <string name="notice_set_card_change">充值卡余额变动提醒</string>
+    <string name="notice_set_apply_voucher">代金券使用提醒</string>
+    <string name="notice_set_apply_red_packet">平台红包使用提醒</string>
+    <string name="notice_set_voucher_expire">代金券即将到期提醒</string>
+    <string name="notice_set_goods_return">退换货消息</string>
+    <string name="notice_set_goods_arrive">到货信息通知</string>
+    <string name="notice_set_goods_consult_reply">商品咨询回复提示</string>
+    <string name="notice_set_platform_consult_reply">平台咨询回复提示</string>
+
 </resources>

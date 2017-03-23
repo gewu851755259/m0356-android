@@ -67,6 +67,8 @@ import java.util.Random;
  * @Time 2015-6-25
  */
 public class LoginActivity extends BaseActivity implements View.OnClickListener{
+
+    // 用户名：18634667757   密码：123456
     private MyShopApplication myApplication;
 
     private EditText etUsername, etPassword;
