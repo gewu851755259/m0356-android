@@ -10,6 +10,8 @@
     <string name="default_search_text">搜索商城商品</string>
 
      <!-- "关于我们"下的文本 -->
+    <string name="check_version">检测更新</string>
+    <string name="wifi_auto_update">WIFI下自动下载更新包</string>
     <string name="tel">服务热线:400-114-0880</string>
     <string name="more_aboutus_appname">晋城购 Android客户端</string>
     <string name="more_aboutus_version">版本：3.5.0</string>

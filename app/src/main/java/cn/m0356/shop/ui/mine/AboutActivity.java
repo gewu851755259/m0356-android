@@ -3,12 +3,12 @@ package cn.m0356.shop.ui.mine;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -21,6 +21,7 @@ import cn.m0356.shop.BaseActivity;
 import cn.m0356.shop.R;
 import cn.m0356.shop.common.Constants;
 import cn.m0356.shop.common.MyExceptionHandler;
+import cn.m0356.shop.common.SPUtils;
 import cn.m0356.shop.common.SystemHelper;
 import cn.m0356.shop.http.RemoteDataHandler;
 import cn.m0356.shop.http.ResponseData;
@@ -37,6 +38,7 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
     private TextView tvVersion;
     private RelativeLayout rl_check_up;
     private ImageView ivBarCode;
+    private ToggleButton autoDownloadToggle;
 
     /**
      * remain
@@ -50,9 +52,11 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
         tvVersion = (TextView) findViewById(R.id.txt_version);
         rl_check_up = (RelativeLayout) findViewById(R.id.rl_check_up);
         ivBarCode = (ImageView) findViewById(R.id.iv_bar_code);
+        autoDownloadToggle = (ToggleButton) findViewById(R.id.auto_download_toggle);
         if(getVersion() != null)
             tvVersion.setText(getVersion());
         rl_check_up.setOnClickListener(this);
+        autoDownloadToggle.setOnClickListener(this);
         loadBarCode();
 
     }
@@ -81,8 +85,17 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.rl_check_up){
-            versionUpdate();
+        switch (v.getId()) {
+            case R.id.rl_check_up:
+                versionUpdate();
+                break;
+
+            case R.id.auto_download_toggle:
+                SPUtils.put(getApplicationContext(), SPUtils.ATTR_AUTO_DOWNLOAD, autoDownloadToggle.isChecked());
+                break;
+
+            default:
+                break;
         }
     }
 

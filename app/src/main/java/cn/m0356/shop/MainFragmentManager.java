@@ -22,6 +22,7 @@ import com.baidu.mobstat.StatService;
 import com.readystatesoftware.viewbadger.BadgeView;
 
 import cn.m0356.shop.common.Constants;
+import cn.m0356.shop.common.LogHelper;
 import cn.m0356.shop.common.MyExceptionHandler;
 import cn.m0356.shop.common.MyShopApplication;
 import cn.m0356.shop.common.ShopHelper;

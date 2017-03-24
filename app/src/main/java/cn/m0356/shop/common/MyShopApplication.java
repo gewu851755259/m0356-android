@@ -607,7 +607,7 @@ public class MyShopApplication extends Application {
                 .discCacheFileNameGenerator(new Md5FileNameGenerator())
                 .tasksProcessingOrder(QueueProcessingType.LIFO)
                 .diskCache(new UnlimitedDiscCache(cacheDir))
-                .writeDebugLogs() // Remove for release app
+//                .writeDebugLogs() // Remove for release app
                 .build();
         // Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(config);
