@@ -26,6 +26,16 @@ import android.widget.Toast;
 import com.baidu.mobstat.StatService;
 import com.squareup.okhttp.Request;
 
+import org.apache.http.HttpStatus;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import cn.m0356.shop.MainFragmentManager;
 import cn.m0356.shop.R;
 import cn.m0356.shop.bean.StoreIndex;
@@ -46,16 +56,6 @@ import cn.m0356.shop.http.ResponseData;
 import cn.m0356.shop.ui.home.SearchActivity;
 import cn.m0356.shop.ui.mine.IMFriendsListActivity;
 import cn.m0356.shop.ui.mine.LoginActivity;
-
-import org.apache.http.HttpStatus;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * 店铺详情页
@@ -126,12 +126,13 @@ public class newStoreInFoActivity extends FragmentActivity implements OnClickLis
             }
             delayTimer.cancel();
             count = 0;
-            String key = myApplication.getLoginKey();
-            int id = msg.arg1;
-            if (id == 0) {
-                AddFav();
-            } else {
-                DeleteFav();
+            if (ShopHelper.isLogin(newStoreInFoActivity.this, myApplication.getLoginKey())) {
+                int id = msg.arg1;
+                if (id == 0) {
+                    AddFav();
+                } else {
+                    DeleteFav();
+                }
             }
             super.handleMessage(msg);
         }

@@ -53,12 +53,13 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
         rl_check_up = (RelativeLayout) findViewById(R.id.rl_check_up);
         ivBarCode = (ImageView) findViewById(R.id.iv_bar_code);
         autoDownloadToggle = (ToggleButton) findViewById(R.id.auto_download_toggle);
+        boolean isAutoDownload = (Boolean) SPUtils.get(getApplicationContext(), SPUtils.ATTR_AUTO_DOWNLOAD, Boolean.TRUE);
+        autoDownloadToggle.setChecked(isAutoDownload);
         if(getVersion() != null)
             tvVersion.setText(getVersion());
         rl_check_up.setOnClickListener(this);
         autoDownloadToggle.setOnClickListener(this);
         loadBarCode();
-
     }
 
     private void loadBarCode() {
