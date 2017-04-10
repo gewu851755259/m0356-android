@@ -197,6 +197,13 @@ public class MineFragment extends Fragment {
         ivMemberAvatar = (ImageView) viewLayout.findViewById(R.id.ivMemberAvatar);
         tvMemberName = (TextView) viewLayout.findViewById(R.id.tvMemberName);
         tvMemberInvite=(TextView) viewLayout.findViewById(R.id.tvMemberInvite);
+        // 会员头像暂时作为积分中心入口
+        ivMemberAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), PointCenterActivity.class));
+            }
+        });
     }
 
     private void enterSellerManager() {

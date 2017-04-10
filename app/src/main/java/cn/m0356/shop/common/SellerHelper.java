@@ -1,10 +1,5 @@
 package cn.m0356.shop.common;
 
-import android.app.Application;
-import android.util.Log;
-
-import org.apache.http.HttpStatus;
-
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -12,7 +7,6 @@ import java.util.HashMap;
 
 import cn.m0356.shop.bean.SellerLoginInfo;
 import cn.m0356.shop.http.RemoteDataHandler;
-import cn.m0356.shop.http.ResponseData;
 
 /**
  * Created by jiangtao on 2016/11/29.

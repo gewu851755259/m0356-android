@@ -66,6 +66,33 @@ public class PointLogInfo {
         return list;
     }
 
+    public static ArrayList<PointLogInfo> newInstanceExpList(String json) {
+        ArrayList<PointLogInfo> list = new ArrayList<PointLogInfo>();
+
+        try {
+            JSONArray arr = new JSONArray(json);
+            int size = null == arr ? 0 : arr.length();
+            for (int i = 0; i < size; i++) {
+                JSONObject obj = arr.getJSONObject(i);
+                String id = obj.optString("exp_id");
+                String memberId = obj.optString("exp_memberid");
+                String memberName = obj.optString("exp_membername");
+                String adminId = ""; // obj.optString("exp_adminid");
+                String adminName = ""; // obj.optString("exp_adminname");
+                String points = obj.optString("exp_points");
+                String addTime = obj.optString("exp_addtime");
+                String addTimeText = obj.optString("addtimetext");
+                String desc = obj.optString("exp_desc");
+                String stage = obj.optString("exp_stage");
+                String stageText = obj.optString("stagetext");
+                list.add(new PointLogInfo(id, memberId, memberName, adminId, adminName, points, addTime, addTimeText, desc, stage, stageText));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
     public String getId() {
         return id;
     }

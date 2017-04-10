@@ -230,7 +230,7 @@ public class SystemHelper {
                 }
             }
         } catch (Exception e) {
-            Log.e("NetworkInfo", "Exception", e);
+            LogHelper.e("NetworkInfo", "Exception", e);
         }
         return code;
     }
@@ -262,7 +262,8 @@ public class SystemHelper {
     public static DisplayImageOptions getRoundedBitmapDisplayImageOptions(int cornerRadiusPixels) {
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .showImageForEmptyUri(0)
-                .showImageOnFail(0)
+                .showImageOnFail(R.drawable.nc_icon_member)
+                .showImageOnLoading(R.drawable.nc_icon_member)
                 .resetViewBeforeLoading(true)
                 .cacheOnDisk(true)
                 .cacheInMemory(true)                        // 设置下载的图片是否缓存在内存中
@@ -338,34 +339,6 @@ public class SystemHelper {
             result = context.getResources().getDimensionPixelSize(resourceId);
         }
         return result;
-    }
-
-    /**
-     * 检测当前网络连接的类型<br/>
-     * 注意：需要添加权限android.permission.ACCESS_NETWORK_STATE
-     *
-     * @param context
-     * @return 返回0代表GPRS网络; 返回1,代表WIFI网络; 返回-1代表网络不可用
-     */
-    public static int getNetWorkType(Context context) {
-        int code = -1;
-        try{
-            ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            if(null != connManager) {
-                State state = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState();
-                if(State.CONNECTED == state) {
-                    code = ConnectivityManager.TYPE_WIFI;
-                } else {
-                    state = connManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState();
-                    if(State.CONNECTED == state) {
-                        code = ConnectivityManager.TYPE_MOBILE;
-                    }
-                }
-            }
-        } catch(Exception e) {
-            LogHelper.i(TAG, "Exception:" + e);
-        }
-        return code;
     }
 
     /**

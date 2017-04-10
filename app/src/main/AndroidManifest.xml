@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="cn.m0356.shop"
     android:versionCode="32"
-    android:versionName="4.0.3" >  <!-- 3.5.5 -->
+    android:versionName="4.0.4" >  <!-- 3.5.5 -->
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -347,6 +347,9 @@
             android:name=".ui.mine.PointLogActivity"
             android:label="@string/title_activity_point_log" />
         <activity
+            android:name=".ui.mine.ExpLogActivity"
+            android:label="@string/title_activity_point_log" />
+        <activity
             android:name=".ui.mine.BindMobileActivity"
             android:label="@string/title_activity_bind_mobile" />
         <activity
@@ -472,6 +475,10 @@
         </activity>
         <!-- 20161011 优化红包界面显示方式 -->
         <activity android:name=".ui.mine.RedpacketListActivityNew">
+
+        </activity>
+        <!-- 20170330 积分中心 -->
+        <activity android:name=".ui.mine.PointCenterActivity">
 
         </activity>
         <!-- 20161025 优化店铺收藏、商家收藏  -->

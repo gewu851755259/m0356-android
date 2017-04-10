@@ -19,6 +19,17 @@
         style="@style/NCTitleText"
         android:text="订单" />
 
+    <ImageView
+        android:id="@+id/btnRight"
+        android:layout_width="48dp"
+        android:padding="7dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical"
+        android:scaleType="fitCenter"
+        android:visibility="gone"/>
+
     <TextView
         android:id="@+id/tvCommonTitleBorder"
         style="@style/NCLine"

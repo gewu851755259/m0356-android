@@ -20,7 +20,6 @@ import cn.m0356.shop.R;
 import cn.m0356.shop.bean.HomeGoodsList;
 import cn.m0356.shop.common.AnimateFirstDisplayListener;
 import cn.m0356.shop.common.Constants;
-import cn.m0356.shop.common.FontUtils;
 import cn.m0356.shop.common.SystemHelper;
 import cn.m0356.shop.ui.home.SubjectWebActivity;
 import cn.m0356.shop.ui.store.newStoreInFoActivity;
@@ -66,8 +65,6 @@ public class HomePreGoodsRecyclerAdapter extends RecyclerView.Adapter<HomePreGoo
         final ImageView imageViewImagePic01 = (ImageView) view.findViewById(R.id.ImageViewImagePic01);
         final TextView textViewTitle = (TextView) view.findViewById(R.id.goodsPriceID);
         final TextView textViewPrice = (TextView) view.findViewById(R.id.goodsOldPriceID);
-        textViewTitle.setTypeface(FontUtils.getTypeface(context, "stxihei.ttf"));
-        textViewPrice.setTypeface(FontUtils.getTypeface(context, "stxihei.ttf"));
         textViewPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         return new PreGoodsViewHolder(view, imageViewImagePic01, textViewTitle, textViewPrice);
     }

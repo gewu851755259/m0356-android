@@ -20,6 +20,8 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import java.net.URLEncoder;
+
 import cn.m0356.shop.R;
 import cn.m0356.shop.common.Constants;
 import cn.m0356.shop.common.LogHelper;
@@ -27,11 +29,9 @@ import cn.m0356.shop.common.MyExceptionHandler;
 import cn.m0356.shop.common.MyShopApplication;
 import cn.m0356.shop.custom.MyGridView;
 
-import java.net.URLEncoder;
-
 /**
  * 店铺所有商品fragment
- *
+ * <p/>
  * Created by 胡婷 on 2015/12/29.
  */
 public class StoreAllGoodsFragment extends Fragment {
@@ -94,7 +94,9 @@ public class StoreAllGoodsFragment extends Fragment {
     private String curpage = "1";
     private String page = "10";
 
-    public StoreAllGoodsFragment() {}
+    public StoreAllGoodsFragment() {
+    }
+
     public static StoreAllGoodsFragment newInstance(String store_id) {
         StoreAllGoodsFragment fragment = new StoreAllGoodsFragment();
         Bundle args = new Bundle();
@@ -132,9 +134,10 @@ public class StoreAllGoodsFragment extends Fragment {
 
     /**
      * 初始化控件
+     *
      * @param layout
      */
-    private void initView(View layout){
+    private void initView(View layout) {
         //排序下拉
         btnSort = (Button) layout.findViewById(R.id.btnSort);
         btnSort.setOnClickListener(new View.OnClickListener() {
@@ -351,7 +354,7 @@ public class StoreAllGoodsFragment extends Fragment {
                             contact += tvContract.getText().toString() + "_";
                         }
                     }
-                    if(contact.length() > 0) {
+                    if (contact.length() > 0) {
                         ci = contact.substring(0, contact.length() - 1);
                     } else {
                         ci = contact;
@@ -401,7 +404,7 @@ public class StoreAllGoodsFragment extends Fragment {
         url += "&price_to=" + price_to;
         url += "&area_id=" + area_id;
         url += "&ci=" + ci;
-        url += "&prom_type=" + prom_type ;
+        url += "&prom_type=" + prom_type;
         //url += "&stc_id=" + stc_id;
         url += "&curpage=" + curpage;
         url += "&page=" + page;
@@ -411,7 +414,7 @@ public class StoreAllGoodsFragment extends Fragment {
             loadGoodsList(url);
         } else {
             //网格模式
-           loadGoodsGrid(url);
+            loadGoodsGrid(url);
         }
     }
 
@@ -435,6 +438,7 @@ public class StoreAllGoodsFragment extends Fragment {
         transaction.replace(R.id.content, goodsGridFragment);
         transaction.commit();
     }
+
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }

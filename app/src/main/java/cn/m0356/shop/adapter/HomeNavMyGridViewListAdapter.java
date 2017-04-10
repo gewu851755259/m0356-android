@@ -27,6 +27,8 @@ import cn.m0356.shop.common.ShopHelper;
 import cn.m0356.shop.common.SystemHelper;
 import cn.m0356.shop.ui.home.SearchActivity;
 import cn.m0356.shop.ui.mine.RegisterMobileActivity;
+import cn.m0356.shop.ui.mine.SigninActivity;
+import cn.m0356.shop.ui.store.newStoreInFoActivity;
 import cn.m0356.shop.ui.type.VoucherActivity;
 
 /**
@@ -78,6 +80,7 @@ public class HomeNavMyGridViewListAdapter extends BaseAdapter {
         if (null == convertView) {
             convertView = inflater.inflate(R.layout.tab_home_item_nav_gridview_item, null);
             holder = new ViewHolder();
+            holder.navAllBgImg = (ImageView) convertView.findViewById(R.id.home_navigation_allimg);
             holder.navBgLayout = (RelativeLayout) convertView.findViewById(R.id.home_navigation_layout);
             holder.navBgImg = (ImageView) convertView.findViewById(R.id.home_navigation_img);
             holder.navBgText = (TextView) convertView.findViewById(R.id.home_navigation_text);
@@ -89,41 +92,60 @@ public class HomeNavMyGridViewListAdapter extends BaseAdapter {
 
         NavigationList bean = navDatas.get(position);
         holder.navTitle.setText(bean.getImage_title());
-        imageLoader.displayImage(bean.getImage(), holder.navBgImg, options, animateFirstListener);
-        OnImageViewClick(holder.navBgImg, bean.getImage_title(), bean.getData());
+        imageLoader.displayImage(bean.getImage(), holder.navAllBgImg, options, animateFirstListener);
+        OnImageViewClick(holder.navAllBgImg, bean.getImage_title(), bean.getType(), bean.getData());
 
         return convertView;
     }
 
     class ViewHolder {
-        ImageView navBgImg;
+        ImageView navBgImg, navAllBgImg;
         RelativeLayout navBgLayout;
         TextView navTitle, navBgText;
     }
 
-    public void OnImageViewClick(View view, final String type, final String data) {
+    public void OnImageViewClick(View view, final String title, final String type, final String data) {
         view.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (type.equals("分类")) {
+                if (type.equals("store")) {
+                    goToStore(data);
+                    return;
+                }
+                if (title.equals("分类")) {
                     Intent intent = new Intent(context, MainFragmentManager.class);
                     myApplication.sendBroadcast(new Intent(Constants.SHOW_Classify_URL));
                     context.startActivity(intent);
-                } else if (type.equals("领券")) {
+                } else if (title.equals("领券")) {
                     if (ShopHelper.isLogin(context, myApplication.getLoginKey()))
                         VoucherActivity.start(context);
-                } else if (type.equals("我的晋城购")) {
+                } else if (title.equals("我的晋城购")) {
                     Intent intent = new Intent(context, MainFragmentManager.class);
                     myApplication.sendBroadcast(new Intent(Constants.SHOW_Mine_URL));
                     context.startActivity(intent);
-                } else if (type.equals("注册")) {
+                } else if (title.equals("注册")) {
                     if (ShopHelper.isLogin(context, myApplication.getLoginKey())) {
                         context.startActivity(new Intent(context, RegisterMobileActivity.class));
+                    }
+                } else if (title.equals("签到")) {
+                    if (ShopHelper.isLogin(context, myApplication.getLoginKey())) {
+                        context.startActivity(new Intent(context, SigninActivity.class));
                     }
                 } else {
                     context.startActivity(new Intent(context, SearchActivity.class));
                 }
             }
         });
+    }
+
+    /**
+     * 进入指定店铺
+     *
+     * @param store_id 店铺id
+     */
+    public void goToStore(String store_id) {
+        Intent intent = new Intent(context, newStoreInFoActivity.class);
+        intent.putExtra("store_id", store_id);
+        context.startActivity(intent);
     }
 }

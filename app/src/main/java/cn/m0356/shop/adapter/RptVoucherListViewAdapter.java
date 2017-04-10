@@ -1,6 +1,7 @@
 package cn.m0356.shop.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -13,7 +14,6 @@ import java.util.List;
 
 import cn.m0356.shop.R;
 import cn.m0356.shop.bean.VoucherRedpacketBean;
-import cn.m0356.shop.common.LogHelper;
 
 /**
  * Created by yml on 2017/3/22.
@@ -127,15 +127,40 @@ public class RptVoucherListViewAdapter extends BaseAdapter {
                     + "~" + voucherRedpacketBean.rpacket_t_end_date);
             vh.tvAmount.setText(voucherRedpacketBean.rpacket_t_price);
             vh.tvLeve.setText(voucherRedpacketBean.rpacket_t_mgradelimittext);
-            vh.tvUsed.setText(voucherRedpacketBean.rpacket_t_giveout + "人已领取");
             vh.iv.setImageResource(R.drawable.triangle_red);
             vh.tvType.setText("红 包");
-            if ("1".equals(voucherRedpacketBean.rpacket_t_isreceive)) {
-                vh.btn.setText("使 用");
-                vh.btn.setBackgroundResource(R.drawable.shape_green_btn);
-            } else {
-                vh.btn.setText("立即领取");
-                vh.btn.setBackgroundResource(R.drawable.shape_red_btn);
+            switch (Integer.parseInt(voucherRedpacketBean.rpacket_t_gettype)) {
+                case 1: // 积分兑换
+                    vh.tvUsed.setText("积分：" + voucherRedpacketBean.rpacket_t_points);
+                    vh.tvUsed.setTextColor(mContext.getResources().getColor(R.color.app_red));
+                    vh.btn.setText("立即兑换");
+                    vh.btn.setBackgroundResource(R.drawable.shape_red_btn);
+                    break;
+
+                case 2:
+
+                    break;
+
+                case 3: // 免费领取
+                    vh.tvUsed.setText(voucherRedpacketBean.rpacket_t_giveout + "人已领取");
+                    vh.tvUsed.setTextColor(Color.argb(255, 55, 55, 51));
+                    if ("1".equals(voucherRedpacketBean.rpacket_t_isreceive)) {
+                        vh.btn.setText("使 用");
+                        vh.btn.setBackgroundResource(R.drawable.shape_green_btn);
+                    } else {
+                        vh.btn.setText("立即领取");
+                        vh.btn.setBackgroundResource(R.drawable.shape_red_btn);
+                    }
+                    vh.btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if ("0".equals(voucherRedpacketBean.rpacket_t_isreceive) && mListener != null)
+                                mListener.getRptClick(position);
+                            else if ("1".equals(voucherRedpacketBean.rpacket_t_isreceive) && mListener != null)
+                                mListener.applyRptClick(position);
+                        }
+                    });
+                    break;
             }
             //带缓存的商品图
             /*Glide.with(VoucherActivity.this)
@@ -144,16 +169,6 @@ public class RptVoucherListViewAdapter extends BaseAdapter {
                     .placeholder(R.drawable.triangle_red)  //设置占位图
                     .error(R.drawable.triangle_red)      //加载错误图
                     .into(vh.iv);*/
-
-            vh.btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if ("0".equals(voucherRedpacketBean.rpacket_t_isreceive) && mListener != null)
-                        mListener.getRptClick(position);
-                    else if ("1".equals(voucherRedpacketBean.rpacket_t_isreceive) && mListener != null)
-                        mListener.applyRptClick(position);
-                }
-            });
         } else if (voucherRedpacketBean.voucher_t_id != null && !"".equals(voucherRedpacketBean.voucher_t_id)
                 && Integer.parseInt(voucherRedpacketBean.voucher_t_id) > 0) { // 免费代金券类型
             vh.tvTitle.setText(voucherRedpacketBean.voucher_t_storename);
@@ -161,15 +176,40 @@ public class RptVoucherListViewAdapter extends BaseAdapter {
             vh.tvTime.setText("有效期至" + voucherRedpacketBean.voucher_t_end_date);
             vh.tvAmount.setText(voucherRedpacketBean.voucher_t_price);
             vh.tvLeve.setText(voucherRedpacketBean.voucher_t_mgradelimittext);
-            vh.tvUsed.setText(voucherRedpacketBean.voucher_t_giveout + "人已领取");
             vh.iv.setImageResource(R.drawable.triangle_orangle);
             vh.tvType.setText("代金券");
-            if ("1".equals(voucherRedpacketBean.voucher_t_isreceive)) {
-                vh.btn.setText("使 用");
-                vh.btn.setBackgroundResource(R.drawable.shape_green_btn);
-            } else {
-                vh.btn.setText("立即领取");
-                vh.btn.setBackgroundResource(R.drawable.shape_red_btn);
+            switch (Integer.parseInt(voucherRedpacketBean.voucher_t_gettype)) {
+                case 1: // 积分兑换
+                    vh.tvUsed.setText("积分：" + voucherRedpacketBean.voucher_t_points);
+                    vh.tvUsed.setTextColor(mContext.getResources().getColor(R.color.app_red));
+                    vh.btn.setText("立即兑换");
+                    vh.btn.setBackgroundResource(R.drawable.shape_red_btn);
+                    break;
+
+                case 2:
+
+                    break;
+
+                case 3: // 免费领取
+                    vh.tvUsed.setText(voucherRedpacketBean.voucher_t_giveout + "人已领取");
+                    vh.tvUsed.setTextColor(Color.argb(255, 55, 55, 51));
+                    if ("1".equals(voucherRedpacketBean.voucher_t_isreceive)) {
+                        vh.btn.setText("使 用");
+                        vh.btn.setBackgroundResource(R.drawable.shape_green_btn);
+                    } else {
+                        vh.btn.setText("立即领取");
+                        vh.btn.setBackgroundResource(R.drawable.shape_red_btn);
+                    }
+                    vh.btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if ("0".equals(voucherRedpacketBean.voucher_t_isreceive) && mListener != null)
+                                mListener.getVoucherClick(position);
+                            else if ("1".equals(voucherRedpacketBean.voucher_t_isreceive) && mListener != null)
+                                mListener.applyVoucherClick(position);
+                        }
+                    });
+                    break;
             }
             //带缓存的商品图
             /*Glide.with(VoucherActivity.this)
@@ -178,16 +218,6 @@ public class RptVoucherListViewAdapter extends BaseAdapter {
                     .placeholder(R.drawable.triangle_red)  //设置占位图
                     .error(R.drawable.triangle_red)      //加载错误图
                     .into(vh.iv);*/
-
-            vh.btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if ("0".equals(voucherRedpacketBean.voucher_t_isreceive) && mListener != null)
-                        mListener.getVoucherClick(position);
-                    else if ("1".equals(voucherRedpacketBean.voucher_t_isreceive) && mListener != null)
-                        mListener.applyVoucherClick(position);
-                }
-            });
         }
         return convertView;
     }

@@ -73,11 +73,9 @@ public class VoucherActivity extends Activity implements RptVoucherListViewAdapt
     private void loadData(final boolean isRefresh) {
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("key", app.getLoginKey());
-        LogHelper.d("VoucherActivity", "key ---- " + app.getLoginKey());
         RemoteDataHandler.asyncPostDataString(Constants.URL_REDPACKET_LIST + curpage, map, new RemoteDataHandler.Callback() {
             @Override
             public void dataLoaded(ResponseData data) {
-                LogHelper.d("VoucherActivity", data.getCode() + "----" + data.getJson());
                 if (data.getCode() == 200) {
                     if (data.isHasMore())
                         lv.setPullLoadEnable(true);

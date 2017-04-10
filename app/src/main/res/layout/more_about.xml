@@ -10,24 +10,32 @@
     <RelativeLayout
         android:id="@+id/rl_"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical">
+        android:layout_height="fill_parent">
 
         <ImageView
             android:id="@+id/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="80dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50.0dip"
             android:contentDescription="TODO"
-            android:src="@drawable/logo2x"/>
+            android:background="@drawable/logo_about"/>
+
+        <ImageView
+            android:id="@+id/iv_bar_code"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_below="@+id/logo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/ic_launcher"/>
 
         <LinearLayout
             android:id="@+id/ll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/logo"
+            android:layout_below="@id/iv_bar_code"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
@@ -36,7 +44,7 @@
                 android:id="@+id/txt_appname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/more_aboutus_appname"
+                android:text=""
                 android:textColor="#A7A9AC"
                 android:textSize="12.0sp"/>
 
@@ -48,15 +56,6 @@
                 android:textColor="#A7A9AC"
                 android:textSize="12.0sp"/>
         </LinearLayout>
-
-        <ImageView
-            android:id="@+id/iv_bar_code"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:layout_below="@+id/ll"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/ic_launcher"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -108,13 +107,15 @@
 
                 <ToggleButton
                     android:id="@+id/auto_download_toggle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="43dp"
+                    android:layout_height="43dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"
                     android:checked="true"
-                    android:scaleType="center"/>
+                    android:textOn=""
+                    android:textOff=""
+                    android:background="@drawable/toggle_button_bg"/>
             </RelativeLayout>
         </LinearLayout>
 
@@ -138,7 +139,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="15.0dip"
             android:gravity="center"
-            android:text="@string/app_copyright"
+            android:text="@string/app_copyright_jcg"
             android:textColor="#6D6D6D"
             android:textSize="10.0sp"/>
     </RelativeLayout>

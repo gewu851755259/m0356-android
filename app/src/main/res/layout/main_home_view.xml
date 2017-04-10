@@ -84,7 +84,7 @@
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="@dimen/main_home_adv_height2">
+                android:layout_height="wrap_content">
 
                 <!-- 幻灯图片 -->
                 <cn.m0356.shop.custom.ViewFlipperScrollView

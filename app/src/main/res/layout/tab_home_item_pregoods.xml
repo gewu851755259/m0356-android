@@ -5,11 +5,11 @@
               android:background="@color/app_bg_color"
               android:orientation="vertical">
 
+    <!--android:layout_marginTop="10dp"-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/main_pregoods_title_height"
-        android:layout_marginTop="10dp"
-        android:background="@color/app_white"
+        android:background="@drawable/pregoods_top"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -21,7 +21,8 @@
             android:text="今日特惠"
             android:textColor="@color/nc_red_dark"
             android:textSize="18dp"
-            android:typeface="monospace"/>
+            android:typeface="monospace"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/pregoods_hint_textview"
@@ -30,7 +31,8 @@
             android:layout_marginLeft="13dp"
             android:text="每日9点上新"
             android:textColor="@color/nc_black"
-            android:textSize="16dp"/>
+            android:textSize="16dp"
+            android:visibility="gone"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,7 +53,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="16 : 06 : 26"
                 android:textColor="@color/nc_black"
-                android:textSize="16dp"/>
+                android:textSize="14dp"/>
         </LinearLayout>
     </LinearLayout>
 

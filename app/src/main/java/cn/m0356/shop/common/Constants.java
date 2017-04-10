@@ -856,4 +856,22 @@ public final class Constants {
 
     }
 
+    /**
+     *  yml新增
+     */
+    // 我的经验
+    public static final String URL_MEMBER_MY_EXP = URL_CONTEXTPATH + "act=member_index&op=my_exp";
+    // 经验等级规则
+    public static final String URL_MEMBER_EXP_HELP = URL_CONTEXTPATH + "act=member_index&op=my_exprule&key=";
+    // 积分获取规则
+    public static final String URL_MEMBER_POINT_HELP = PROTOCOL + HOST + APP + "/help_point.html";
+    // 热门代金券和全部代金券，热门加参数recommend
+    public static final String URL_POINTS_VOUCHER_LIST = URL_CONTEXTPATH + "act=voucher&op=voucher_hotptl_list";
+    // 热门礼品和全部礼品，热门加参数hot_gift
+    public static final String URL_POINTS_PRODGOODS_LIST = URL_CONTEXTPATH + "act=prodgoods&op=pgoods_hot_list";
+    // 热门红包和全部红包，热门红包加参数hot_redpacket
+    public static final String URL_POINTS_RPACKET_LIST = URL_CONTEXTPATH + "act=redpacket&op=rpacket_hotptl_list";
+    // 经验日志
+    public static final String URL_MEMBER_EXP_LOG = URL_CONTEXTPATH + "act=member_exps&op=expslog";
+
 }

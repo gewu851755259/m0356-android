@@ -26,7 +26,11 @@ import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.tencent.open.SocialConstants;
 import com.umeng.socialize.PlatformConfig;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.common.SocializeConstants;
 
 import cn.m0356.shop.R;
 import cn.m0356.shop.bean.IMMemberInFo;
@@ -182,15 +186,14 @@ public class MyShopApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
         context = this;
 
-        PlatformConfig.setWeixin(Constants.APP_ID, Constants.APP_SECRET);
         //微信 appid appsecret
-        PlatformConfig.setSinaWeibo(Constants.WEIBO_APP_KEY, Constants.WEIBO_APP_SECRET);
+        PlatformConfig.setWeixin(Constants.APP_ID, Constants.APP_SECRET);
         //新浪微博 appkey appsecret
-        PlatformConfig.setQQZone(Constants.QQ_APP_ID, Constants.QQ_APP_KEY);
+        PlatformConfig.setSinaWeibo(Constants.WEIBO_APP_KEY, Constants.WEIBO_APP_SECRET);
         // QQ和Qzone appid appkey
+        PlatformConfig.setQQZone(Constants.QQ_APP_ID, Constants.QQ_APP_KEY);
 
         //百度地图
         initBaiduMap();

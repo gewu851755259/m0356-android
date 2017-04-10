@@ -21,6 +21,7 @@
     <dimen name="main_goods_size">200dp</dimen>
     <dimen name="main_pregoods_size">100dp</dimen>
     <dimen name="main_pregoods_title_height">31dp</dimen>
+    <dimen name="main_navigation_height">80dp</dimen>
     <dimen name="main_home6_width">400dp</dimen>
     <dimen name="main_home6_height">41dp</dimen>
     <dimen name="main_home8_height">113dp</dimen>

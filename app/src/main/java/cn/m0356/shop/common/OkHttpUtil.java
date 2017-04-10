@@ -620,7 +620,7 @@ public class OkHttpUtil {
     private static void checkInternetState(Context ctx,String url,Param... params){
 
         //检查网络是否可用
-        if(-1 == SystemHelper.getNetWorkType(ctx)){
+        if(-1 == SystemHelper.getNetworkType(ctx)){
             String str = ctx.getResources().getString(R.string.network_inavaible);
             T.showShort(ctx, str);
             return;
@@ -651,7 +651,7 @@ public class OkHttpUtil {
     private static void checkInternetStateM(Context ctx,String url,Map<String,String> params){
 
         //检查网络是否可用
-        if(-1 == SystemHelper.getNetWorkType(ctx)){
+        if(-1 == SystemHelper.getNetworkType(ctx)){
             String str = ctx.getResources().getString(R.string.network_inavaible);
             Toast.makeText(ctx, str, Toast.LENGTH_SHORT).show();
             return;

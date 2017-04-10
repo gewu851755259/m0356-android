@@ -12,6 +12,12 @@ import android.widget.ToggleButton;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.shareboard.SnsPlatform;
+import com.umeng.socialize.utils.ShareBoardlistener;
 
 import org.apache.http.HttpStatus;
 import org.json.JSONException;
@@ -48,7 +54,7 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.more_about);
         MyExceptionHandler.getInstance().setContext(this);
-        setCommonHeader("关于我们");
+        initTitle();
         tvVersion = (TextView) findViewById(R.id.txt_version);
         rl_check_up = (RelativeLayout) findViewById(R.id.rl_check_up);
         ivBarCode = (ImageView) findViewById(R.id.iv_bar_code);
@@ -60,6 +66,13 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
         rl_check_up.setOnClickListener(this);
         autoDownloadToggle.setOnClickListener(this);
         loadBarCode();
+    }
+
+    private void initTitle() {
+        setCommonHeader("关于我们");
+        showBtnRight(); // 显示标题栏右侧按钮
+        setBtnRightImgResource(R.drawable.share_about);
+        setBtnRightClickListener(this);
     }
 
     private void loadBarCode() {
@@ -77,7 +90,7 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
             PackageManager manager = this.getPackageManager();
             PackageInfo info = manager.getPackageInfo(this.getPackageName(), 0);
             String version = info.versionName;
-            return "版本：" + version;
+            return "当前版本号：V" + version;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -93,6 +106,14 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
 
             case R.id.auto_download_toggle:
                 SPUtils.put(getApplicationContext(), SPUtils.ATTR_AUTO_DOWNLOAD, autoDownloadToggle.isChecked());
+                break;
+
+            case R.id.btnRight:
+                /**开启默认分享面板，分享列表**/
+                new ShareAction(AboutActivity.this)
+                        .setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.SMS)
+                        .setShareboardclickCallback(shareBoardlistener)
+                        .open();
                 break;
 
             default:
@@ -130,4 +151,86 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
             }
         });
     }
+
+    //设置多平台分享监听
+    private ShareBoardlistener shareBoardlistener = new ShareBoardlistener() {
+
+        @Override
+        public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
+            UMImage image = new UMImage(AboutActivity.this, Constants.BAR_CODE);
+            if (share_media != SHARE_MEDIA.SMS) {
+                new ShareAction(AboutActivity.this).setPlatform(share_media).setCallback(umShareListener)
+                        .withText("晋城购，同城网购直通车。\n" + SPUtils.get(getApplicationContext(), SPUtils.ATTR_DOWNLOAD_URL, ""))
+                        .withTitle(getString(R.string.more_aboutus_appname))
+                        .withTargetUrl((String) SPUtils.get(getApplicationContext(), SPUtils.ATTR_DOWNLOAD_URL, ""))
+                        .withMedia(image)
+                        .share();
+            } else {
+                new ShareAction(AboutActivity.this).setPlatform(share_media).setCallback(umShareListener)
+                        .withText("晋城购，同城网购直通车。\n" + SPUtils.get(getApplicationContext(), SPUtils.ATTR_DOWNLOAD_URL, ""))
+                        .withTitle(getString(R.string.more_aboutus_appname))
+                        .withTargetUrl((String) SPUtils.get(getApplicationContext(), SPUtils.ATTR_DOWNLOAD_URL, ""))
+                        .withMedia(image)
+                        .share();
+
+            }
+        }
+    };
+
+    //设置单个监听是否分享成功
+    private UMShareListener umShareListener = new UMShareListener() {
+        @Override
+        public void onResult(SHARE_MEDIA platform) {
+            if (platform == SHARE_MEDIA.QQ) {
+                Toast.makeText(AboutActivity.this, "QQ分享成功啦", Toast.LENGTH_SHORT).show();
+            } else if (platform == SHARE_MEDIA.SINA) {
+                Toast.makeText(AboutActivity.this, "新浪微博分享成功啦", Toast.LENGTH_SHORT).show();
+            } else if (platform == SHARE_MEDIA.QZONE) {
+                Toast.makeText(AboutActivity.this, "QQ空间分享成功啦", Toast.LENGTH_SHORT).show();
+            } else if (platform == SHARE_MEDIA.WEIXIN) {
+                Toast.makeText(AboutActivity.this, "微信分享成功啦", Toast.LENGTH_SHORT).show();
+            } else if (platform == SHARE_MEDIA.WEIXIN_CIRCLE) {
+                Toast.makeText(AboutActivity.this, "微信朋友圈分享成功啦", Toast.LENGTH_SHORT).show();
+            } else if (platform == SHARE_MEDIA.SMS) {
+                Toast.makeText(AboutActivity.this, "短信分享成功啦", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA platform, Throwable t) {
+
+            if (platform == SHARE_MEDIA.QQ) {
+                Toast.makeText(AboutActivity.this, "QQ分享失败啦", Toast.LENGTH_SHORT).show();
+            } else if (platform == SHARE_MEDIA.SINA) {
+                Toast.makeText(AboutActivity.this, "新浪微博分享失败啦", Toast.LENGTH_SHORT).show();
+            } else if (platform == SHARE_MEDIA.QZONE) {
+                Toast.makeText(AboutActivity.this, "QQ空间分享失败啦", Toast.LENGTH_SHORT).show();
+            } else if (platform == SHARE_MEDIA.WEIXIN) {
+                Toast.makeText(AboutActivity.this, "微信分享失败啦", Toast.LENGTH_SHORT).show();
+            } else if (platform == SHARE_MEDIA.WEIXIN_CIRCLE) {
+                Toast.makeText(AboutActivity.this, "微信朋友圈分享失败啦", Toast.LENGTH_SHORT).show();
+            } else if (platform == SHARE_MEDIA.SMS) {
+                Toast.makeText(AboutActivity.this, "短信分享失败啦", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA platform) {
+
+            if (platform == SHARE_MEDIA.QQ) {
+                Toast.makeText(AboutActivity.this, "QQ分享取消了", Toast.LENGTH_SHORT).show();
+            } else if (platform == SHARE_MEDIA.SINA) {
+                Toast.makeText(AboutActivity.this, "新浪微博分享取消了", Toast.LENGTH_SHORT).show();
+            } else if (platform == SHARE_MEDIA.QZONE) {
+                Toast.makeText(AboutActivity.this, "QQ空间分享取消了", Toast.LENGTH_SHORT).show();
+            } else if (platform == SHARE_MEDIA.WEIXIN) {
+                Toast.makeText(AboutActivity.this, "微信分享取消了", Toast.LENGTH_SHORT).show();
+            } else if (platform == SHARE_MEDIA.WEIXIN_CIRCLE) {
+                Toast.makeText(AboutActivity.this, "微信朋友圈分享取消了", Toast.LENGTH_SHORT).show();
+            } else if (platform == SHARE_MEDIA.SMS) {
+                Toast.makeText(AboutActivity.this, "短信分享取消了", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
 }

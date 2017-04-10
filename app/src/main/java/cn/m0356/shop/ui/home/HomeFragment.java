@@ -2,14 +2,11 @@ package cn.m0356.shop.ui.home;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.LayoutInflater;
@@ -17,13 +14,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextSwitcher;
@@ -32,39 +26,32 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.baidu.mobstat.StatService;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+
+import org.apache.http.HttpStatus;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.m0356.shop.MainFragmentManager;
 import cn.m0356.shop.R;
-import cn.m0356.shop.adapter.GridViewAdapter;
-import cn.m0356.shop.adapter.HomeActivityMyGridViewListAdapter;
-import cn.m0356.shop.adapter.HomeGoodsMyGridViewListAdapter;
-import cn.m0356.shop.bean.AdvertList;
-import cn.m0356.shop.bean.Home1Data;
-import cn.m0356.shop.bean.Home2Data;
-import cn.m0356.shop.bean.Home3Data;
-import cn.m0356.shop.bean.Home5Data;
-import cn.m0356.shop.bean.HomeGoodsList;
 import cn.m0356.shop.bean.HomeNotice;
 import cn.m0356.shop.bracode.ui.CaptureActivity;
-import cn.m0356.shop.common.AnimateFirstDisplayListener;
 import cn.m0356.shop.common.Constants;
-import cn.m0356.shop.common.FileUtils;
 import cn.m0356.shop.common.LogHelper;
 import cn.m0356.shop.common.MyExceptionHandler;
 import cn.m0356.shop.common.MyShopApplication;
 import cn.m0356.shop.common.ShopHelper;
 import cn.m0356.shop.common.SystemHelper;
-import cn.m0356.shop.controller.IHomeModel;
-import cn.m0356.shop.custom.MyGridView;
 import cn.m0356.shop.custom.MyProgressDialog;
 import cn.m0356.shop.custom.ViewFlipperScrollView;
 import cn.m0356.shop.http.RemoteDataHandler;
 import cn.m0356.shop.http.RemoteDataHandler.Callback;
 import cn.m0356.shop.http.ResponseData;
-import cn.m0356.shop.presenter.HomePresenter;
+import cn.m0356.shop.mvp.presenter.HomePresenter;
+import cn.m0356.shop.mvp.view.IHomeView;
 import cn.m0356.shop.pulltorefresh.library.PullToRefreshBase;
 import cn.m0356.shop.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import cn.m0356.shop.pulltorefresh.library.PullToRefreshScrollView;
@@ -75,16 +62,6 @@ import cn.m0356.shop.ui.type.GoodsDetailsActivity;
 import cn.m0356.shop.ui.type.GoodsListFragmentManager;
 import cn.m0356.shop.ui.type.NoticeActivity;
 import cn.m0356.shop.ui.type.VoucherActivity;
-import cn.m0356.shop.viewinterface.IHomeView;
-
-import org.apache.http.HttpStatus;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 首页
@@ -200,8 +177,15 @@ public class HomeFragment extends Fragment implements OnGestureListener, IHomeVi
             }
         });
         // 实例化主导器
-        homePresenter = new HomePresenter(this);
+        homePresenter = new HomePresenter();
+        homePresenter.attachView(this);
         return viewLayout;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        homePresenter.detachView();
     }
 
     /**
@@ -549,7 +533,7 @@ public class HomeFragment extends Fragment implements OnGestureListener, IHomeVi
                             } else if (!JsonObj.isNull("adv_list")) {
                                 myScrollView.setVisibility(View.VISIBLE);
                                 myScrollView2.setVisibility(View.GONE);
-                                homePresenter.showAdvList(JsonObj); // 高度较高(340)的广告轮播图，广告条版块
+                                homePresenter.showAdvList(JsonObj, "adv_list", 340); // 高度较高(340)的广告轮播图，广告条版块
                             } else if (!JsonObj.isNull("goods")) {
                                 homePresenter.showGoods(JsonObj); // 展示商品列表，商品版块
                             } else if (!JsonObj.isNull("adv_list2")) {

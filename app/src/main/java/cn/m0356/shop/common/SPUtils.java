@@ -16,6 +16,10 @@ public class SPUtils {
      * is auto download int the wifi environment.
      */
     public static final String ATTR_AUTO_DOWNLOAD = "ATTR_AUTO_DOWNLOAD";
+    /**
+     * download site url.
+     */
+    public static final String ATTR_DOWNLOAD_URL = "ATTR_DOWNLOAD_URL";
 
 
     /**

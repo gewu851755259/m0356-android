@@ -253,6 +253,7 @@ public class SigninActivity extends BaseActivity {
                         JSONObject obj = new JSONObject(json);
                         ArrayList<SigninInfo> list = SigninInfo.newInstanceList(obj.getString("signin_list"));
                         if (list.size() > 0) {
+                            signinInfoArrayList.clear();
                             signinInfoArrayList.addAll(list);
                             signinListViewAdapter.notifyDataSetChanged();
                             hideListEmpty();

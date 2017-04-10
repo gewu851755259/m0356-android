@@ -1,14 +1,12 @@
 package cn.m0356.shop.ui.store;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.LayoutInflater;
@@ -16,17 +14,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.TextSwitcher;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -40,45 +32,24 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
-import cn.m0356.shop.MainFragmentManager;
 import cn.m0356.shop.R;
-import cn.m0356.shop.adapter.GridViewAdapter;
-import cn.m0356.shop.adapter.HomeActivityMyGridViewListAdapter;
-import cn.m0356.shop.adapter.HomeGoodsMyGridViewListAdapter;
-import cn.m0356.shop.bean.AdvertList;
-import cn.m0356.shop.bean.Home1Data;
-import cn.m0356.shop.bean.Home2Data;
-import cn.m0356.shop.bean.Home3Data;
-import cn.m0356.shop.bean.Home5Data;
-import cn.m0356.shop.bean.HomeGoodsList;
 import cn.m0356.shop.bean.HomeNotice;
-import cn.m0356.shop.bracode.ui.CaptureActivity;
 import cn.m0356.shop.common.AnimateFirstDisplayListener;
 import cn.m0356.shop.common.Constants;
-import cn.m0356.shop.common.FileUtils;
 import cn.m0356.shop.common.MyExceptionHandler;
 import cn.m0356.shop.common.MyShopApplication;
-import cn.m0356.shop.common.ShopHelper;
 import cn.m0356.shop.common.SystemHelper;
-import cn.m0356.shop.custom.MyGridView;
 import cn.m0356.shop.custom.MyProgressDialog;
 import cn.m0356.shop.custom.ViewFlipperScrollView;
 import cn.m0356.shop.http.RemoteDataHandler;
 import cn.m0356.shop.http.RemoteDataHandler.Callback;
 import cn.m0356.shop.http.ResponseData;
-import cn.m0356.shop.pulltorefresh.library.PullToRefreshBase;
-import cn.m0356.shop.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
-import cn.m0356.shop.pulltorefresh.library.PullToRefreshScrollView;
-import cn.m0356.shop.ui.home.SearchActivity;
+import cn.m0356.shop.mvp.presenter.HomePresenter;
+import cn.m0356.shop.mvp.view.IHomeView;
 import cn.m0356.shop.ui.home.SubjectWebActivity;
-import cn.m0356.shop.ui.mine.IMFriendsListActivity;
-import cn.m0356.shop.ui.mine.RegisterMobileActivity;
 import cn.m0356.shop.ui.type.GoodsDetailsActivity;
-import cn.m0356.shop.ui.type.GoodsListFragmentManager;
 import cn.m0356.shop.ui.type.NoticeActivity;
 
 /**
@@ -87,7 +58,7 @@ import cn.m0356.shop.ui.type.NoticeActivity;
  * @author dqw
  * @Time 2015-8-17
  */
-public class StoreIndexNewFragment extends Fragment implements OnGestureListener, OnTouchListener {
+public class StoreIndexNewFragment extends Fragment implements OnGestureListener, IHomeView {
     private MyShopApplication myApplication;
     private static final String ARG_STORE_ID = "store_id";
     private Intent intent = null;
@@ -138,6 +109,20 @@ public class StoreIndexNewFragment extends Fragment implements OnGestureListener
     private MyProgressDialog progressDialog;
     private String store_id;
 
+    private OnTouchListener advTouchListener = new OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            return mGestureDetector.onTouchEvent(event);
+        }
+    };
+    /**
+     * 公告通知集合
+     */
+    //private List<HomeNotice> homeNotices;
+
+    // mvp模式主导其P,主要用于处理
+    private HomePresenter homePresenter;
+
     public static StoreIndexNewFragment newInstance(String store_id) {
         StoreIndexNewFragment fragment = new StoreIndexNewFragment();
         Bundle args = new Bundle();
@@ -145,11 +130,6 @@ public class StoreIndexNewFragment extends Fragment implements OnGestureListener
         fragment.setArguments(args);
         return fragment;
     }
-
-    /**
-     * 公告通知集合
-     */
-    //private List<HomeNotice> homeNotices;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -177,10 +157,20 @@ public class StoreIndexNewFragment extends Fragment implements OnGestureListener
             progressDialog.dismiss();
         }
         mGestureDetector = new GestureDetector(this);
-        viewflipper.setOnTouchListener(this);
+        viewflipper.setOnTouchListener(advTouchListener);
+        myScrollView.setGestureDetector(mGestureDetector);
         myScrollView.setGestureDetector(mGestureDetector);
 
+        // 实例化主导器
+        homePresenter = new HomePresenter();
+        homePresenter.attachView(this);
         return viewLayout;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        homePresenter.detachView();
     }
 
     /**
@@ -276,19 +266,45 @@ public class StoreIndexNewFragment extends Fragment implements OnGestureListener
                             JSONObject JsonObj = new JSONObject(obj.toString());
 
                             if (!JsonObj.isNull("home1")) {
-                                showHome1(JsonObj);
+                                homePresenter.showHome1(JsonObj); // 一张大图,640*260，模版A
                             } else if (!JsonObj.isNull("home2")) {
-                                showHome2(JsonObj);
-                            } else if (!JsonObj.isNull("home4")) {
-                                showHome4(JsonObj);
+                                homePresenter.showHome2(JsonObj); //  左边一个大图，右边上下两个小图，模版B
                             } else if (!JsonObj.isNull("home3")) {
-                                showHome3(JsonObj);
-                            } else if (!JsonObj.isNull("adv_list")) {
-                                showAdvList(JsonObj);
-                            } else if (!JsonObj.isNull("goods")) {
-                                showGoods(JsonObj);
+                                homePresenter.showHome3(JsonObj); // 原来两列总共十个分类那个模版，模版C
+                            } else if (!JsonObj.isNull("home4")) {
+                                homePresenter.showHome4(JsonObj); // 左边上下两个小图，右边一个大图，模版D
                             } else if (!JsonObj.isNull("home5")) {  // 20160829
-                                showHome5(JsonObj);
+                                homePresenter.showHome5(JsonObj);
+                            } else if (!JsonObj.isNull("adv_list")) {
+                                homePresenter.showAdvList(JsonObj, "adv_list", 340); // 高度较高(340)的广告轮播图，广告条版块
+                            } else if (!JsonObj.isNull("goods")) {
+                                homePresenter.showGoods(JsonObj); // 展示商品列表，商品版块
+                            } else if (!JsonObj.isNull("adv_list2")) {
+                                homePresenter.showAdvList(JsonObj, "adv_list2", 280); // 高度较低(280)的广告轮播图，广告条版块2
+                            } else if (!JsonObj.isNull("preferential_goods")) {
+                                homePresenter.showPreferentialGoods(JsonObj); // 限时特惠，特惠商品版块
+                            } else if (!JsonObj.isNull("navigation")) {
+                                homePresenter.showNavigation(JsonObj);  // 显示导航选项，导航版块
+                            } else if (!JsonObj.isNull("home6")) {
+                                homePresenter.showHome6(JsonObj);  // 显示一张图片的home6,模版F，复用原来home1代码
+                            } else if (!JsonObj.isNull("home7")) {
+                                homePresenter.showHome7(JsonObj);  // 两行两列的那个模版,模版G
+                            } else if (!JsonObj.isNull("home8")) {
+                                homePresenter.showHome8(JsonObj);  // 一排1：1：1：1模版，模版H
+                            } else if (!JsonObj.isNull("home9")) {
+                                homePresenter.showHome9(JsonObj);  // 一排2：1：1模版，模版I
+                            } else if (!JsonObj.isNull("home11")) {
+                                homePresenter.showHome11(JsonObj);  // 一排1：1：1模版，模版K
+                            } else if (!JsonObj.isNull("home12")) {
+                                homePresenter.showHome12(JsonObj);  // 一排1：1模版，模版L
+                            } else if (!JsonObj.isNull("home13")) {
+                                homePresenter.showHome13(JsonObj);  // 一排2：1：1：1模版，模版M
+                            } else if (!JsonObj.isNull("home14")) {
+                                homePresenter.showHome14(JsonObj);  //  两行两列，模版N，复用原来home7代码
+                            } else if (!JsonObj.isNull("home15")) {
+                                homePresenter.showHome15(JsonObj);  //  一个大格，模版O，复用原来home1代码
+                            } else if (!JsonObj.isNull("home16")) {
+                                homePresenter.showHome16(JsonObj);  //  一排1：1：1：1模版，模版P，复用原来home8代码
                             }
                         }
                     } catch (Exception e) {
@@ -300,242 +316,6 @@ public class StoreIndexNewFragment extends Fragment implements OnGestureListener
                 }
             }
         });
-    }
-
-    /**
-     * 显示商品块
-     *
-     * @param jsonObj
-     * @throws JSONException
-     */
-    private void showGoods(JSONObject jsonObj) throws JSONException {
-        String goodsJson = jsonObj.getString("goods");
-        JSONObject itemObj = new JSONObject(goodsJson);
-        String item = itemObj.getString("item");
-        String title = itemObj.getString("title");
-
-        if (!item.equals("[]")) {
-
-            ArrayList<HomeGoodsList> goodsList = HomeGoodsList.newInstanceList(item);
-            View goodsView = getActivity().getLayoutInflater().inflate(R.layout.tab_home_item_goods, null);
-            TextView textView = (TextView) goodsView.findViewById(R.id.TextViewTitle);
-            MyGridView gridview = (MyGridView) goodsView.findViewById(R.id.gridview);
-            gridview.setFocusable(false);
-            HomeGoodsMyGridViewListAdapter adapter = new HomeGoodsMyGridViewListAdapter(getActivity());
-            adapter.setHomeGoodsList(goodsList);
-            gridview.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
-
-            if (!title.equals("") && !title.equals("null") && title != null) {
-                textView.setVisibility(View.VISIBLE);
-                textView.setText(title);
-            } else {
-                textView.setVisibility(View.GONE);
-            }
-
-            HomeView.addView(goodsView);
-
-        }
-    }
-
-    /**
-     * 显示广告块
-     *
-     * @param jsonObj
-     * @throws JSONException
-     */
-    private void showAdvList(JSONObject jsonObj) throws JSONException, IOException {
-        String advertJson = jsonObj.getString("adv_list");
-        JSONObject itemObj = new JSONObject(advertJson);
-        String item = itemObj.getString("item");
-        FileUtils.saveToLocal(item);
-        ////
-        if (!item.equals("[]")) {
-            ArrayList<AdvertList> advertList = AdvertList.newInstanceList(item);
-            if (advertList.size() > 0 && advertList != null) {
-                initHeadImage(advertList);
-            }
-        }
-    }
-
-
-    /**
-     * 显示Home3
-     *
-     * @param jsonObj
-     * @throws JSONException
-     */
-    private void showHome3(JSONObject jsonObj) throws JSONException {
-        String home3Json = jsonObj.getString("home3");
-        Home3Data bean = Home3Data.newInstanceDetelis(home3Json);
-        ArrayList<Home3Data> home3Datas = Home3Data.newInstanceList(bean.getItem());
-        View home3View = getActivity().getLayoutInflater().inflate(R.layout.tab_home_item_home3, null);
-        TextView textView = (TextView) home3View.findViewById(R.id.TextViewTitle);
-        MyGridView gridview = (MyGridView) home3View.findViewById(R.id.gridview);
-        gridview.setFocusable(false);
-        HomeActivityMyGridViewListAdapter adapter = new HomeActivityMyGridViewListAdapter(getActivity());
-        adapter.setHome3Datas(home3Datas);
-        gridview.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-
-        if (!bean.getTitle().equals("") && !bean.getTitle().equals("null") && bean.getTitle() != null) {
-            textView.setVisibility(View.VISIBLE);
-            textView.setText(bean.getTitle());
-        } else {
-            textView.setVisibility(View.GONE);
-        }
-
-        HomeView.addView(home3View);
-    }
-    /**
-     * 显示home5   20160829
-     * @param home5
-     */
-    private void showHome5(JSONObject home5) throws JSONException {
-        String home5Json = home5.getString("home5");
-        Log.d("hehe",home5Json);
-        Home5Data bean = Home5Data.newInstanceDetelis(home5Json);
-        ArrayList<Home5Data> home5Datas = Home5Data.newInstanceList(bean.getItem());
-        View home5View = getActivity().getLayoutInflater().inflate(R.layout.tab_home_item_home5, null);
-        GridView gridview = (GridView) home5View.findViewById(R.id.index_home_gridview_my);
-        gridview.setFocusable(false);
-        gridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
-        GridViewAdapter adapter = new GridViewAdapter(getActivity());
-        adapter.setHome5Datas(home5Datas);
-        gridview.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-        HomeView.addView(home5View);
-    }
-    /**
-     * 显示Home4
-     *
-     * @param jsonObj
-     * @throws JSONException
-     */
-    private void showHome4(JSONObject jsonObj) throws JSONException {
-        String home2Json = jsonObj.getString("home4");
-        Home2Data bean = Home2Data.newInstanceDetelis(home2Json);
-        View home4View = getActivity().getLayoutInflater().inflate(R.layout.tab_home_item_home2_rehit, null);
-        TextView textView = (TextView) home4View.findViewById(R.id.TextViewTitle);
-
-        ImageView imageViewSquare = (ImageView) home4View.findViewById(R.id.ImageViewSquare);
-        ImageView imageViewRectangle1 = (ImageView) home4View.findViewById(R.id.ImageViewRectangle1);
-        ImageView imageViewRectangle2 = (ImageView) home4View.findViewById(R.id.ImageViewRectangle2);
-
-        imageLoader.displayImage(bean.getSquare_image(), imageViewSquare, options, animateFirstListener);
-        imageLoader.displayImage(bean.getRectangle1_image(), imageViewRectangle1, options, animateFirstListener);
-        imageLoader.displayImage(bean.getRectangle2_image(), imageViewRectangle2, options, animateFirstListener);
-
-        OnImageViewClick(imageViewSquare, bean.getSquare_type(), bean.getSquare_data());
-        OnImageViewClick(imageViewRectangle1, bean.getRectangle1_type(), bean.getRectangle1_data());
-        OnImageViewClick(imageViewRectangle2, bean.getRectangle2_type(), bean.getRectangle2_data());
-
-        if (!bean.getTitle().equals("") && !bean.getTitle().equals("null") && bean.getTitle() != null) {
-            textView.setVisibility(View.VISIBLE);
-            textView.setText(bean.getTitle());
-        } else {
-            textView.setVisibility(View.GONE);
-        }
-
-        HomeView.addView(home4View);
-    }
-
-    /**
-     * 显示Home2
-     *
-     * @param jsonObj
-     * @throws JSONException
-     */
-    private void showHome2(JSONObject jsonObj) throws JSONException {
-        String home2Json = jsonObj.getString("home2");
-        Home2Data bean = Home2Data.newInstanceDetelis(home2Json);
-        View home2View = getActivity().getLayoutInflater().inflate(R.layout.tab_home_item_home2_left, null);
-        TextView textView = (TextView) home2View.findViewById(R.id.TextViewTitle);
-
-        ImageView imageViewSquare = (ImageView) home2View.findViewById(R.id.ImageViewSquare);
-        ImageView imageViewRectangle1 = (ImageView) home2View.findViewById(R.id.ImageViewRectangle1);
-        ImageView imageViewRectangle2 = (ImageView) home2View.findViewById(R.id.ImageViewRectangle2);
-
-        imageLoader.displayImage(bean.getSquare_image(), imageViewSquare, options, animateFirstListener);
-        imageLoader.displayImage(bean.getRectangle1_image(), imageViewRectangle1, options, animateFirstListener);
-        imageLoader.displayImage(bean.getRectangle2_image(), imageViewRectangle2, options, animateFirstListener);
-
-        OnImageViewClick(imageViewSquare, bean.getSquare_type(), bean.getSquare_data());
-        OnImageViewClick(imageViewRectangle1, bean.getRectangle1_type(), bean.getRectangle1_data());
-        OnImageViewClick(imageViewRectangle2, bean.getRectangle2_type(), bean.getRectangle2_data());
-
-        if (!bean.getTitle().equals("") && !bean.getTitle().equals("null") && bean.getTitle() != null) {
-            textView.setVisibility(View.VISIBLE);
-            textView.setText(bean.getTitle());
-        } else {
-            textView.setVisibility(View.GONE);
-        }
-
-        HomeView.addView(home2View);
-    }
-
-    /**
-     * 显示Home1
-     *
-     * @param jsonObj
-     * @throws JSONException
-     */
-    private void showHome1(JSONObject jsonObj) throws JSONException {
-        String home1Json = jsonObj.getString("home1");
-        Home1Data bean = Home1Data.newInstanceList(home1Json);
-        View home1View = getActivity().getLayoutInflater().inflate(R.layout.tab_home_item_home1, null);
-        TextView textView = (TextView) home1View.findViewById(R.id.TextViewHome1Title01);
-        ImageView imageView = (ImageView) home1View.findViewById(R.id.ImageViewHome1Imagepic01);
-
-        if (!bean.getTitle().equals("") && !bean.getTitle().equals("null") && bean.getTitle() != null) {
-            textView.setVisibility(View.VISIBLE);
-            textView.setText(bean.getTitle());
-        } else {
-            textView.setVisibility(View.GONE);
-        }
-
-        imageLoader.displayImage(bean.getImage(), imageView, options, animateFirstListener);
-        OnImageViewClick(imageView, bean.getType(), bean.getData());
-        HomeView.addView(home1View);
-    }
-
-    public void initHeadImage(ArrayList<AdvertList> list) {
-
-        mHandler.removeMessages(SHOW_NEXT);
-
-        //清除已有视图防止重复
-        viewflipper.removeAllViews();
-        dian.removeAllViews();
-        viewList.clear();
-
-        for (int i = 0; i < list.size(); i++) {
-            AdvertList bean = list.get(i);
-            ImageView imageView = new ImageView(StoreIndexNewFragment.this.getActivity());
-            imageView.setScaleType(ScaleType.FIT_XY);
-            imageView.setBackgroundResource(R.drawable.dic_av_item_pic_bg);
-            imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-            imageLoader.displayImage(bean.getImage(), imageView, options, animateFirstListener);
-            viewflipper.addView(imageView);
-            OnImageViewClick(imageView, bean.getType(), bean.getData(), true);
-
-            ImageView dianimageView = new ImageView(StoreIndexNewFragment.this.getActivity());
-            LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, 3, 1);
-            dianimageView.setLayoutParams(params);
-            imageView.setScaleType(ScaleType.FIT_XY);
-            dianimageView.setBackgroundResource(R.drawable.dian_select);
-            dian.addView(dianimageView);
-            viewList.add(dianimageView);
-        }
-
-        //mGestureDetector = new GestureDetector(this);
-        viewflipper.setOnTouchListener(this);
-        //myScrollView.setGestureDetector(mGestureDetector);
-
-        if (viewList.size() > 1) {
-            dian_select(currentPage);
-            mHandler.sendEmptyMessageDelayed(SHOW_NEXT, 3800);
-        }
     }
 
     /**
@@ -809,12 +589,6 @@ public class StoreIndexNewFragment extends Fragment implements OnGestureListener
     }
 
     @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        return mGestureDetector.onTouchEvent(event);
-    }
-
-
-    @Override
     public void onResume() {
         super.onResume();
         StatService.onPageStart(MyShopApplication.context, "主界面-首页");
@@ -826,4 +600,64 @@ public class StoreIndexNewFragment extends Fragment implements OnGestureListener
         StatService.onPageEnd(MyShopApplication.context, "主界面-首页");
     }
 
+    /* -----------------------------IHomeView------------------------------  */
+    @Override
+    public Activity getMainActivity() {
+        return getActivity();
+    }
+
+    @Override
+    public Handler getHandler() {
+        return mHandler;
+    }
+
+    @Override
+    public LinearLayout getDianView() {
+        return dian;
+    }
+
+    @Override
+    public LinearLayout getDianLowView() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<ImageView> getDianViewList() {
+        return viewList;
+    }
+
+    @Override
+    public ArrayList<ImageView> getDianViewLowList() {
+        return null;
+    }
+
+    @Override
+    public ViewFlipper getAdvListView() {
+        return viewflipper;
+    }
+
+    @Override
+    public ViewFlipper getAdvListLowView() {
+        return null;
+    }
+
+    @Override
+    public OnTouchListener getAdvTouchListener() {
+        return advTouchListener;
+    }
+
+    @Override
+    public void onImageViewClick(ImageView imageView, String type, String data, boolean b) {
+        OnImageViewClick(imageView, type, data, b);
+    }
+
+    @Override
+    public void dianSelect() {
+        dian_select(currentPage);
+    }
+
+    @Override
+    public LinearLayout getHomeView() {
+        return HomeView;
+    }
 }

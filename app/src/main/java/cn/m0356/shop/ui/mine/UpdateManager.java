@@ -19,9 +19,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import cn.m0356.shop.common.Constants;
-import cn.m0356.shop.common.LogHelper;
-import cn.m0356.shop.common.NetworkUtils;
 import cn.m0356.shop.common.SPUtils;
+import cn.m0356.shop.common.SystemHelper;
 import cn.m0356.shop.custom.MyUpdateDialog;
 
 
@@ -75,12 +74,13 @@ public class UpdateManager {
     public UpdateManager(Context context, String url) {
         this.mContext = context;
         this.apkUrl = url;
+        SPUtils.put(context.getApplicationContext(), SPUtils.ATTR_DOWNLOAD_URL, "");
     }
 
     // 外部接口让主Activity调用
     public void checkUpdateInfo() {
         // 如果是wifi连接且wifi下自动下载的开关是开着，直接开启下载线程
-        if (NetworkUtils.isWifiConnected(mContext.getApplicationContext())
+        if (SystemHelper.getNetworkType(mContext) == 1
                 && (Boolean) SPUtils.get(mContext.getApplicationContext(), SPUtils.ATTR_AUTO_DOWNLOAD, Boolean.TRUE)) {
             downLoadThread = new Thread(mdownApkRunnable);
             downLoadThread.start();

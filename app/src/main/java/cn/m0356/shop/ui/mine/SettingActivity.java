@@ -271,7 +271,9 @@ public class SettingActivity extends BaseActivity {
      * 意见反馈
      */
     public void btnHelpClick(View view) {
-        startActivity(new Intent(SettingActivity.this, HelpActivity.class));
+        Intent helpIntent = new Intent(SettingActivity.this, HelpActivity.class);
+        helpIntent.putExtra("loadUrl" , Constants.URL_HELP);
+        startActivity(helpIntent);
     }
 
     /**

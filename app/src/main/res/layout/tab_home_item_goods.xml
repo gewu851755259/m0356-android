@@ -6,10 +6,10 @@
     android:orientation="vertical"
     tools:context=".MainFragmentManager" >
 
+    <!--android:layout_marginTop="10dp"-->
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:background="#FFFFFF"
         android:orientation="vertical" >
 
@@ -28,7 +28,6 @@
             android:visibility="gone"
             android:background="@drawable/cart_listview_gap" />
     </LinearLayout>
-    <!-- ====================== -->
 
     <cn.m0356.shop.custom.MyGridView
         android:id="@+id/gridview"

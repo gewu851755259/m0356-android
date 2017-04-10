@@ -30,7 +30,7 @@
             android:layout_marginTop="4dp"
             android:singleLine="true"
             android:textColor="@color/nc_red"
-            android:textSize="16dp"/>
+            android:textSize="14dp"/>
 
         <TextView
             android:id="@+id/goodsOldPriceID"

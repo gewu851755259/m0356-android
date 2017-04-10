@@ -13,6 +13,7 @@ import android.widget.TextView;
  */
 public class BaseActivity extends Activity {
     protected ImageButton btnBack;
+    protected ImageView btnRight;
     protected TextView tvCommonTitle;
     protected TextView tvCommonTitleBorder;
     private LinearLayout llListEmpty;
@@ -27,6 +28,7 @@ public class BaseActivity extends Activity {
      */
     protected void setCommonHeader(String title) {
         btnBack = (ImageButton) findViewById(R.id.btnBack);
+        btnRight = (ImageView) findViewById(R.id.btnRight);
         tvCommonTitle = (TextView) findViewById(R.id.tvCommonTitle);
         tvCommonTitleBorder = (TextView) findViewById(R.id.tvCommonTitleBorder);
 
@@ -78,6 +80,36 @@ public class BaseActivity extends Activity {
      */
     protected void hideCommonHeaderBorder() {
         tvCommonTitleBorder.setVisibility(View.INVISIBLE);
+    }
+
+    /**
+     * 显示右侧按钮
+     */
+    protected void showBtnRight() {
+        btnRight.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * 显示右侧按钮
+     */
+    protected void hideBtnRight() {
+        btnRight.setVisibility(View.INVISIBLE);
+    }
+
+    /**
+     * 设置右侧按钮的背景
+     * @param resId 背景资源id
+     */
+    protected void setBtnRightImgResource(int resId){
+        btnRight.setImageResource(resId);
+    }
+
+    /**
+     * 设置右侧按钮点击事件
+     * @param l
+     */
+    protected void setBtnRightClickListener(View.OnClickListener l){
+        btnRight.setOnClickListener(l);
     }
 
 }

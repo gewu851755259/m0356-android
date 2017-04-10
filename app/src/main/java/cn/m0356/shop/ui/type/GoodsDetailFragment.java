@@ -1060,7 +1060,7 @@ public class GoodsDetailFragment extends Fragment implements View.OnClickListene
         } else if (goodsBean.getIs_fcode().equals("1")) {
             tvGoodsType.setText(R.string.text_fcode);
             tvGoodsType.setVisibility(View.VISIBLE);
-            tvGoodsType.setBackgroundResource(R.color.text_Fcode);
+            tvGoodsType.setBackgroundResource(R.color.text_fcode);
         } else if (goodsBean.getIs_presell().equals("1")) {
             tvGoodsType.setText(R.string.text_presell);
             tvGoodsType.setVisibility(View.VISIBLE);

@@ -18,6 +18,7 @@
     <string name="copyright">Copyright © 20014–2016</string>
     <string name="web">www.m0356.com</string>
     <string name="app_copyright">Copyright © 2014–2017 山西晋城市方舟商园电子商务有限公司, All Rights Reserved</string>
+    <string name="app_copyright_jcg">Copyright © 2014–2017 晋城购 All Rights Reserved</string>
 
     <string name="text_rmb">￥</string>
 
@@ -148,5 +149,8 @@
     <string name="notice_set_goods_arrive">到货信息通知</string>
     <string name="notice_set_goods_consult_reply">商品咨询回复提示</string>
     <string name="notice_set_platform_consult_reply">平台咨询回复提示</string>
+
+    <!-- 积分中心 -->
+    <string name="pc_empiric_to_next_level">还差%1$s分升级到%2$s级会员</string>
 
 </resources>

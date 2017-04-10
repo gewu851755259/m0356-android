@@ -157,7 +157,7 @@ public class GoodsListViewAdapter extends BaseAdapter {
         } else if (bean.getIs_fcode().equals("1")) {
             holder.textGoodsType.setText(context.getString(R.string.text_fcode));
             holder.textGoodsType.setVisibility(View.VISIBLE);
-            holder.textGoodsType.setBackgroundResource(R.color.text_Fcode);
+            holder.textGoodsType.setBackgroundResource(R.color.text_fcode);
         } else if (bean.getIs_presell().equals("1")) {
             holder.textGoodsType.setText(context.getString(R.string.text_presell));
             holder.textGoodsType.setVisibility(View.VISIBLE);
