@@ -596,7 +596,7 @@ public class HomeFragmentOld extends Fragment implements OnGestureListener, OnTo
         TextView textView = (TextView) home3View.findViewById(R.id.TextViewTitle);
         MyGridView gridview = (MyGridView) home3View.findViewById(R.id.gridview);
         gridview.setFocusable(false);
-        HomeActivityMyGridViewListAdapter adapter = new HomeActivityMyGridViewListAdapter(getActivity());
+        HomeActivityMyGridViewListAdapter adapter = new HomeActivityMyGridViewListAdapter(getActivity(), 85);
         adapter.setHome3Datas(home3Datas);
         gridview.setAdapter(adapter);
         adapter.notifyDataSetChanged();

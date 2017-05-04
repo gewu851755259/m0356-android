@@ -1,14 +1,5 @@
 package cn.m0356.shop.ui.home;
 
-import cn.m0356.shop.R;
-import cn.m0356.shop.common.Constants;
-import cn.m0356.shop.common.MyExceptionHandler;
-import cn.m0356.shop.custom.RoundProgressBar;
-import cn.m0356.shop.ui.store.StoreGoodsListFragmentManager;
-import cn.m0356.shop.ui.store.newStoreInFoActivity;
-import cn.m0356.shop.ui.type.GoodsDetailsActivity;
-import cn.m0356.shop.ui.type.GoodsListFragmentManager;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -25,6 +16,16 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 
 import com.baidu.mobstat.StatService;
+
+import cn.m0356.shop.R;
+import cn.m0356.shop.common.Constants;
+import cn.m0356.shop.common.LogHelper;
+import cn.m0356.shop.common.MyExceptionHandler;
+import cn.m0356.shop.custom.RoundProgressBar;
+import cn.m0356.shop.ui.store.StoreGoodsListFragmentManager;
+import cn.m0356.shop.ui.store.newStoreInFoActivity;
+import cn.m0356.shop.ui.type.GoodsDetailsActivity;
+import cn.m0356.shop.ui.type.GoodsListFragmentManager;
 
 /**
  * 专题页面
@@ -61,8 +62,8 @@ public class SubjectWebActivity extends Activity implements OnClickListener{
 		settings.setJavaScriptEnabled(true);
 		settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
 		settings.setAppCacheEnabled(false);
-		webviewID.setWebChromeClient(new MyWebChromeClient()); 
-		
+		webviewID.setWebChromeClient(new MyWebChromeClient());
+		LogHelper.e("SubjectWebActivity", "专题地址：" + data);
 		webviewID.loadUrl(data);
 		
 		webviewID.setWebViewClient(new WebViewClient() {

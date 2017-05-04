@@ -69,21 +69,19 @@
 
             <TextView
                 android:id="@+id/tv_voucher_title"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:maxWidth="120dp"
+                android:layout_weight="1"
                 android:singleLine="true"
+                android:text="测试"
                 android:textColor="#F18248"
-                android:textSize="15sp"
-                tools:text="测试"/>
+                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/tv_voucher_leve"
-                android:layout_width="22dp"
+                android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:layout_toRightOf="@id/tv_voucher_title"
-                android:layout_weight="1"
                 android:background="@drawable/shape_red"
                 android:gravity="center"
                 android:text="V1"
@@ -118,17 +116,23 @@
             android:layout_marginBottom="18dp"
             android:background="#aaaaaa"/>
 
+        <TextView
+            android:id="@+id/tv_center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
         <Button
             android:id="@+id/btn_voucher"
             android:layout_width="80dp"
-            android:layout_height="30dp"
+            android:layout_height="27dp"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_margin="8dp"
+            android:layout_below="@id/tv_center"
+            android:layout_marginTop="3dp"
             android:background="@drawable/shape_red_btn"
+            android:layout_marginRight="8dp"
             android:text="立即领取"
             android:textColor="#ffffff"/>
-
     </RelativeLayout>
 
     <TextView

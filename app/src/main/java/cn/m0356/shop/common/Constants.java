@@ -133,7 +133,7 @@ public final class Constants {
      * IM好友列表状态刷新页面返回标识
      */
     public static final String IM_FRIENDS_LIST_UPDATA_UI = "11";
-    public static final String SHOW_CART_NUM="22";
+    public static final String SHOW_CART_NUM = "22";
 
     static {
         if (Environment.MEDIA_MOUNTED.equals(Environment
@@ -154,16 +154,15 @@ public final class Constants {
     /**
      * 与服务器端连接的协议名
      */
-//    public static final String PROTOCOL = "https://";
-    public static final String PROTOCOL = "http://";
+    public static final String PROTOCOL = "https://";
+//    public static final String PROTOCOL = "http://";
 
     /**
      * 服务器域名
      */
-//	public static final String HOST = "www.m0356.com";
+    public static final String HOST = "www.m0356.com";
 //    public static final String HOST = "192.168.5.56"; // 测试
-    public static final String HOST = "192.168.80.1:80/m0356.com.test"; // localhost
-
+//    public static final String HOST = "192.168.80.1:80/m0356.com.test"; // localhost
 
     //WAPURL
     public static final String WAP_URL = "http://www.m0356.com/wap/";
@@ -182,7 +181,7 @@ public final class Constants {
     /**
      * 应用上下文名
      */
-    public static final String APP = "/mobile";// /mobile
+    public static final String APP = "/mobile";
 
     /**
      * 应用上下文完整路径
@@ -193,16 +192,16 @@ public final class Constants {
      * 首页请求地址
      */
     public static final String URL_HOME = URL_CONTEXTPATH + "act=index&op=index&style=1";
-    // String testUrl = "http://192.168.5.56/mobile/index.php?act=index&style=1";
 
     /**
      * 专题接口(get)
      */
-    public static final String URL_SPECIAL = URL_CONTEXTPATH + "act=index&op=special";
+    public static final String URL_SPECIAL = URL_CONTEXTPATH + "act=index&op=special&style=1";
 
     /**
      * 一级分类请求地址
-     */public static final String URL_GOODSCLASS = URL_CONTEXTPATH + "act=goods_class";
+     */
+    public static final String URL_GOODSCLASS = URL_CONTEXTPATH + "act=goods_class";
 
     /**
      * 商品列表请求地址
@@ -257,28 +256,28 @@ public final class Constants {
     /**
      * 订单详情请求地址
      */
-    public static final String URL_ORDER_DETAILS=URL_CONTEXTPATH+"act=member_order&op=order_info";
+    public static final String URL_ORDER_DETAILS = URL_CONTEXTPATH + "act=member_order&op=order_info";
 
     /**
      * 订单退款请求地址
      */
-    public static final String URL_ORDER_REFUND=URL_CONTEXTPATH+"act=member_refund&op=refund_all_form";
+    public static final String URL_ORDER_REFUND = URL_CONTEXTPATH + "act=member_refund&op=refund_all_form";
 
     /**
      * 部分商品退款退货信息
      */
-    public static final String URL_ORDER_REFUND_SOME=URL_CONTEXTPATH+"act=member_refund&op=refund_form";
+    public static final String URL_ORDER_REFUND_SOME = URL_CONTEXTPATH + "act=member_refund&op=refund_form";
 
     /**
      * 订单物流请求地址
      */
-    public static final String URL_ORDER_WULIU_INFO=URL_CONTEXTPATH+"act=member_order&op=search_deliver";
+    public static final String URL_ORDER_WULIU_INFO = URL_CONTEXTPATH + "act=member_order&op=search_deliver";
 
 
     /**
      * 订单物流请求最新一条信息
      */
-    public static final String URL_ORDER_WULIU_NEW_ONE=URL_CONTEXTPATH+"act=member_order&op=get_current_deliver";
+    public static final String URL_ORDER_WULIU_NEW_ONE = URL_CONTEXTPATH + "act=member_order&op=get_current_deliver";
 
     /**
      * 添加购物车请求地址
@@ -289,7 +288,7 @@ public final class Constants {
     /**
      * 购物车数量请求地址
      */
-    public static final String URL_GET_CART_NUM=URL_CONTEXTPATH+"act=member_cart&op=cart_count";
+    public static final String URL_GET_CART_NUM = URL_CONTEXTPATH + "act=member_cart&op=cart_count";
 
     /**
      * 购物车列表请求地址(老版本)
@@ -402,53 +401,53 @@ public final class Constants {
     /**
      * 退款上传凭证保存
      */
-    public static final String URL_ORDER_EXCHANGE_PHOTO=URL_CONTEXTPATH+"act=member_refund&op=upload_pic";
+    public static final String URL_ORDER_EXCHANGE_PHOTO = URL_CONTEXTPATH + "act=member_refund&op=upload_pic";
 
     /**
      * 全部退款保存
      */
-    public static final String URL_ORDER_EXCHANGE_REFUND_ALL=URL_CONTEXTPATH+"act=member_refund&op=refund_all_post";
+    public static final String URL_ORDER_EXCHANGE_REFUND_ALL = URL_CONTEXTPATH + "act=member_refund&op=refund_all_post";
 
     /**
      * 部分退款信息（退货信息）
      */
-    public static final String URL_ORDER_EXCHANGE_SOME= URL_CONTEXTPATH+"act=member_refund&op=refund_post";
+    public static final String URL_ORDER_EXCHANGE_SOME = URL_CONTEXTPATH + "act=member_refund&op=refund_post";
 
 
     /**
      * 退款记录列表
      */
-    public static final String URL_ORDER_EXCHANGE_MONEY_LIST=URL_CONTEXTPATH+"act=member_refund&op=get_refund_list";
+    public static final String URL_ORDER_EXCHANGE_MONEY_LIST = URL_CONTEXTPATH + "act=member_refund&op=get_refund_list";
 
     /**
      * 查看退款信息
      */
-    public static final String URL_ORDER_EXCHANGE_MONEY_DETAILS=URL_CONTEXTPATH+"act=member_refund&op=get_refund_info";
+    public static final String URL_ORDER_EXCHANGE_MONEY_DETAILS = URL_CONTEXTPATH + "act=member_refund&op=get_refund_info";
 
     /**
      * 退货记录列表
      */
-    public static final String URL_ORDER_EXCHANGE_GOODS_LIST=URL_CONTEXTPATH+"act=member_return&op=get_return_list";
+    public static final String URL_ORDER_EXCHANGE_GOODS_LIST = URL_CONTEXTPATH + "act=member_return&op=get_return_list";
 
     /**
      * 查看退货信息
      */
-    public static final String URL_ORDER_EXCHANGE_GOODS_DETAILS=URL_CONTEXTPATH+"act=member_return&op=get_return_info";
+    public static final String URL_ORDER_EXCHANGE_GOODS_DETAILS = URL_CONTEXTPATH + "act=member_return&op=get_return_info";
 
     /**
      * 退货发货信息
      */
-    public static final String URL_ORDER_EXCHANGE_GOODS_SEND=URL_CONTEXTPATH+"act=member_return&op=ship_form";
-
-/**
- * 退货发货保存
- */
-    public static final String URL_ORDER_EXCHANGE_GOODS_SAVA=URL_CONTEXTPATH+"act=member_return&op=ship_post";
+    public static final String URL_ORDER_EXCHANGE_GOODS_SEND = URL_CONTEXTPATH + "act=member_return&op=ship_form";
 
     /**
-     *退货延迟收货保存
+     * 退货发货保存
      */
-    public static final String URL_ORDER_EXCHANGE_GOODS_DELAY=URL_CONTEXTPATH+"act=member_return&op=delay_post";
+    public static final String URL_ORDER_EXCHANGE_GOODS_SAVA = URL_CONTEXTPATH + "act=member_return&op=ship_post";
+
+    /**
+     * 退货延迟收货保存
+     */
+    public static final String URL_ORDER_EXCHANGE_GOODS_DELAY = URL_CONTEXTPATH + "act=member_return&op=delay_post";
 
     /**
      * 订单确认收货请求地址
@@ -683,22 +682,21 @@ public final class Constants {
     //更改绑定手机第三步-验证短信(没有第一步)
     public static final String URL_MEMBER_ACCOUNT_UNBIND_MOBILE_STEP3 = URL_CONTEXTPATH + "act=member_account&op=modify_mobile_step3";
     //更改密码第二步-发短信(没有第一步)
-    public static final String URL_MEMBER_ACCOUNT_MODIFY_PASSWORD_STEP2= URL_CONTEXTPATH + "act=member_account&op=modify_password_step2";
+    public static final String URL_MEMBER_ACCOUNT_MODIFY_PASSWORD_STEP2 = URL_CONTEXTPATH + "act=member_account&op=modify_password_step2";
     //更改密码第三步-验证短信
-    public static final String URL_MEMBER_ACCOUNT_MODIFY_PASSWORD_STEP3= URL_CONTEXTPATH + "act=member_account&op=modify_password_step3";
+    public static final String URL_MEMBER_ACCOUNT_MODIFY_PASSWORD_STEP3 = URL_CONTEXTPATH + "act=member_account&op=modify_password_step3";
     //更改密码第五步-保存密码(第五步可以不调用)
-    public static final String URL_MEMBER_ACCOUNT_MODIFY_PASSWORD_STEP5= URL_CONTEXTPATH + "act=member_account&op=modify_password_step5";
+    public static final String URL_MEMBER_ACCOUNT_MODIFY_PASSWORD_STEP5 = URL_CONTEXTPATH + "act=member_account&op=modify_password_step5";
     //检测是否设置了支付密码
     public static final String URL_MEMBER_ACCOUNT_GET_PAYPWD_INFO = URL_CONTEXTPATH + "act=member_account&op=get_paypwd_info";
     //更改支付密码第二步-发短信(没有第一步)
-    public static final String URL_MEMBER_ACCOUNT_MODIFY_PAYPWD_STEP2= URL_CONTEXTPATH + "act=member_account&op=modify_paypwd_step2";
+    public static final String URL_MEMBER_ACCOUNT_MODIFY_PAYPWD_STEP2 = URL_CONTEXTPATH + "act=member_account&op=modify_paypwd_step2";
     //更改支付密码第三步-验证短信
-    public static final String URL_MEMBER_ACCOUNT_MODIFY_PAYPWD_STEP3= URL_CONTEXTPATH + "act=member_account&op=modify_paypwd_step3";
+    public static final String URL_MEMBER_ACCOUNT_MODIFY_PAYPWD_STEP3 = URL_CONTEXTPATH + "act=member_account&op=modify_paypwd_step3";
     //更改支付密码第五步-保存密码(第五步可以不调用)
-    public static final String URL_MEMBER_ACCOUNT_MODIFY_PAYPWD_STEP5= URL_CONTEXTPATH + "act=member_account&op=modify_paypwd_step5";
+    public static final String URL_MEMBER_ACCOUNT_MODIFY_PAYPWD_STEP5 = URL_CONTEXTPATH + "act=member_account&op=modify_paypwd_step5";
     //o2o商家分店地址列表
     public static final String URL_GOODS_STORE_O2O_ADDR = URL_CONTEXTPATH + "act=goods&op=store_o2o_addr";
-
 
 
     //支付宝原生支付接口--获取实物订单信息
@@ -741,18 +739,30 @@ public final class Constants {
     public static final String URL_STORE_VOUCHER = URL_CONTEXTPATH + "act=voucher&op=voucher_tpl_list";
 
     public static final String URL_GC_ID = URL_CONTEXTPATH + "act=goods&op=get_keyword&gc_id=";
-    /** 评论界面*/
+    /**
+     * 评论界面
+     */
     public static final String URL_ORDER_EVALUATE = URL_CONTEXTPATH + "act=member_evaluate&op=index";
-    /**评价图片上传*/
-    public static final String URL_ORDER_EVALUATE_UPLOAD_IAMGE = URL_CONTEXTPATH +"act=sns_album&op=file_upload";
-    /**评价提交*/
+    /**
+     * 评价图片上传
+     */
+    public static final String URL_ORDER_EVALUATE_UPLOAD_IAMGE = URL_CONTEXTPATH + "act=sns_album&op=file_upload";
+    /**
+     * 评价提交
+     */
     public static final String URL_ORDER_EVALUATE_COMMIT = URL_CONTEXTPATH + "act=member_evaluate&op=save";
-    /**追加评价界面*/
+    /**
+     * 追加评价界面
+     */
     public static final String URL_ORDER_EVALUATE_ADD = URL_CONTEXTPATH + "act=member_evaluate&op=again";
-    /**追加评论提交*/
+    /**
+     * 追加评论提交
+     */
     public static final String URL_ORDER_EVALUATE_ADD_COMMIT = URL_CONTEXTPATH + "act=member_evaluate&op=save_again";
 
-    /**支付密码修改绑定手机*/
+    /**
+     * 支付密码修改绑定手机
+     */
     public static final String URl_UNDIND_PASSWORD = URL_CONTEXTPATH + "act=member_account&op=check_paypwd";
 
     // 二维码
@@ -760,104 +770,184 @@ public final class Constants {
     public static final String BAR_CODE = PROTOCOL + HOST + "/data/upload/shop/common/mb_app1.png";
 
     /**  hxf  2016/8/4  */
-    /** 公告列表 */
+    /**
+     * 公告列表
+     */
     public static final String URL_LIST_NOTICE = URL_CONTEXTPATH + "act=article_notice&op=article_list";
 
-    /**公告详情 + id*/
+    /**
+     * 公告详情 + id
+     */
     public static final String URL_DETAIL_NOTICE = URL_CONTEXTPATH + "act=article_notice&op=article&article_id=";
 
-    /** 首页轮播图缓存文件 */
+    /**
+     * 首页轮播图缓存文件
+     */
     public static final String FILE_DIR_ADV = "m0356_adv_cache";
 
-    /** 支付方式 */
+    /**
+     * 支付方式
+     */
     public static final String URL_PAY_LIST = URL_CONTEXTPATH + "act=member_buy&op=pay";
 
     public static final String URL_PAY_NEW = URL_CONTEXTPATH + "act=member_payment&op=pay_new_v2";
-    /** stc_info 查询指定stcid的店铺分类信息 */
+    /**
+     * stc_info 查询指定stcid的店铺分类信息
+     */
     public static final String URL_STCID_INFO = URL_CONTEXTPATH + "act=store&op=stc_info";
-    /** 红包列表 */
+    /**
+     * 红包列表
+     */
     public static final String URL_REDPACKET_LIST = URL_CONTEXTPATH + "act=redpacket&op=rptlist&curpage=";
     public static final String URL_REDPACKET_SVAE = URL_CONTEXTPATH + "act=redpacket&op=getredpacketsave";
 
-    /** 搜索店铺 */
-    public static final  String URL_QUERY_STORE = URL_CONTEXTPATH + "act=store&op=search_store&";
+    /**
+     * 搜索店铺
+     */
+    public static final String URL_QUERY_STORE = URL_CONTEXTPATH + "act=store&op=search_store&";
 
     // 商家后台管理接口
-    public class SellerManager{
-        /** 用户是否为商家 */
+    public class SellerManager {
+        /**
+         * 用户是否为商家
+         */
         public static final String URL_SELLER_IS_SELLER = URL_CONTEXTPATH + "act=seller_login&op=is_seller";
-        /** 登录 */
+        /**
+         * 登录
+         */
         public static final String URL_SELLER_LOGIN = URL_CONTEXTPATH + "act=seller_login";
-        /** 获取卖家统计累信息 */
+        /**
+         * 获取卖家统计累信息
+         */
         public static final String URL_SELLER_STORE_STATISTICS = URL_CONTEXTPATH + "act=seller_order&op=seller_all";
-        /** 获取店铺信息 */
+        /**
+         * 获取店铺信息
+         */
         public static final String URL_SELLER_STORE_INFO = URL_CONTEXTPATH + "act=seller_store&op=store_info";
-        /** 订单列表 */
+        /**
+         * 订单列表
+         */
         public static final String URL_SELLER_ORDER_LIST = URL_CONTEXTPATH + "act=seller_order&op=order_list";
-        /** 关闭订单 */
+        /**
+         * 关闭订单
+         */
         public static final String URL_SELLER_ORDER_CANCEL = URL_CONTEXTPATH + "act=seller_order&op=order_cancel";
-        /** 查询订单信息 */
+        /**
+         * 查询订单信息
+         */
         public static final String URL_SELLER_ORDER_INFO = URL_CONTEXTPATH + "act=seller_order&op=order_info";
-        /** 商家发货 */
+        /**
+         * 商家发货
+         */
         public static final String URL_SELLER_ORDER_ORDER_DELIVER_SEND = URL_CONTEXTPATH + "act=seller_order&op=order_deliver_send";
-        /** 默认物流 */
+        /**
+         * 默认物流
+         */
         public static final String URL_SELLER_ORDER_ORDER_DEFAULT_EXPRESS = URL_CONTEXTPATH + "act=seller_express&op=get_list_v2";
-        /** 售前退款 */
+        /**
+         * 售前退款
+         */
         public static final String URL_SELLER_ORDER_REFUND_LOCK = URL_CONTEXTPATH + "act=seller_order&op=refund&lock=2";
-        /** 售后退款 */
+        /**
+         * 售后退款
+         */
         public static final String URL_SELLER_ORDER_REFUND = URL_CONTEXTPATH + "act=seller_order&op=refund&lock=1";
-        /** 售前退货 */
+        /**
+         * 售前退货
+         */
         public static final String URL_SELLER_ORDER_RETURN_LOCK = URL_CONTEXTPATH + "act=seller_order&op=return&lock=2";
-        /** 售后退货 */
+        /**
+         * 售后退货
+         */
         public static final String URL_SELLER_ORDER_RETURN = URL_CONTEXTPATH + "act=seller_order&op=return&lock=1";
-        /** 退款 */
+        /**
+         * 退款
+         */
         public static final String URL_SELLER_ORDER_REFUND_OP = URL_CONTEXTPATH + "act=seller_order&op=refund_op";
-        /** 收货 */
+        /**
+         * 收货
+         */
         public static final String URL_SELLER_ORDER_RETURN_RECEIVE = URL_CONTEXTPATH + "act=seller_order&op=receive";
-        /** 商品列表 */
+        /**
+         * 商品列表
+         */
         public static final String URL_SELLER_GOODS_LIST = URL_CONTEXTPATH + "act=seller_goods&op=goods_list&curpage=";
-        /** 删除商品 */
+        /**
+         * 删除商品
+         */
         public static final String URL_SELLER_GOODS_DROP = URL_CONTEXTPATH + "act=seller_goods&op=goods_drop";
-        /** 商品信息 */
+        /**
+         * 商品信息
+         */
         public static final String URL_SELLER_GOODS_INFO = URL_CONTEXTPATH + "act=seller_goods&op=goods_info";
-        /** 规格属性 */
+        /**
+         * 规格属性
+         */
         public static final String URL_SELLER_GOODS_TYPE_INFO = URL_CONTEXTPATH + "act=seller_goods_class&op=type_info";
-        /** 编辑商品 */
+        /**
+         * 编辑商品
+         */
         public static final String URL_SELLER_GOODS_EDIT = URL_CONTEXTPATH + "act=seller_goods&op=goods_edit";
-        /** 商品上架 */
+        /**
+         * 商品上架
+         */
         public static final String URL_SELLER_GOODS_SHOW = URL_CONTEXTPATH + "act=seller_goods&op=goods_show";
-        /** 商品下架 */
+        /**
+         * 商品下架
+         */
         public static final String URL_SELLER_GOODS_UNSHOW = URL_CONTEXTPATH + "act=seller_goods&op=goods_unshow";
 
-        /** 商品流量top 10接口 */
+        /**
+         * 商品流量top 10接口
+         */
         public static final String URL_SELLER_GOODS_FLOW = URL_CONTEXTPATH + "act=seller_stat&op=goodsflow";
 
-        /** 投诉列表  state 1:正在进行  2:完成 其他:全部*/
+        /**
+         * 投诉列表  state 1:正在进行  2:完成 其他:全部
+         */
         public static final String URL_SELLER_STATISTICS_LIST = URL_CONTEXTPATH + "act=seller_statistics&op=consult_list";
-        /** 客服回复 */
+        /**
+         * 客服回复
+         */
         public static final String URL_SELLER_STATISTICS_REPLY = URL_CONTEXTPATH + "act=seller_statistics&op=reply_save";
-        /** 咨询删除 */
+        /**
+         * 咨询删除
+         */
         public static final String URL_SELLER_STATISTICS_DROP = URL_CONTEXTPATH + "act=seller_statistics&op=drop_consult";
-        /** 统计 */
+        /**
+         * 统计
+         */
         public static final String URL_SELLER_STATISTICS_GENERAL = URL_CONTEXTPATH + "act=seller_statistics&op=general";
-        /** 投诉 */
+        /**
+         * 投诉
+         */
         public static final String URL_SELLER_STATISTICS_COMPLAIN = URL_CONTEXTPATH + "act=seller_statistics&op=complain_list";
-        /** 投诉信息 */
+        /**
+         * 投诉信息
+         */
         public static final String URL_SELLER_STATISTICS_COMPLAIN_DETAIL = URL_CONTEXTPATH + "act=seller_statistics&op=complain_show";
-        /** 投诉信息对话记录 */
+        /**
+         * 投诉信息对话记录
+         */
         public static final String URL_SELLER_COMPLAIN_TALK = URL_CONTEXTPATH + "act=seller_statistics&op=get_complain_talk";
-        /** 保存申诉 */
+        /**
+         * 保存申诉
+         */
         public static final String URL_SELLER_STATISTICS_COMPLAIN_APPEAL_SAVE = URL_CONTEXTPATH + "act=seller_statistics&op=appeal_save";
-        /** 提交仲裁 */
+        /**
+         * 提交仲裁
+         */
         public static final String URL_SELLER_STATISTICS_COMPLAIN_APPLY_HANDLE = URL_CONTEXTPATH + "act=seller_statistics&op=apply_handle";
-        /** 发布对话 */
+        /**
+         * 发布对话
+         */
         public static final String URL_SELLER_STATISTICS_COMPLAIN_PUBLISH_MESSAGE = URL_CONTEXTPATH + "act=seller_statistics&op=publish_complain_talk";
 
 
     }
 
     /**
-     *  yml新增
+     * yml新增
      */
     // 我的经验
     public static final String URL_MEMBER_MY_EXP = URL_CONTEXTPATH + "act=member_index&op=my_exp";

@@ -15,6 +15,7 @@ import java.util.List;
 
 import cn.m0356.shop.R;
 import cn.m0356.shop.bean.ProdgoodsBean;
+import cn.m0356.shop.common.LogHelper;
 
 /**
  * Created by yml on 2017/4/5.

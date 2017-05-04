@@ -39,6 +39,7 @@ import java.util.List;
 import cn.m0356.shop.R;
 import cn.m0356.shop.bean.MyPayInfoBean;
 import cn.m0356.shop.common.Constants;
+import cn.m0356.shop.common.LogHelper;
 import cn.m0356.shop.common.MyExceptionHandler;
 import cn.m0356.shop.common.MyShopApplication;
 import cn.m0356.shop.common.ShopHelper;
@@ -588,7 +589,9 @@ public class CashierActivity extends Activity implements View.OnClickListener {
         url += "&password=" + password;
         url += "&rcb_pay=" + rcb_pay;
         url += "&pd_pay=" + pd_pay;
+        url += "&style=" + 1;
         //url += "&payment_code=" + payment_code;
+        LogHelper.e("CashierActivity" , url);
         RemoteDataHandler.asyncDataStringGet(url, new RemoteDataHandler.Callback() {
             @Override
             public void dataLoaded(ResponseData data) {

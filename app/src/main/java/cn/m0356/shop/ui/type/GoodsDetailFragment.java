@@ -52,12 +52,14 @@ import cn.m0356.shop.MainFragmentManager;
 import cn.m0356.shop.R;
 import cn.m0356.shop.adapter.CommendGridViewAdapter;
 import cn.m0356.shop.adapter.ContractDetailGridViewAdapter;
+import cn.m0356.shop.adapter.CouListViewAdapter;
 import cn.m0356.shop.adapter.GiftListViewAdapter;
 import cn.m0356.shop.adapter.GoodsEvaluateListViewAdapter;
 import cn.m0356.shop.adapter.ImageSwitchPagerAdapter;
 import cn.m0356.shop.adapter.ManSongRuleListViewAdapter;
 import cn.m0356.shop.bean.CommendList;
 import cn.m0356.shop.bean.ContractDetail;
+import cn.m0356.shop.bean.CouInFo;
 import cn.m0356.shop.bean.GiftArrayList;
 import cn.m0356.shop.bean.GoodsDetailStoreVoucherInfo;
 import cn.m0356.shop.bean.GoodsDetails;
@@ -70,6 +72,7 @@ import cn.m0356.shop.bean.StoreInfo;
 import cn.m0356.shop.bean.StoreO2oAddressInfo;
 import cn.m0356.shop.common.AnimateFirstDisplayListener;
 import cn.m0356.shop.common.Constants;
+import cn.m0356.shop.common.LogHelper;
 import cn.m0356.shop.common.MyExceptionHandler;
 import cn.m0356.shop.common.MyShopApplication;
 import cn.m0356.shop.common.ShopHelper;
@@ -132,8 +135,8 @@ public class GoodsDetailFragment extends Fragment implements View.OnClickListene
 
     private static final int TIMELINE_SUPPORTED_VERSION = 0x21020001;
     //促销
-    private LinearLayout llPromotion, llManSong, llGift;
-    private MyListView lvManSong, lvGift;
+    private LinearLayout llPromotion, llJiaJiaGou, llManSong, llGift;
+    private MyListView lvManSong, lvGift, lvJiaJiaGou;
     //店铺代金券
     private LinearLayout llStoreVoucher;
     private NCStoreVoucherPopupWindow pwVoucher;
@@ -218,7 +221,6 @@ public class GoodsDetailFragment extends Fragment implements View.OnClickListene
             super.handleMessage(message);
             if (message.what == 1) {
                 badge.setText((String) message.obj);
-                Log.i("QING", (String) message.obj);
                 badge.setVisibility(View.VISIBLE);
                 badge.show();
             }
@@ -312,7 +314,6 @@ public class GoodsDetailFragment extends Fragment implements View.OnClickListene
         btnGoodsShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 /**开启默认分享面板，分享列表**/
                 new ShareAction(GoodsDetailFragment.this.getActivity()).setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.SMS)
                         .withText(goodsName + "     " + Constants.WAP_GOODS_URL + goodsId + "     (" + getString(R.string.app_name) + ")")
@@ -320,8 +321,6 @@ public class GoodsDetailFragment extends Fragment implements View.OnClickListene
                         .withTargetUrl(Constants.WAP_GOODS_URL + goodsId)
                         .setShareboardclickCallback(shareBoardlistener)
                         .open();
-
-
             }
         });
         //收藏按钮
@@ -334,6 +333,8 @@ public class GoodsDetailFragment extends Fragment implements View.OnClickListene
         });
         //促销
         llPromotion = (LinearLayout) layout.findViewById(R.id.llPromotion);
+        llJiaJiaGou = (LinearLayout) layout.findViewById(R.id.llJiaJiaGou);
+        lvJiaJiaGou = (MyListView) layout.findViewById(R.id.lvJiaJiaGou);
         llManSong = (LinearLayout) layout.findViewById(R.id.llManSong);
         lvManSong = (MyListView) layout.findViewById(R.id.lvManSong);
         llGift = (LinearLayout) layout.findViewById(R.id.llGift);
@@ -669,6 +670,8 @@ public class GoodsDetailFragment extends Fragment implements View.OnClickListene
             url += "&area_id=" + myApplication.getAreaId();
         }
 
+        LogHelper.e("GoodsDetailFragment", url);
+
         progressDialog = new MyProgressDialog(getActivity(), "正在加载中...", R.anim.progress_round);
         progressDialog.show();
         RemoteDataHandler.asyncDataStringGet(url, new RemoteDataHandler.Callback() {
@@ -704,7 +707,8 @@ public class GoodsDetailFragment extends Fragment implements View.OnClickListene
                         //显示促销
                         String mansong_info = obj.getString("mansong_info");// 满即送信息
                         String gift_array = obj.getString("gift_array");// 赠品数组
-                        showPromotion(mansong_info, gift_array);
+                        String cou_info = obj.getString("cou_info");// 加价购
+                        showPromotion(cou_info, mansong_info, gift_array);
 
                         //店铺代金券
                         String storeVoucher = obj.optString("voucher");
@@ -1189,9 +1193,23 @@ public class GoodsDetailFragment extends Fragment implements View.OnClickListene
      * @param mansong_info
      * @param gift_array
      */
-    private void showPromotion(String mansong_info, String gift_array) {
+    private void showPromotion(String cou_info, String mansong_info, String gift_array) {
         boolean mansongFlag = false;
         boolean giftFlag = false;
+        boolean couFlag = false;
+
+        // 加价购
+        if (cou_info != null && !cou_info.equals("") && !cou_info.equals("[]") && !cou_info.equals("null")) {
+            couFlag = true;
+            llJiaJiaGou.setVisibility(View.VISIBLE);
+
+            ArrayList<CouInFo> couInFos = CouInFo.newInstanceList(cou_info);
+            CouListViewAdapter couListViewAdapter = new CouListViewAdapter(getActivity());
+            couListViewAdapter.setList(couInFos);
+            lvJiaJiaGou.setAdapter(couListViewAdapter);
+        } else {
+            llJiaJiaGou.setVisibility(View.GONE);
+        }
 
         //显示满即送
         if (mansong_info != null && !mansong_info.equals("") && !mansong_info.equals("[]") && !mansong_info.equals("null")) {
@@ -1225,11 +1243,17 @@ public class GoodsDetailFragment extends Fragment implements View.OnClickListene
                     startActivity(intent);
                 }
             });
+
+            // 优惠套装
+
+
+            // 限时折扣
+
         } else {
             llGift.setVisibility(View.GONE);
         }
 
-        if (mansongFlag || giftFlag) {
+        if (mansongFlag || giftFlag || couFlag) {
             llPromotion.setVisibility(View.VISIBLE);
         } else {
             llPromotion.setVisibility(View.GONE);

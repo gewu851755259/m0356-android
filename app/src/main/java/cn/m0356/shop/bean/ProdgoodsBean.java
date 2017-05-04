@@ -9,6 +9,7 @@ public class ProdgoodsBean {
     public String pgoods_price;
     public String pgoods_points;
     public String pgoods_image;
+    public String pgoods_image_small;
     public String pgoods_limitnum;
     public String pgoods_description;
     public String pgoods_starttime;

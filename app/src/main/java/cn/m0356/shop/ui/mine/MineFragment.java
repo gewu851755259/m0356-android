@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +24,12 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.readystatesoftware.viewbadger.BadgeView;
 
+import org.apache.http.HttpStatus;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+
 import cn.m0356.shop.R;
 import cn.m0356.shop.bean.IsSellerBean;
 import cn.m0356.shop.bean.Mine;
@@ -39,12 +44,6 @@ import cn.m0356.shop.http.RemoteDataHandler;
 import cn.m0356.shop.http.ResponseData;
 import cn.m0356.shop.ui.type.AddressListActivity;
 import cn.m0356.shop.ui.type.GoodsBrowseActivity;
-
-import org.apache.http.HttpStatus;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
 
 /**
  * 我的
@@ -198,12 +197,12 @@ public class MineFragment extends Fragment {
         tvMemberName = (TextView) viewLayout.findViewById(R.id.tvMemberName);
         tvMemberInvite=(TextView) viewLayout.findViewById(R.id.tvMemberInvite);
         // 会员头像暂时作为积分中心入口
-        ivMemberAvatar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), PointCenterActivity.class));
-            }
-        });
+//        ivMemberAvatar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(getActivity(), PointCenterActivity.class));
+//            }
+//        });
     }
 
     private void enterSellerManager() {

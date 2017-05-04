@@ -16,6 +16,12 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
+import org.apache.http.HttpStatus;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 import cn.m0356.shop.R;
 import cn.m0356.shop.bean.GoodsList;
 import cn.m0356.shop.common.AnimateFirstDisplayListener;
@@ -26,12 +32,6 @@ import cn.m0356.shop.http.RemoteDataHandler;
 import cn.m0356.shop.http.ResponseData;
 import cn.m0356.shop.ui.store.newStoreInFoActivity;
 import cn.m0356.shop.ui.type.GoodsDetailsActivity;
-
-import org.apache.http.HttpStatus;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 /**
  * 商品列表适配器
@@ -53,7 +53,7 @@ public class GoodsListViewAdapter extends BaseAdapter {
     private DisplayImageOptions options = SystemHelper.getDisplayImageOptions();
     private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
-    public GoodsListViewAdapter(Context context,String listType) {
+    public GoodsListViewAdapter(Context context, String listType) {
         this.context = context;
         this.inflater = LayoutInflater.from(context);
         this.listType = listType;
@@ -61,9 +61,9 @@ public class GoodsListViewAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        if (goodsLists == null){
+        if (goodsLists == null) {
             LogHelper.d("huting--count:", "0");
-        }else {
+        } else {
             LogHelper.d("huting--count:", String.valueOf(goodsLists.size()));
         }
         return goodsLists == null ? 0 : goodsLists.size();
@@ -96,12 +96,12 @@ public class GoodsListViewAdapter extends BaseAdapter {
         final String storeId = bean.getStore_id();
 
         if (null == convertView) {
-            if(listType.equals("grid")) {
+            if (listType.equals("grid")) {
                 convertView = inflater.inflate(R.layout.gridview_goods_item, null);
-                LogHelper.d("huting+++",convertView.toString());
+                LogHelper.d("huting+++", convertView.toString());
             } else {
                 convertView = inflater.inflate(R.layout.listivew_goods_item, null);
-                LogHelper.d("huting====",convertView.toString());
+                LogHelper.d("huting====", convertView.toString());
             }
 
             holder = new ViewHolder();
@@ -130,7 +130,10 @@ public class GoodsListViewAdapter extends BaseAdapter {
         }
 
         holder.llStoreInfo.setVisibility(View.GONE);
-        LogHelper.e("position",String.valueOf(position));
+        LogHelper.e("position", String.valueOf(position) + "---- goods url = " + bean.getGoods_image_url());
+        if (position == 1){
+            LogHelper.e("position", bean.toString());
+        }
         imageLoader.displayImage(bean.getGoods_image_url(), holder.imageGoodsPic, options, animateFirstListener);
 
         holder.textGoodsName.setText(bean.getGoods_name());
@@ -188,38 +191,38 @@ public class GoodsListViewAdapter extends BaseAdapter {
             holder.btnStoreName.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                            holder.llStoreInfo.setVisibility(View.VISIBLE);
-                            RemoteDataHandler.asyncDataStringGet(Constants.URL_STORE_CREDIT + "&store_id=" + storeId, new RemoteDataHandler.Callback() {
-                                @Override
-                                public void dataLoaded(ResponseData data) {
-                                    LogHelper.e("wj","点击了" + position);
+                    holder.llStoreInfo.setVisibility(View.VISIBLE);
+                    RemoteDataHandler.asyncDataStringGet(Constants.URL_STORE_CREDIT + "&store_id=" + storeId, new RemoteDataHandler.Callback() {
+                        @Override
+                        public void dataLoaded(ResponseData data) {
+                            LogHelper.e("wj", "点击了" + position);
 
-                                    if (data.getCode() == HttpStatus.SC_OK) {
+                            if (data.getCode() == HttpStatus.SC_OK) {
 
-                                        String json = data.getJson();
+                                String json = data.getJson();
 
-                                        try {
-                                            JSONObject jsonObj = new JSONObject(json);
-                                            String objString = jsonObj.getString("store_credit");
-                                            JSONObject obj = new JSONObject(objString);
-                                            String desc = obj.getString("store_desccredit");
-                                            JSONObject objDesc = new JSONObject(desc);
-                                            setStoreCredit(objDesc.getString("credit"), objDesc.getString("percent_class"), holder.tvStoreDescPoint, holder.tvStoreDescText);
-                                            String service = obj.getString("store_servicecredit");
-                                            JSONObject objService = new JSONObject(service);
-                                            setStoreCredit(objService.getString("credit"), objService.getString("percent_class"), holder.tvStoreServicePoint, holder.tvStoreServiceText);
-                                            String delivery = obj.getString("store_deliverycredit");
-                                            JSONObject objDelivery = new JSONObject(delivery);
-                                            setStoreCredit(objDelivery.getString("credit"), objDelivery.getString("percent_class"), holder.tvStoreDeliveryPoint, holder.tvStoreDeliveryText);
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                            holder.llStoreInfo.setVisibility(View.GONE);
-                                        }
-                                    } else {
-                                        holder.llStoreInfo.setVisibility(View.GONE);
-                                    }
+                                try {
+                                    JSONObject jsonObj = new JSONObject(json);
+                                    String objString = jsonObj.getString("store_credit");
+                                    JSONObject obj = new JSONObject(objString);
+                                    String desc = obj.getString("store_desccredit");
+                                    JSONObject objDesc = new JSONObject(desc);
+                                    setStoreCredit(objDesc.getString("credit"), objDesc.getString("percent_class"), holder.tvStoreDescPoint, holder.tvStoreDescText);
+                                    String service = obj.getString("store_servicecredit");
+                                    JSONObject objService = new JSONObject(service);
+                                    setStoreCredit(objService.getString("credit"), objService.getString("percent_class"), holder.tvStoreServicePoint, holder.tvStoreServiceText);
+                                    String delivery = obj.getString("store_deliverycredit");
+                                    JSONObject objDelivery = new JSONObject(delivery);
+                                    setStoreCredit(objDelivery.getString("credit"), objDelivery.getString("percent_class"), holder.tvStoreDeliveryPoint, holder.tvStoreDeliveryText);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                    holder.llStoreInfo.setVisibility(View.GONE);
                                 }
-                            });
+                            } else {
+                                holder.llStoreInfo.setVisibility(View.GONE);
+                            }
+                        }
+                    });
                 }
             });
         }
@@ -268,17 +271,17 @@ public class GoodsListViewAdapter extends BaseAdapter {
 
     private void setStoreCredit(String credit, String type, TextView tvPoint, TextView tvText) {
         tvPoint.setText(credit);
-        if(type.equals("low")) {
+        if (type.equals("low")) {
             tvPoint.setTextColor(context.getResources().getColor(R.color.nc_green));
             tvText.setText("低");
             tvText.setBackgroundColor(context.getResources().getColor(R.color.nc_green));
         }
-        if(type.equals("equal")) {
+        if (type.equals("equal")) {
             tvPoint.setTextColor(context.getResources().getColor(R.color.nc_red));
             tvText.setText("平");
             tvText.setBackgroundColor(context.getResources().getColor(R.color.nc_red));
         }
-        if(type.equals("high")) {
+        if (type.equals("high")) {
             tvPoint.setTextColor(context.getResources().getColor(R.color.nc_red));
             tvText.setText("高");
             tvText.setBackgroundColor(context.getResources().getColor(R.color.nc_red));

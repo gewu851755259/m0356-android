@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="cn.m0356.shop"
     android:versionCode="32"
-    android:versionName="4.0.4" >  <!-- 3.5.5 -->
+    android:versionName="4.0.5" >  <!-- 3.5.5 -->
 
     <uses-sdk
         android:minSdkVersion="8"

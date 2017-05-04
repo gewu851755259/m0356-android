@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,8 +13,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
@@ -26,6 +23,20 @@ import com.tencent.tauth.Tencent;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
+
+import org.apache.http.HttpStatus;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 import cn.m0356.shop.BaseActivity;
 import cn.m0356.shop.R;
@@ -45,20 +56,6 @@ import cn.m0356.shop.ui.home.SubjectWebActivity;
 import cn.m0356.shop.ui.store.newStoreInFoActivity;
 import cn.m0356.shop.ui.type.GoodsDetailsActivity;
 import cn.m0356.shop.ui.type.GoodsListFragmentManager;
-
-import org.apache.http.HttpStatus;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
 
 /**
  * 登面
@@ -450,9 +447,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 
         if(cacheData == null)
             return false;
+
         // 5分钟 过期
-        if(System.currentTimeMillis() - Long.parseLong(cacheData.get("time")) > 1000 * 60 * 5) // 1478226001714
+        try {
+            if(System.currentTimeMillis() - Long.parseLong(cacheData.get("time")) > 1000 * 60 * 5) // 1478226001714
+                return  false;
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
             return  false;
+        }
         ArrayList<AdvertList> data = AdvertList.newInstanceList(cacheData.get("data"));
         initHeadImage(data.get(new Random().nextInt(data.size())));
         return true;

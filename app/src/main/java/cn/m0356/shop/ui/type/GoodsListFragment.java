@@ -9,10 +9,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.http.HttpStatus;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 import cn.m0356.shop.R;
 import cn.m0356.shop.adapter.GoodsListViewAdapter;
 import cn.m0356.shop.bean.GoodsList;
 import cn.m0356.shop.common.Constants;
+import cn.m0356.shop.common.LogHelper;
 import cn.m0356.shop.common.MyExceptionHandler;
 import cn.m0356.shop.common.MyShopApplication;
 import cn.m0356.shop.custom.XListView;
@@ -20,12 +27,6 @@ import cn.m0356.shop.custom.XListView.IXListViewListener;
 import cn.m0356.shop.http.RemoteDataHandler;
 import cn.m0356.shop.http.RemoteDataHandler.Callback;
 import cn.m0356.shop.http.ResponseData;
-
-import org.apache.http.HttpStatus;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 /**
  * 商品列表Fragment
@@ -95,9 +96,8 @@ public class GoodsListFragment extends Fragment implements IXListViewListener{
 	
 	/** 初始化加载列表数据 */
 	public void loadingGoodsListData(){
-		
 		url = url +"&curpage=" +pageno  + "&page=" +Constants.PAGESIZE;
-		
+		LogHelper.d("GoodsListFragment", "商品列表加载地址 = " + url);
 		RemoteDataHandler.asyncDataStringGet(url, new Callback() {
 			@Override
 			public void dataLoaded(ResponseData data) {

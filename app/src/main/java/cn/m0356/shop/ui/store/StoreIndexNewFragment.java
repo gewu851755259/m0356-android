@@ -293,6 +293,8 @@ public class StoreIndexNewFragment extends Fragment implements OnGestureListener
                                 homePresenter.showHome8(JsonObj);  // 一排1：1：1：1模版，模版H
                             } else if (!JsonObj.isNull("home9")) {
                                 homePresenter.showHome9(JsonObj);  // 一排2：1：1模版，模版I
+                            } else if (!JsonObj.isNull("home10")) {
+                                homePresenter.showHome10(JsonObj);  // 类似模版C，高度不同，模版J
                             } else if (!JsonObj.isNull("home11")) {
                                 homePresenter.showHome11(JsonObj);  // 一排1：1：1模版，模版K
                             } else if (!JsonObj.isNull("home12")) {

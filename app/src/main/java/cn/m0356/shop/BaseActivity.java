@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -47,7 +48,13 @@ public class BaseActivity extends Activity {
     protected void setListEmpty(int resId, String title, String subTitle) {
         llListEmpty = (LinearLayout) findViewById(R.id.llListEmpty);
         ImageView ivListEmpty = (ImageView) findViewById(R.id.ivListEmpty);
-        ivListEmpty.setImageResource(resId);
+        RelativeLayout rlListEmpty = (RelativeLayout) findViewById(R.id.rlListEmpty);
+        if (resId <= 0) {
+            rlListEmpty.setVisibility(View.GONE);
+        } else {
+            rlListEmpty.setVisibility(View.VISIBLE);
+            ivListEmpty.setImageResource(resId);
+        }
         TextView tvListEmptyTitle = (TextView) findViewById(R.id.tvListEmptyTitle);
         TextView tvListEmptySubTitle = (TextView) findViewById(R.id.tvListEmptySubTitle);
         tvListEmptyTitle.setText(title);
@@ -58,14 +65,16 @@ public class BaseActivity extends Activity {
      * 显示空列表背景
      */
     protected void showListEmpty() {
-        llListEmpty.setVisibility(View.VISIBLE);
+        if (llListEmpty.getVisibility() != View.VISIBLE)
+            llListEmpty.setVisibility(View.VISIBLE);
     }
 
     /**
      * 隐藏空列表背景
      */
     protected void hideListEmpty() {
-        llListEmpty.setVisibility(View.GONE);
+        if (llListEmpty.getVisibility() != View.GONE)
+            llListEmpty.setVisibility(View.GONE);
     }
 
     /**
@@ -98,17 +107,19 @@ public class BaseActivity extends Activity {
 
     /**
      * 设置右侧按钮的背景
+     *
      * @param resId 背景资源id
      */
-    protected void setBtnRightImgResource(int resId){
+    protected void setBtnRightImgResource(int resId) {
         btnRight.setImageResource(resId);
     }
 
     /**
      * 设置右侧按钮点击事件
+     *
      * @param l
      */
-    protected void setBtnRightClickListener(View.OnClickListener l){
+    protected void setBtnRightClickListener(View.OnClickListener l) {
         btnRight.setOnClickListener(l);
     }
 

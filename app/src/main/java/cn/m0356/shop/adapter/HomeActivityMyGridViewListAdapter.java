@@ -8,22 +8,24 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
+import java.util.ArrayList;
+
 import cn.m0356.shop.R;
 import cn.m0356.shop.bean.Home3Data;
 import cn.m0356.shop.common.AnimateFirstDisplayListener;
 import cn.m0356.shop.common.Constants;
+import cn.m0356.shop.common.LogHelper;
 import cn.m0356.shop.common.SystemHelper;
 import cn.m0356.shop.ui.home.SubjectWebActivity;
 import cn.m0356.shop.ui.store.newStoreInFoActivity;
 import cn.m0356.shop.ui.type.GoodsDetailsActivity;
 import cn.m0356.shop.ui.type.GoodsListFragmentManager;
-
-import java.util.ArrayList;
 
 /**
  * 首页Home3GridView适配器
@@ -39,9 +41,11 @@ public class HomeActivityMyGridViewListAdapter extends BaseAdapter {
     protected ImageLoader imageLoader = ImageLoader.getInstance();
     private DisplayImageOptions options = SystemHelper.getDisplayImageOptions();
     private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
+    private int height = 85;
 
-    public HomeActivityMyGridViewListAdapter(Context context) {
+    public HomeActivityMyGridViewListAdapter(Context context , int height) {
         this.context = context;
+        this.height = height;
         this.inflater = LayoutInflater.from(context);
     }
 
@@ -81,11 +85,18 @@ public class HomeActivityMyGridViewListAdapter extends BaseAdapter {
         }
 
         Home3Data bean = home3Datas.get(position);
-
+        LinearLayout.LayoutParams ll = (LinearLayout.LayoutParams) holder.ImageViewImagePic01.getLayoutParams();
+        ll.width = context.getResources().getDimensionPixelOffset(R.dimen.main_home_half_width);
+        ll.height = (int) (ll.width / 320.0 * height);
+        holder.ImageViewImagePic01.setLayoutParams(ll);
 //		new MyBackAsynaTask(bean.getImage(), holder.ImageViewImagePic01, context).execute();
         imageLoader.displayImage(bean.getImage(), holder.ImageViewImagePic01, options, animateFirstListener);
         OnImageViewClick(holder.ImageViewImagePic01, bean.getType(), bean.getData());
 
+        if (position == 0) {
+            LinearLayout.LayoutParams logll = (LinearLayout.LayoutParams) holder.ImageViewImagePic01.getLayoutParams();
+            LogHelper.d("HomeActivityMyGridViewListAdapter", "home3或者home10的图片宽高:" + logll.width + "*" + logll.height);
+        }
         return convertView;
     }
 

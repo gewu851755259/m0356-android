@@ -313,7 +313,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
         TextView textView = (TextView) home3View.findViewById(R.id.TextViewTitle);
         MyGridView gridview = (MyGridView) home3View.findViewById(R.id.gridview);
         gridview.setFocusable(false);
-        HomeActivityMyGridViewListAdapter adapter = new HomeActivityMyGridViewListAdapter(getMvpView().getMainActivity());
+        HomeActivityMyGridViewListAdapter adapter = new HomeActivityMyGridViewListAdapter(getMvpView().getMainActivity(), 85);
         adapter.setHome3Datas(home3Datas);
         gridview.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -548,6 +548,35 @@ public class HomePresenter extends BasePresenter<IHomeView> {
         }
 
         getMvpView().getHomeView().addView(home9View);
+    }
+
+    /**
+     * 显示Home10
+     *
+     * @param jsonObj
+     * @throws JSONException
+     */
+    public void showHome10(JSONObject jsonObj) throws JSONException {
+        String home3Json = jsonObj.getString("home10");
+        Home3Data bean = Home3Data.newInstanceDetelis(home3Json);
+        ArrayList<Home3Data> home3Datas = Home3Data.newInstanceList(bean.getItem());
+        View home3View = getMvpView().getMainActivity().getLayoutInflater().inflate(R.layout.tab_home_item_home3, null);
+        TextView textView = (TextView) home3View.findViewById(R.id.TextViewTitle);
+        MyGridView gridview = (MyGridView) home3View.findViewById(R.id.gridview);
+        gridview.setFocusable(false);
+        HomeActivityMyGridViewListAdapter adapter = new HomeActivityMyGridViewListAdapter(getMvpView().getMainActivity(), 124);
+        adapter.setHome3Datas(home3Datas);
+        gridview.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+        if (!bean.getTitle().equals("") && !bean.getTitle().equals("null") && bean.getTitle() != null) {
+            textView.setVisibility(View.VISIBLE);
+            textView.setText(bean.getTitle());
+        } else {
+            textView.setVisibility(View.GONE);
+        }
+
+        getMvpView().getHomeView().addView(home3View);
     }
 
 

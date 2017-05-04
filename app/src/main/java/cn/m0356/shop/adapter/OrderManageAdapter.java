@@ -149,11 +149,12 @@ public class OrderManageAdapter extends BaseAdapter {
             vh.ll_order_goods.addView(view);
             num += Integer.parseInt(goods_list.get(i).goods_num);
             // 商品实际支付
-            price += Double.parseDouble(goods_list.get(i).goods_pay_price);
+//            price += Double.parseDouble(goods_list.get(i).goods_pay_price);
         }
         if(!TextUtils.isEmpty(sellerOrderBean.shipping_fee)){
-            price += Double.parseDouble(sellerOrderBean.shipping_fee);
+//            price += Double.parseDouble(sellerOrderBean.shipping_fee);
         }
+        price += Double.parseDouble(sellerOrderBean.order_amount);
         priceToStr = df.format(price);
         // 自提
         if(sellerOrderBean.is_ziti.equals("0")){

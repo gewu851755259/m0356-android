@@ -113,9 +113,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/nc_white"
-                    android:paddingTop="6dp"
                     android:paddingBottom="5dp"
-                    android:paddingLeft="5dp">
+                    android:paddingLeft="5dp"
+                    android:paddingTop="6dp">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -141,10 +141,12 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
+
                                 <TextView
+                                    style="@style/NCText"
                                     android:text="市场价："
-                                    android:textSize="12dp"
-                                    style="@style/NCText" />
+                                    android:textSize="12dp"/>
+
                                 <TextView
                                     android:id="@+id/tvGoodsMarketPrice"
                                     style="@style/NCText"
@@ -158,13 +160,13 @@
                             android:id="@+id/tvGoodsType"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
                             android:layout_marginLeft="3dp"
                             android:background="@color/nc_red"
-                            tools:text="tvGoodsType"
-                            android:layout_margin="4dp"
                             android:textColor="@color/nc_white"
                             android:textSize="12dp"
                             android:visibility="gone"
+                            tools:text="tvGoodsType"
                             tools:visibility="visible"/>
 
                     </LinearLayout>
@@ -211,6 +213,32 @@
                         android:orientation="vertical">
 
                         <LinearLayout
+                            android:id="@+id/llJiaJiaGou"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/NCText"
+                                android:layout_width="38dp"
+                                android:layout_marginTop="3dp"
+                                android:background="@drawable/nc_btn_bg_on"
+                                android:gravity="center_horizontal"
+                                android:text="加价购"
+                                android:textColor="@color/nc_white"
+                                android:textSize="12dp"/>
+
+                            <cn.m0356.shop.custom.MyListView
+                                android:id="@+id/lvJiaJiaGou"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:divider="@color/nc_white">
+                            </cn.m0356.shop.custom.MyListView>
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:id="@+id/llManSong"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -232,8 +260,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
-                                android:divider="@color/nc_white"></cn.m0356.shop.custom.MyListView>
-
+                                android:divider="@color/nc_white">
+                            </cn.m0356.shop.custom.MyListView>
                         </LinearLayout>
 
                         <LinearLayout
@@ -259,9 +287,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
                                 android:divider="@color/nc_white">
-
                             </cn.m0356.shop.custom.MyListView>
-
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -294,7 +320,6 @@
                         android:text="点击领取店铺代金券"
                         android:textColor="@color/nc_text_dark"
                         android:textSize="14dp"/>
-
                 </LinearLayout>
 
                 <!-- 配送区域 -->
@@ -363,7 +388,6 @@
                             style="@style/NCText"
                             android:text="免运费"
                             android:textSize="14dp"/>
-
                     </LinearLayout>
                 </LinearLayout>
 
@@ -435,7 +459,6 @@
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp"
                             android:src="@drawable/nc_icon_phone"/>
-
                     </LinearLayout>
 
                     <Button
@@ -450,7 +473,6 @@
                         android:text="查看全部分店地址"
                         android:textColor="@color/nc_red"
                         android:textSize="14dp"/>
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -479,7 +501,6 @@
                         android:text="规格："
                         android:textColor="@color/nc_text"
                         android:textSize="14dp"/>
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -516,11 +537,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:numColumns="4">
-
                         </cn.m0356.shop.custom.MyGridView>
-
                     </LinearLayout>
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -587,9 +605,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:divider="@color/nc_border"
-                            android:dividerHeight="1dp"></cn.m0356.shop.custom.MyListView>
+                            android:dividerHeight="1dp">
+                        </cn.m0356.shop.custom.MyListView>
                     </LinearLayout>
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -731,9 +749,7 @@
                                 android:text="平"
                                 android:textColor="@color/nc_white"
                                 android:textSize="10dp"/>
-
                         </LinearLayout>
-
                     </LinearLayout>
                 </LinearLayout>
 
@@ -782,9 +798,9 @@
 
         <ScrollView
             xmlns:tools="http://schemas.android.com/tools"
-            tools:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            tools:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -800,19 +816,11 @@
                         android:id="@+id/wvDetail"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent">
-
                     </WebView>
-
                 </FrameLayout>
-
-
             </LinearLayout>
-
         </ScrollView>
-
-
     </cn.m0356.shop.custom.ScrollViewContainer>
-
 
     <include layout="@layout/app_common_goods_detail_button"/>
 
@@ -820,17 +828,16 @@
         android:id="@+id/top_btn"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@drawable/top_btn_bg"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textColor="@android:color/white"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="50dp"
         android:layout_marginRight="10dp"
-        android:layout_alignParentBottom="true"
-        tools:visibility="visible"
-        android:visibility="gone"/>
-
+        android:background="@drawable/top_btn_bg"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:visibility="gone"
+        tools:visibility="visible"/>
 </RelativeLayout>
 
 

@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -56,7 +55,6 @@ public class GoodsDetailsActivity extends BaseActivity implements GoodsDetailFra
 
     private LinearLayout ll_new_tab;
     private TextView tvCommonTitle;
-
 
 
     @Override
@@ -225,7 +223,7 @@ public class GoodsDetailsActivity extends BaseActivity implements GoodsDetailFra
         mRlTabDetailAnimationHide.start();
     }
 
-    private void rlTabHideDetailShow(){
+    private void rlTabHideDetailShow() {
         // rltab 从下到上隐藏
         TranslateAnimation mRlTabAnimationHide = new TranslateAnimation(0, 0, 0, -ScreenUtil.dip2px(48));
         mRlTabAnimationHide.setDuration(200);
@@ -242,7 +240,6 @@ public class GoodsDetailsActivity extends BaseActivity implements GoodsDetailFra
         tvCommonTitle.setAnimation(mRlTabDetailAnimationShow);
         mRlTabDetailAnimationShow.start();
     }
-
 
 
     /**
@@ -269,7 +266,7 @@ public class GoodsDetailsActivity extends BaseActivity implements GoodsDetailFra
     @Override
     public void onBackPressed() {
         // 判断是否在信息页
-        if(goodsDetailFragment.isTopPage()) {
+        if (goodsDetailFragment.isTopPage()) {
             btnBackClick(null);
         } else {
             // 滑动到顶部

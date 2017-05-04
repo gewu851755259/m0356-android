@@ -1,6 +1,5 @@
 package cn.m0356.shop.ui.type;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +19,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import cn.m0356.shop.BaseActivity;
 import cn.m0356.shop.MainFragmentManager;
 import cn.m0356.shop.R;
 import cn.m0356.shop.adapter.RptVoucherListViewAdapter;
@@ -36,7 +36,7 @@ import cn.m0356.shop.ui.store.newStoreInFoActivity;
 /**
  * Created by jiangtao on 2017/1/18.
  */
-public class VoucherActivity extends Activity implements RptVoucherListViewAdapter.OnVoucherRedpacketListener, XListView.IXListViewListener {
+public class VoucherActivity extends BaseActivity implements RptVoucherListViewAdapter.OnVoucherRedpacketListener, XListView.IXListViewListener {
 
     private XListView lv;
     private MyShopApplication app;
@@ -55,6 +55,8 @@ public class VoucherActivity extends Activity implements RptVoucherListViewAdapt
 
         app = (MyShopApplication) getApplication();
 
+        setCommonHeader("领券中心");
+        setListEmpty(-1, "当前没有可用红包及店铺优惠券哦", "");
         lv = (XListView) findViewById(R.id.lv_voucher_list);
         mMyAdapter = new RptVoucherListViewAdapter(this, null);
         mMyAdapter.setOnVoucherRedpacketListener(this);
@@ -111,6 +113,15 @@ public class VoucherActivity extends Activity implements RptVoucherListViewAdapt
                 VoucherRedpacketBean bean = gson.fromJson(voucher_arr.getJSONObject(i).toString(), VoucherRedpacketBean.class);
                 data.add(bean);
             }
+            if (data.size() <= 0) {
+                showListEmpty();
+                if (lv.getVisibility() != View.GONE)
+                    lv.setVisibility(View.GONE);
+            } else {
+                hideListEmpty();
+                if (lv.getVisibility() != View.VISIBLE)
+                    lv.setVisibility(View.VISIBLE);
+            }
             if (isRefresh) {
                 mMyAdapter.update(data);
                 curpage = 1;
@@ -142,7 +153,7 @@ public class VoucherActivity extends Activity implements RptVoucherListViewAdapt
     @Override
     public void applyVoucherClick(int position) {
         Intent intent = new Intent(VoucherActivity.this, newStoreInFoActivity.class);
-        intent.putExtra("store_id", ((VoucherRedpacketBean)(mMyAdapter.getItem(position))).voucher_t_store_id);
+        intent.putExtra("store_id", ((VoucherRedpacketBean) (mMyAdapter.getItem(position))).voucher_t_store_id);
         startActivity(intent);
     }
 
@@ -154,7 +165,7 @@ public class VoucherActivity extends Activity implements RptVoucherListViewAdapt
     private void saveRedpacket(final int position) {
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("key", app.getLoginKey());
-        map.put("tid", ((VoucherRedpacketBean)(mMyAdapter.getItem(position))).rpacket_t_id);
+        map.put("tid", ((VoucherRedpacketBean) (mMyAdapter.getItem(position))).rpacket_t_id);
         map.put("member_id", app.getMemberID());
         map.put("member_name", app.getUserName());
         RemoteDataHandler.asyncPostDataString(Constants.URL_REDPACKET_SVAE, map, new RemoteDataHandler.Callback() {
@@ -180,13 +191,13 @@ public class VoucherActivity extends Activity implements RptVoucherListViewAdapt
     private void saveVoucher(final int position) {
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("key", app.getLoginKey());
-        params.put("tid", ((VoucherRedpacketBean)(mMyAdapter.getItem(position))).voucher_t_id);
+        params.put("tid", ((VoucherRedpacketBean) (mMyAdapter.getItem(position))).voucher_t_id);
         RemoteDataHandler.asyncLoginPostDataString(Constants.URL_MEMBER_VOUCHER_FREE_ADD, params, app, new RemoteDataHandler.Callback() {
             @Override
             public void dataLoaded(ResponseData data) {
                 String json = data.getJson();
                 if (data.getCode() == HttpStatus.SC_OK) {
-                    LogHelper.d("VoucherActivity" , "saveVoucher ----- " + position);
+                    LogHelper.d("VoucherActivity", "saveVoucher ----- " + position);
                     ShopHelper.showMessage(VoucherActivity.this, "领取成功");
                     mMyAdapter.getVoucherSuccessUpdate(position);
                 } else {
